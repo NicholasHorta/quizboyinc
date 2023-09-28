@@ -1,4 +1,0 @@
-Style = Tailwind
-Database = Firebase
-Frontend = Angular
-Backend = GO / Node

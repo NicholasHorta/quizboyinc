@@ -17,6 +17,7 @@ import {
   AngularFireFunctionsModule,
   USE_EMULATOR as USE_FUNCTIONS_EMULATOR,
 } from '@angular/fire/compat/functions';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import {
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
+    CoreModule
   ],
   providers: [
     {
