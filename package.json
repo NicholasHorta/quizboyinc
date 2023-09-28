@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "quiz": "ng serve --c=development",
-    "quiz:em": "firebase emulators:exec --project=demo-quizboyinc --ui 'ng serve --c=development'",
+    "quiz-em": "firebase emulators:exec --project=demo-quizboyinc --ui 'ng serve --c=development'",
     "build-dev": "ng build --c=development",
     "quiz-prod": "ng serve --c=production",
     "build-prod": "ng build --c=production"
