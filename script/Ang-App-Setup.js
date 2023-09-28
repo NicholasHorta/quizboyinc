@@ -13,4 +13,21 @@
 //> Go to angular.json and change build/outputPath - and change to dist/
 //@ Do this because we only have one project, after successful build, all build files will go directly to the DIST folder
 //. Package.json
-// Now we can apply these processes to our scripts object
+//> Now we can apply these processes to our scripts object
+
+
+//. FIREBASE
+//> We should have different database configs for prod and dev to avoid data corruption during development
+//+ import {AngularFireModule} from '@angular/fire/compat'
+//+ import {AuthModule} from '@angular/fire/auth'
+//+ import {FirestoreModule} from '@angular/fire/firestore'
+
+//+ imports: [
+//+   BrowserModule,
+//+   AppRoutingModule,
+//+   AuthModule,
+//+   FirestoreModule,
+//+   AngularFireModule.initializeApp(environment.firebase),
+//+ ]
+
+//> Then to test it's working, go to your app component and sub

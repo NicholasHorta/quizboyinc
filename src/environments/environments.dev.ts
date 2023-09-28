@@ -11,3 +11,7 @@ export const environment = {
   name: 'development',
   useEmulators: true
 }
+
+// Must have "demo-<projectId>"
+// Firebase rules MUST be set to allow read/write
+// To change to prod - remove {projectId: demo-, useEmulators: false}

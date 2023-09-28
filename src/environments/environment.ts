@@ -1,4 +1,5 @@
 export const environment = {
+  name: 'default',
   firebase: {
     apiKey: "AIzaSyAYJ4DwJA4CWaBJys_JvHyDrQAcE5wQUoE",
     authDomain: "quizboyinc.firebaseapp.com",
