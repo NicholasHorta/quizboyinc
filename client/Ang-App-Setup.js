@@ -16,6 +16,7 @@
 //> Now we can apply these processes to our scripts object
 
 
+
 //. FIREBASE
 //> We should have different database configs for prod and dev to avoid data corruption during development
 //+ import {AngularFireModule} from '@angular/fire/compat'
@@ -30,4 +31,14 @@
 //+   AngularFireModule.initializeApp(environment.firebase),
 //+ ]
 
-//> Then to test it's working, go to your app component and sub
+//> Then to test it's working, go to your app component and sub - in App component
+//+ ngOnInit() {
+//+   this.ngFirestore
+//+   .collection('test')
+//+   .doc('Dqf3bCYGHWCFmgcSG1Nb')
+//+   .get()
+//+   .subscribe((i) => console.log('Data request: ', i.data()));
+//+ }
+
+//. ANGULAR.JSON
+//> Move architect > build > options > "BuildOptimizer" & "Optimization" to production as this is not needed in development

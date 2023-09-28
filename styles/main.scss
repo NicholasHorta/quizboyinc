@@ -1,0 +1,23 @@
+@import "_padding";
+@import "_reset";
+@import "_fonts";
+@import "_colors";
+@import "_mixins";
+@import "base";
+@import "layout";
+@import "vendor";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $text-color;
+  background-color: $background-color;
+}
