@@ -1,4 +1,4 @@
-export const environment = {
+export const prodEnvironment = {
   firebase: {
     apiKey: "AIzaSyAYJ4DwJA4CWaBJys_JvHyDrQAcE5wQUoE",
     authDomain: "quizboyinc.firebaseapp.com",

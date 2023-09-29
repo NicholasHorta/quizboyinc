@@ -9,5 +9,6 @@
 //> > module - handle imports specific for the components
 //> > routing - Handle the routing for the all pages
 //> > store - Handles state of our application
+//> > shared - Components used throughout the application
 
 

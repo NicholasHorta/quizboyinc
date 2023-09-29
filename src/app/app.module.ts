@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environments.dev';
+import { devEnvironment } from '../environments/environment.dev';
 import { AngularFireModule } from '@angular/fire/compat';
 import {
   AngularFireAuthModule,
@@ -19,12 +19,15 @@ import {
 } from '@angular/fire/compat/functions';
 import { CoreModule } from './core/core.module';
 
+
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(devEnvironment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
@@ -33,19 +36,19 @@ import { CoreModule } from './core/core.module';
   providers: [
     {
       provide: USE_AUTH_EMULATOR,
-      useValue: environment.useEmulators
+      useValue: devEnvironment.useEmulators
         ? ['http://localhost', 9099]
         : undefined,
     },
     {
       provide: USE_FIRESTORE_EMULATOR,
-      useValue: environment.useEmulators
+      useValue: devEnvironment.useEmulators
         ? ['localhost', 8080]
         : undefined,
     },
     {
       provide: USE_FUNCTIONS_EMULATOR,
-      useValue: environment.useEmulators
+      useValue: devEnvironment.useEmulators
         ? ['localhost', 5001]
         : undefined,
     },
