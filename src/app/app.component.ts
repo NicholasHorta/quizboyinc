@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { interval, tap } from 'rxjs';
 @Component({
   selector: 'app-root',
@@ -7,12 +8,14 @@ import { interval, tap } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private ngFirestore: AngularFirestore) {}
+  constructor(private ngFirestore: AngularFirestore, private fb: FormBuilder) {}
 
   title = 'quiz';
-
+  form!: FormGroup;
   ngOnInit() {
-
+    this.form = this.fb.group({
+      input: [null]
+    })
   }
   iWantThat(){
     this.ngFirestore
@@ -21,4 +24,19 @@ export class AppComponent implements OnInit {
     .get()
     .subscribe((i) => console.log('Data request: ', i.data()));
   }
+
+  onPatchValue(){
+    this.form.patchValue({input: 'test'})
+  }
+
+  onSubmit(){
+    // this.onPatchValue()
+    console.log('Submission', this.form.value)
+  }
+
+
+  emission(value: any){
+    console.log(`%c RAN `, `background: red; color: white;`, value)
+  }
+
 }

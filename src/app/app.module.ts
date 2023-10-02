@@ -18,6 +18,7 @@ import {
   USE_EMULATOR as USE_FUNCTIONS_EMULATOR,
 } from '@angular/fire/compat/functions';
 import { CoreModule } from './core/core.module';
+import { SharedGlobalModule } from './shared/shared-global.module';
 
 
 
@@ -31,6 +32,7 @@ import { CoreModule } from './core/core.module';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
+    SharedGlobalModule,
     CoreModule
   ],
   providers: [

@@ -1,3 +1,10 @@
 <quiz-header></quiz-header>
-<button (click)="iWantThat()">Get</button>
+<quiz-button >Click Me</quiz-button>
+<quiz-button type="submit">Submit</quiz-button>
 <quiz-footer></quiz-footer>
+
+
+<form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+  <app-input formControlName="input" (changed)="emission($event)" placeholder="Name"></app-input>
+  <quiz-button type="submit">Submit</quiz-button>
+</form>

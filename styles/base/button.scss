@@ -1,17 +1,26 @@
+@import "../colors";
+
 button {
   padding: 1rem 2rem;
   background: none;
-  border: 1px solid #000;
+  border: 1px solid $primary;
+  background: $primary;
+  color: $primary;
 
   &:hover {
-    background: #000;
-    color: #fff;
+    border: 1px solid $primary-dark;
+    background: $primary-dark;
+    color: $primary-dark;
   }
   &:focus {
-    background: #444;
+    border: 1px solid $primary-light;
+    background: $primary-light;
+    color: $primary-light;
     outline: none;
   }
   &:active {
-    background: #888;
+    border: 1px solid $secondary;
+    background: $secondary;
+    color: $secondary;
   }
 }

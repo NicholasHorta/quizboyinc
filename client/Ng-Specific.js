@@ -12,12 +12,12 @@
 
 
 //: Component is NOT the main application elements!
-//@ Componentrs define a visual part and are technically able to make a whole application using just root module
+//@ Components define a visual part and are technically able to make a whole application using just root module
 //@ BUT This obscures the frameworks potential, along with badly maintained and complicated code
 //% The main application element is - A Module
-// Module usage allows the division of the application into isolated logical blocks
-// A module can include one or more components or simple a service module
-// Can contain all other elements and 3rd party dependencies
+//$ Module usage allows the division of the application into isolated logical blocks
+//$ A module can include one or more components or simple a service module
+//$ Can contain all other elements and 3rd party dependencies
 // --- Modules give opportunities to divide an app into blocks correlated with business-logic and applcation architechture
 
 
@@ -30,6 +30,8 @@
 //> Each module is to contain just the elemets which are used in it
 //> In our root, keep it as cleamn as possible
 //> If a component/service has unique dependencies, this is a sign to remove this component/service into it's own module and import all dependencies into it
+
+//------------------------------------------------------------------------------------------------------------------------------------
 
 //. Dividing an App into Modules & Components
 //: Can have their own modules
@@ -46,6 +48,8 @@
 //:   > shared
 
 /// The above will give an application greater capability for extension
+
+//------------------------------------------------------------------------------------------------------------------------------------
 
 //. When is it time to add seperate components
 //> At the first opportunity to split the logic of the parent component
@@ -74,6 +78,8 @@
 //: In a module of a parent component, you should declare those components which are DIRECTLY USED by this module
 //: Ref ID001.png
 
+//------------------------------------------------------------------------------------------------------------------------------------
+
 //. Shared
 //> Shared = Fully re-usable components of the application
 //> Must NOT be an all in one module - Smae approach for others should be taken
@@ -81,6 +87,7 @@
 //: It's best practice for EACH component in shared module to have it's OWN module
 //> This way, they can be a part of the Shared Module and at the same time may be seperately imported into the PageModule
 
+//------------------------------------------------------------------------------------------------------------------------------------
 
 //. Advantages of Single Responsibility Components
 //: Eg: Button Component - Seems redundant, But..
@@ -102,4 +109,38 @@
 //> If a page 1, 2, & 3 use the same component --> ID002.png
 //> We Don't need it in our global shared module even if several use it within the same module
 //> We simply make a shared section within this component --> ID003.png
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+//. Constructor vs NgOnInit --> C = Yellow / I = Cyan
+
+//: What each method does, and when it's fired
+//| Its a lifecycle method, it's used to run things during construction & inject services into the component.
+//+ Serves only as a lifecycle method, firing when a component is initialized
+
+//: Both construction and initialization take place at very similar times in the life of a component
+//| Construction happens when the JavaScript class is constructed. It's the first thing that can happen to a class instance.
+//+ Initialization happens after, when the component is fully initialized. In essence, when Angular is done plugging all the pieces together.
+
+
+//| Construction is first, and happens when it's not really a component yet.
+//| Should only contain very basic simple code relating to basic initialization of the class.
+//| You have the injected services, but that's about it.
+//| Typically we only put simple quick code such as state initialization.
+//| Although it's usually simpler to initialize those properties where they are declared if possible --> ID004.png
+//| The only time to use the latter method is if you need access to an injected service when initializing state.
+
+//+ NgOnInit method, fires when the component is ready to be a component & is called AFTER the first ngOnChanges
+//+ Just about all startup code should be placed here by default.
+//+ We can even put our initial state initialization here and it's just fine.
+//+ There's no drawback to putting it here instead of in the constructor.
+//+ There’s a fundamental catch to keep in mind though: type safety.
+
+//$ Rule of thumb: Consider code in the constructor to be a code smell, evaluate carefully to ensure that it shouldn't be in ngOnInit.
+
+//* ngOnInit gotcha:
+//+ If we change routes & we're using the same component for both the previous and current route, then the ngOnInit method isn't fired again.
+
+//? Resource: https://javascript.plainenglish.io/how-to-choose-between-constructor-and-ngoninit-in-your-angular-apps-f16987627312
+
 
