@@ -20,10 +20,14 @@ import {
 import { CoreModule } from './core/core.module';
 import { SharedGlobalModule } from './shared/shared-global.module';
 import { ProfileComponent } from './components/profile/profile.component';
+import { QuizCollectionsComponent } from './components/quiz-collections/quiz-collections.component';
+import { QuizStartComponent } from './components/quiz-start/quiz-start.component';
+import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
+import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
 
 
 @NgModule({
-  declarations: [QuizComponent, ProfileComponent],
+  declarations: [QuizComponent, ProfileComponent, QuizCollectionsComponent, QuizStartComponent, QuizQuestionComponent, QuizResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

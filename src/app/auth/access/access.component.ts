@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-access',
+  selector: 'quiz-access',
   templateUrl: './access.component.html',
   styleUrls: ['./access.component.scss']
 })

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'quiz-checkbox',
+  selector: 'quiz-quiz-timer',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+  templateUrl: './quiz-timer.component.html',
+  styleUrls: ['./quiz-timer.component.scss']
 })
-export class CheckboxComponent {
+export class QuizTimerComponent {
 
 }
