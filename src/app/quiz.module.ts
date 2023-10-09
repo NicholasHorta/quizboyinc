@@ -24,6 +24,7 @@ import { QuizCollectionsComponent } from './components/quiz-collections/quiz-col
 import { QuizStartComponent } from './components/quiz-start/quiz-start.component';
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
 import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
+import { StaticModule } from './static/static.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { QuizResultComponent } from './components/quiz-result/quiz-result.compon
     AngularFirestoreModule,
     AngularFireFunctionsModule,
     SharedGlobalModule,
-    CoreModule
+    CoreModule,
+    StaticModule
   ],
   providers: [
     {

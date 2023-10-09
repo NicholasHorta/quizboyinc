@@ -24,7 +24,7 @@ const components = [
   imports: [
     ...components,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     ...components,

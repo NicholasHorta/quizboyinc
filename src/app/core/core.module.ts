@@ -7,12 +7,7 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 import { PortalComponent } from './shared/components/portal/portal.component';
 import { IconComponent } from '../shared/components/icon/icon.component';
 
-
-const components = [
-  LogoComponent,
-  NavigationComponent,
-  PortalComponent
-]
+const components = [LogoComponent, NavigationComponent, PortalComponent];
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, IconComponent],
   imports: [CommonModule, ...components],
