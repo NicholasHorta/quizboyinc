@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import { QuizComponent } from './quiz.component';
 import { AppRoutingModule } from './app-routing.module';
 import { devEnvironment } from '../environments/environment.dev';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -24,7 +24,7 @@ import { SharedGlobalModule } from './shared/shared-global.module';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [QuizComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -55,6 +55,6 @@ import { SharedGlobalModule } from './shared/shared-global.module';
         : undefined,
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [QuizComponent],
 })
-export class AppModule {}
+export class QuizModule {}

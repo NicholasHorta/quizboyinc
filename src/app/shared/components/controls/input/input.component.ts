@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
+  selector: 'quiz-input',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './input.component.html',

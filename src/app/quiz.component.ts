@@ -3,11 +3,11 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { interval, tap } from 'rxjs';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'quiz-root',
+  templateUrl: './quiz.component.html',
+  styleUrls: ['./quiz.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class QuizComponent implements OnInit {
   constructor(private ngFirestore: AngularFirestore, private fb: FormBuilder) {}
 
   title = 'quiz';
