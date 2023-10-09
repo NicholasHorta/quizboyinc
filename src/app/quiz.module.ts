@@ -19,12 +19,11 @@ import {
 } from '@angular/fire/compat/functions';
 import { CoreModule } from './core/core.module';
 import { SharedGlobalModule } from './shared/shared-global.module';
-
-
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
-  declarations: [QuizComponent],
+  declarations: [QuizComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
