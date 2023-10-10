@@ -12,10 +12,8 @@ import { AComponent } from '@app/shared/components/a/a.component';
 })
 export class NavigationComponent {
   links: NavigationLinks[]  = [
-    {label: 'Home', path: ''},
+    {label: 'Shows', path: ''},
     {label: 'About', path: 'about'},
-    {label: 'Contact', path: 'about/contact'},
-    {label: 'Sign in', path: ''},
-    {label: 'Register', path: ''},
+    {label: 'Contact', path: 'about/contact'}
   ];
 }

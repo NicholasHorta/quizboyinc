@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type ButtonType = 'button' | 'submit';
+type ButtonType = 'button' | 'submit';
+type ButtonClass = 'primary' | 'warning' | 'danger' | 'success' | 'info';
 
 @Component({
   selector: 'quiz-button',
@@ -12,4 +13,5 @@ export type ButtonType = 'button' | 'submit';
 })
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';
+  @Input() status: ButtonClass = 'primary';
 }
