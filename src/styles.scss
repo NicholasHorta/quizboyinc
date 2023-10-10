@@ -5,3 +5,7 @@
 body {
   background-color: #666;
 }
+
+.quiz-container {
+  @apply mx-auto max-w-7xl px-2 sm:px-6 lg:px-8;
+}
