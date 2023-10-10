@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path: 'about', loadChildren: () => import('./static/static.module').then(m => m.StaticModule)},
+  {path: 'info', loadChildren: () => import('./static/static.module').then(m => m.StaticModule)},
   { path: '**',  component: PageNotFoundComponent }
 ];
 
