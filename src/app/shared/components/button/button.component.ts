@@ -12,5 +12,4 @@ type ButtonType = 'button' | 'submit';
 })
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';
-  @Input() task: string = '';
 }
