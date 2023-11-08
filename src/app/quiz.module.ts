@@ -25,10 +25,11 @@ import { QuizStartComponent } from './components/quiz-start/quiz-start.component
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
 import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
 import { StaticModule } from './static/static.module';
+import { ProfileModule } from './components/profile/profile.module';
 
 
 @NgModule({
-  declarations: [QuizComponent, ProfileComponent, QuizCollectionsComponent, QuizStartComponent, QuizQuestionComponent, QuizResultComponent],
+  declarations: [QuizComponent, QuizCollectionsComponent, QuizStartComponent, QuizQuestionComponent, QuizResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,7 +39,8 @@ import { StaticModule } from './static/static.module';
     AngularFireFunctionsModule,
     SharedGlobalModule,
     CoreModule,
-    StaticModule
+    StaticModule,
+    ProfileModule
   ],
   providers: [
     {

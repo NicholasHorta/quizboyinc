@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 
 const routes: Routes = [
   {path: 'info', loadChildren: () => import('./static/static.module').then(m => m.StaticModule)},
+  {path: 'profile', loadChildren: () => import('./components/profile/profile.module').then(m => m.ProfileModule)},
   { path: '**',  component: PageNotFoundComponent }
 ];
 
