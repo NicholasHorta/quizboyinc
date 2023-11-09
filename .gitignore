@@ -44,4 +44,5 @@ Thumbs.db
 # Firebase
 /firestore-debug.log
 /ui-debug.log
-*.log
+
+/.nx

@@ -62,12 +62,239 @@
           "hash": "11159661406321548099"
         },
         {
+          "file": ".nx/cache/cloud/2310.19.6.hotfix2/index.js",
+          "hash": "11105368040345262562",
+          "deps": [
+            "npm:os",
+            "npm:assert",
+            "npm:buffer",
+            "npm:zlib",
+            "npm:events",
+            "npm:fs",
+            "npm:path",
+            [
+              "npm:fs",
+              "dynamic"
+            ],
+            [
+              "npm:path",
+              "dynamic"
+            ],
+            [
+              "npm:os",
+              "dynamic"
+            ],
+            [
+              "npm:child_process",
+              "dynamic"
+            ],
+            [
+              "npm:crypto",
+              "dynamic"
+            ],
+            [
+              "npm:tty",
+              "dynamic"
+            ],
+            [
+              "npm:util",
+              "dynamic"
+            ],
+            [
+              "npm:url",
+              "dynamic"
+            ],
+            [
+              "npm:http",
+              "dynamic"
+            ],
+            [
+              "npm:https",
+              "dynamic"
+            ],
+            [
+              "npm:stream",
+              "dynamic"
+            ],
+            [
+              "npm:assert",
+              "dynamic"
+            ],
+            [
+              "npm:zlib",
+              "dynamic"
+            ],
+            [
+              "npm:perf_hooks",
+              "dynamic"
+            ],
+            [
+              "npm:events",
+              "dynamic"
+            ],
+            [
+              "npm:string_decoder",
+              "dynamic"
+            ],
+            [
+              "npm:constants",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": ".nx/cache/cloud/2310.19.6.hotfix2/lib/daemon/process-run-end.js",
+          "hash": "17993887837223109277",
+          "deps": [
+            "npm:path",
+            "npm:os",
+            "npm:assert",
+            "npm:buffer",
+            "npm:zlib",
+            "npm:events",
+            "npm:fs",
+            [
+              "npm:fs",
+              "dynamic"
+            ],
+            [
+              "npm:path",
+              "dynamic"
+            ],
+            [
+              "npm:os",
+              "dynamic"
+            ],
+            [
+              "npm:child_process",
+              "dynamic"
+            ],
+            [
+              "npm:crypto",
+              "dynamic"
+            ],
+            [
+              "npm:tty",
+              "dynamic"
+            ],
+            [
+              "npm:util",
+              "dynamic"
+            ],
+            [
+              "npm:url",
+              "dynamic"
+            ],
+            [
+              "npm:http",
+              "dynamic"
+            ],
+            [
+              "npm:https",
+              "dynamic"
+            ],
+            [
+              "npm:stream",
+              "dynamic"
+            ],
+            [
+              "npm:assert",
+              "dynamic"
+            ],
+            [
+              "npm:zlib",
+              "dynamic"
+            ],
+            [
+              "npm:perf_hooks",
+              "dynamic"
+            ],
+            [
+              "npm:events",
+              "dynamic"
+            ],
+            [
+              "npm:string_decoder",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": ".nx/cache/cloud/2310.19.6.hotfix2/lib/heartbeat/heartbeat-process.js",
+          "hash": "8101618490335397045",
+          "deps": [
+            "npm:os",
+            "npm:fs",
+            "npm:path",
+            [
+              "npm:fs",
+              "dynamic"
+            ],
+            [
+              "npm:path",
+              "dynamic"
+            ],
+            [
+              "npm:os",
+              "dynamic"
+            ],
+            [
+              "npm:child_process",
+              "dynamic"
+            ],
+            [
+              "npm:crypto",
+              "dynamic"
+            ],
+            [
+              "npm:tty",
+              "dynamic"
+            ],
+            [
+              "npm:util",
+              "dynamic"
+            ],
+            [
+              "npm:url",
+              "dynamic"
+            ],
+            [
+              "npm:http",
+              "dynamic"
+            ],
+            [
+              "npm:https",
+              "dynamic"
+            ],
+            [
+              "npm:stream",
+              "dynamic"
+            ],
+            [
+              "npm:assert",
+              "dynamic"
+            ],
+            [
+              "npm:zlib",
+              "dynamic"
+            ],
+            [
+              "npm:perf_hooks",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": ".nx/cache/cloud/verify.lock",
+          "hash": "2435460707779962997"
+        },
+        {
           "file": ".nx/cache/d/server-process.json",
-          "hash": "16916805353562727362"
+          "hash": "11908756582842561841"
         },
         {
           "file": ".nx/cache/file-map.json",
-          "hash": "2176363535221137022"
+          "hash": "18045699023635388444"
         },
         {
           "file": ".nx/cache/lockfile.hash",
@@ -79,7 +306,11 @@
         },
         {
           "file": ".nx/cache/project-graph.json",
-          "hash": "16806795404169179685"
+          "hash": "17807903888950328580"
+        },
+        {
+          "file": ".nx/cache/terminalOutputs/7416518337050388075",
+          "hash": "13989041702325853974"
         },
         {
           "file": ".prettierrc",
