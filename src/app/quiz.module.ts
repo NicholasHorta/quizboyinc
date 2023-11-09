@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { QuizComponent } from './quiz.component';
-import { AppRoutingModule } from './app-routing.module';
+import { QuizRoutingModule } from './quiz-routing.module';
 import { devEnvironment } from '../environments/environment.dev';
 import { AngularFireModule } from '@angular/fire/compat';
 import {
@@ -19,20 +19,16 @@ import {
 } from '@angular/fire/compat/functions';
 import { CoreModule } from './core/core.module';
 import { SharedGlobalModule } from './shared/shared-global.module';
-import { ProfileComponent } from './components/profile/profile.component';
-import { QuizCollectionsComponent } from './components/quiz-collections/quiz-collections.component';
-import { QuizStartComponent } from './components/quiz-start/quiz-start.component';
-import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
-import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
 import { StaticModule } from './static/static.module';
 import { ProfileModule } from './components/profile/profile.module';
+import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
 
 
 @NgModule({
-  declarations: [QuizComponent, QuizCollectionsComponent, QuizStartComponent, QuizQuestionComponent, QuizResultComponent],
+  declarations: [QuizComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    QuizRoutingModule,
     AngularFireModule.initializeApp(devEnvironment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -40,7 +36,8 @@ import { ProfileModule } from './components/profile/profile.module';
     SharedGlobalModule,
     CoreModule,
     StaticModule,
-    ProfileModule
+    ProfileModule,
+    QuizShowsModule
   ],
   providers: [
     {
