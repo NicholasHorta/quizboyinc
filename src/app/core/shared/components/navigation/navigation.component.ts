@@ -2,14 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationLinks } from '../../interfaces/core.model';
 import { AComponent } from '@app/shared/components/a/a.component';
-
-enum Paths {
-  STATIC = 'info',
-  AUTH = 'auth',
-  HOME = 'shows',
-  PROFILE = 'profile'
-}
-
+import { Paths } from '../../interfaces/core.enums';
 @Component({
   selector: 'quiz-navigation',
   standalone: true,
