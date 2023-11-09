@@ -1,0 +1,21 @@
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files                                                                       | Names                     |  Raw Size
+vendor.js                                                                                 | vendor                    |   4.33 MB |
+polyfills.js                                                                              | polyfills                 | 314.81 kB |
+styles.css, styles.js                                                                     | styles                    | 222.52 kB |
+main.js                                                                                   | main                      |  76.33 kB |
+runtime.js                                                                                | runtime                   |  13.22 kB |
+
+| Initial Total             |   4.94 MB
+
+Lazy Chunk Files                                                                          | Names                     |  Raw Size
+node_modules_angular_fire_node_modules_firebase_compat_functions_dist_esm_index_esm_js.js | firebase-compat-functions |  32.69 kB |
+
+Build at: 2023-11-09T18:29:17.584Z - Hash: e1d37e6dfc0fd529 - Time: 6017ms
+
+** Angular Live Development Server is listening on localhost:8000, open your browser on http://localhost:8000/ **
+
+
+✔ Compiled successfully.

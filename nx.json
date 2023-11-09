@@ -1,0 +1,40 @@
+{
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "serve": {
+      "cache": true
+    },
+    "test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "namedInputs": {
+    "sharedGlobals": [],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/**/*.spec.[jt]s"
+    ]
+  },
+  "nxCloudAccessToken": "MGRlMDU0OWQtY2NlMy00ODE5LThiMTItYWU4MmNkYWYyNjYwfHJlYWQtd3JpdGU="
+}
