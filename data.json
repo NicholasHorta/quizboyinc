@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "userId": "user123",
+      "username": "john_doe",
+      "email": "john.doe@example.com",
+      "age": 25,
+      "isActive": true,
+      "createdAt": "2023-11-09T12:00:00Z"
+    },
+    {
+      "userId": "user456",
+      "username": "jane_smith",
+      "email": "jane.smith@example.com",
+      "age": 30,
+      "isActive": true,
+      "createdAt": "2023-11-09T12:30:00Z"
+    }
+  ],
+  "posts": [
+    {
+      "postId": "post789",
+      "title": "Introduction to Firestore",
+      "content": "Firestore is a NoSQL database by Firebase.",
+      "authorId": "user123",
+      "createdAt": "2023-11-09T13:00:00Z"
+    },
+    {
+      "postId": "post101",
+      "title": "Working with JSON in Firestore",
+      "content": "Learn how to store and retrieve JSON data in Firestore.",
+      "authorId": "user456",
+      "createdAt": "2023-11-09T14:00:00Z"
+    }
+  ]
+}
