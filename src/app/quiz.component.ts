@@ -8,7 +8,7 @@ import { interval, tap } from 'rxjs';
   styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent implements OnInit {
-  constructor(private ngFirestore: AngularFirestore, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   title = 'quiz';
   form!: FormGroup;
@@ -16,13 +16,6 @@ export class QuizComponent implements OnInit {
     this.form = this.fb.group({
       input: [null]
     })
-  }
-  iWantThat(){
-    this.ngFirestore
-    .collection('test')
-    .doc('Dqf3bCYGHWCFmgcSG1Nb')
-    .get()
-    .subscribe((i) => console.log('Data request: ', i.data()));
   }
 
   onPatchValue(){
