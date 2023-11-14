@@ -1,1 +1,9 @@
-<p>quiz-shows works!</p>
+<ng-container *ngTemplateOutlet="titles">
+
+</ng-container>
+
+<ng-template #titles>
+  <div *ngIf="shows$ | async as shows">
+    <h1 *ngFor="let show of shows">{{show.title}}</h1>
+  </div>
+</ng-template>
