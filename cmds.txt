@@ -1,0 +1,2 @@
+firebase emulators:export data
+firebase emulators:start --import=data
