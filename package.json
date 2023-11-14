@@ -8,7 +8,7 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "quiz": "nx serve --c=development",
-    "quiz-em": "firebase emulators:exec --project=demo-quizboyinc --ui 'ng serve --c=development'",
+    "quiz-em": "firebase emulators:exec --project=demo-quizboyinc --import=data --export-on-exit --ui 'ng serve --c=development'",
     "build-dev": "nx build --c=development",
     "quiz-prod": "nx serve --c=production",
     "build-prod": "nx build --c=production"
