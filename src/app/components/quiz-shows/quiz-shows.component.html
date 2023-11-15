@@ -4,6 +4,7 @@
 
 <ng-template #titles>
   <div *ngIf="shows$ | async as shows">
-    <h1 *ngFor="let show of shows">{{show.title}}</h1>
+    <a [routerLink]="[show.id]" *ngFor="let show of shows">{{show.title}}</a>
+    <pre>{{shows | json}}</pre>
   </div>
 </ng-template>

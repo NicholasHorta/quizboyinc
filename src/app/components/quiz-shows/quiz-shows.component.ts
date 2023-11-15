@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Show } from '@app/models/quiz.interface';
+import { ShowWithId } from '@app/models/quiz.interface';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class QuizShowsComponent implements OnInit {
 
   constructor(private quizSVC: QuizService) { }
 
-  shows$: Observable<Show[]> = this.quizSVC.getTestCollection();
+  shows$: Observable<ShowWithId[]> = this.quizSVC.shows;
 
   ngOnInit(): void {
 

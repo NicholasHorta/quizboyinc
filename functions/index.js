@@ -17,3 +17,5 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+//!! Automatic function which counts the amount of seasons in array and stores in shows to use as amount for shows

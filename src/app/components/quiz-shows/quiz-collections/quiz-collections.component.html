@@ -1,1 +1,10 @@
-<p>quiz-collections works!</p>
+<ng-container *ngTemplateOutlet="seasons">
+
+</ng-container>
+
+<ng-template #seasons>
+  <div *ngIf="seasons$ | async as seasons">
+    <button >XXX</button>
+    <pre>{{seasons}}</pre>
+  </div>
+</ng-template>

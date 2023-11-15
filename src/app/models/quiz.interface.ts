@@ -2,6 +2,7 @@ interface Show {
   title: string;
   info: string;
   image: string;
+  seasons: number;
 }
 
 interface Seasons {
