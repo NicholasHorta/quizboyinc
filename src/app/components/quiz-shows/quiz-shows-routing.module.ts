@@ -5,7 +5,7 @@ import { QuizCollectionsComponent } from './quiz-collections/quiz-collections.co
 
 const routes: Routes = [
   { path: '', component: QuizShowsComponent },
-  { path: ':show', component: QuizCollectionsComponent }
+  { path: ':show', component: QuizCollectionsComponent },
 ];
 
 @NgModule({

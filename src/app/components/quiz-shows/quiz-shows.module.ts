@@ -11,7 +11,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 @NgModule({
   declarations: [
     QuizShowsComponent,
-    QuizCollectionsComponent
+    QuizCollectionsComponent,
   ],
   imports: [
     CommonModule,

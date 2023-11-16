@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'quiz-achievements',
+  selector: 'bs-achievements',
   templateUrl: './achievements.component.html',
   styleUrls: ['./achievements.component.scss']
 })

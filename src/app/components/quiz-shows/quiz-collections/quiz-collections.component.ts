@@ -7,7 +7,7 @@ import { errorHandler, generateArrayFromNumber } from '@app/shared/utilities/uti
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Component({
-  selector: 'quiz-quiz-collections',
+  selector: 'bs-quiz-collections',
   templateUrl: './quiz-collections.component.html',
   styleUrls: ['./quiz-collections.component.scss']
 })
@@ -20,6 +20,7 @@ export class QuizCollectionsComponent implements OnInit {
 
   collection$: Observable<Show> = new Observable<Show>();
   numberOfSeasons: number[] = [];
+  selectedSeason: number = 0;
 
   ngOnInit(): void {
     const showId = this.activeRoute?.snapshot?.paramMap?.get('show');
@@ -29,5 +30,9 @@ export class QuizCollectionsComponent implements OnInit {
       }),
       catchError(() => errorHandler(`Cannot retrieving data for show: ${showId}`))
     );
+  }
+
+  setAttemptButtonData(season: number): void {
+    this.selectedSeason = season;
   }
 }

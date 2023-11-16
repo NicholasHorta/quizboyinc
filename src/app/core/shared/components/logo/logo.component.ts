@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'quiz-logo',
+  selector: 'bs-logo',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './logo.component.html',

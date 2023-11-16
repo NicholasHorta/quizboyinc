@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'quiz-toast',
+  selector: 'bs-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })

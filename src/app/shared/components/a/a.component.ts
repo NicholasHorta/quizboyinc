@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'quiz-a',
+  selector: 'bs-a',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './a.component.html',

@@ -4,7 +4,7 @@ import { NavigationLinks } from '../../interfaces/core.model';
 import { AComponent } from '@app/shared/components/a/a.component';
 import { Paths } from '../../interfaces/core.enums';
 @Component({
-  selector: 'quiz-navigation',
+  selector: 'bs-navigation',
   standalone: true,
   imports: [CommonModule, AComponent],
   templateUrl: './navigation.component.html',
