@@ -20,4 +20,5 @@ Preface a branch with the following goals:
 - `feat`: Adding/removing a feature.
 - `refactor`: Refactoring code.
 - `update`: Single component/service/file change ONLY.
+  - Must be prefaced with association: `update/<file>-<branch-description>` 
 - `style`: Updates to styling
