@@ -18,12 +18,12 @@ export class QuizCollectionsComponent implements OnInit {
     private consoleSVC: ConsoleService
   ) {}
 
-  seasons$: Observable<Show> = new Observable<Show>();
+  collection$: Observable<Show> = new Observable<Show>();
   seasonsNumber: number[] = [];
 
   ngOnInit(): void {
     const showId = this.activeRoute?.snapshot?.paramMap?.get('show');
-    this.seasons$ = this.quizSVC.getSeasons(showId ?? '').pipe(
+    this.collection$ = this.quizSVC.getSeasons(showId ?? '').pipe(
       tap(seasons => {
         this.seasonsNumber = generateArrayFromNumber(seasons.seasons);
       }),
