@@ -22,3 +22,19 @@ Preface a branch with the following goals:
 - `update`: Single component/service/file change ONLY.
   - Must be prefaced with association: `update/<file>-<branch-description>` 
 - `style`: Updates to styling
+
+## TS component
+
+#### Follow layout in order of below
+
+- `@Input`
+- `@Output`
+- `Global variables: type;`
+- `Global variables: type = value`
+- `Constructor() { }`
+- `Lifecycle methods - ngOnInit | ngOnChanges etc`
+- `Public Methods`
+- `Private Methods`
+
+#### Using services in TS component
+- Name services with the following abbreviation: `private exampleSVC: ExampleService`
