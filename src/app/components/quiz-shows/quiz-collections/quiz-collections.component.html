@@ -1,9 +1,12 @@
 <ng-container *ngTemplateOutlet="seasons"></ng-container>
 
 <ng-template #seasons>
-  <div *ngIf="seasons$ | async as seasons; else error">
-    <h1>{{ seasons.title | presentAsTitle }}</h1>
-    <button *ngFor="let number of seasonsNumber">Season {{ number }}</button>
+  <div *ngIf="collection$ | async as collection; else error">
+    <h1>{{ collection.title | presentAsTitle }}</h1>
+    <p>{{ collection.info }}</p>
+    <quiz-button *ngFor="let season of numberOfSeasons" class="quiz-button btn-success">
+      Season {{ season }}
+    </quiz-button>
   </div>
 </ng-template>
 

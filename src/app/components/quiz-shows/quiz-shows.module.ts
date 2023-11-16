@@ -4,6 +4,7 @@ import { QuizShowsRoutingModule } from './quiz-shows-routing.module';
 import { QuizShowsComponent } from './quiz-shows.component';
 import { QuizCollectionsComponent } from './quiz-collections/quiz-collections.component';
 import { PresentAsTitlePipe } from '@app/shared/pipes/present-as-title.pipe';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
 
 
 
@@ -15,7 +16,8 @@ import { PresentAsTitlePipe } from '@app/shared/pipes/present-as-title.pipe';
   imports: [
     CommonModule,
     QuizShowsRoutingModule,
-    PresentAsTitlePipe
+    PresentAsTitlePipe,
+    ButtonComponent
   ]
 })
 export class QuizShowsModule { }
