@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuizShowsRoutingModule } from './quiz-shows-routing.module';
 import { QuizShowsComponent } from './quiz-shows.component';
 import { QuizCollectionsComponent } from './quiz-collections/quiz-collections.component';
+import { PresentAsTitlePipe } from '@app/shared/pipes/present-as-title.pipe';
 
 
 
@@ -13,7 +14,8 @@ import { QuizCollectionsComponent } from './quiz-collections/quiz-collections.co
   ],
   imports: [
     CommonModule,
-    QuizShowsRoutingModule
+    QuizShowsRoutingModule,
+    PresentAsTitlePipe
   ]
 })
 export class QuizShowsModule { }

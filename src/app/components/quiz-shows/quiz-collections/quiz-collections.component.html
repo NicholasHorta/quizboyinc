@@ -1,10 +1,12 @@
-<ng-container *ngTemplateOutlet="seasons">
-
-</ng-container>
+<ng-container *ngTemplateOutlet="seasons"></ng-container>
 
 <ng-template #seasons>
-  <div *ngIf="seasons$ | async as seasons">
-    <button >XXX</button>
-    <pre>{{seasons}}</pre>
+  <div *ngIf="seasons$ | async as seasons; else error">
+    <h1>{{ seasons.title | presentAsTitle }}</h1>
+    <button *ngFor="let number of seasonsNumber">Season {{ number }}</button>
   </div>
+</ng-template>
+
+<ng-template #error>
+  <div>No Document Found</div>
 </ng-template>
