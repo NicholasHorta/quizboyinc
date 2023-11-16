@@ -19,5 +19,5 @@ Preface a branch with the following goals:
 - `test`: Adding/removing a test.
 - `feat`: Adding/removing a feature.
 - `refactor`: Refactoring code.
-- `update`: Single file change ONLY.
+- `update`: Single component/service/file change ONLY.
 - `style`: Updates to styling
