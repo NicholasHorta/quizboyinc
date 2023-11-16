@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 type ButtonType = 'button' | 'submit';
 
 @Component({
-  selector: 'quiz-button',
+  selector: 'bs-button',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',

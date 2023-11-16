@@ -1,15 +1,22 @@
 <ng-container *ngTemplateOutlet="seasons"></ng-container>
 
 <ng-template #seasons>
-  <div *ngIf="collection$ | async as collection; else error">
+  <ng-container *ngIf="collection$ | async as collection; else error">
     <h1>{{ collection.title | presentAsTitle }}</h1>
     <p>{{ collection.info }}</p>
-    <quiz-button *ngFor="let season of numberOfSeasons" class="quiz-button btn-success">
+    <bs-button *ngFor="let season of numberOfSeasons" class="quiz-button btn-success" (click)="setAttemptButtonData(season)">
       Season {{ season }}
-    </quiz-button>
-  </div>
+    </bs-button>
+    <ng-container *ngTemplateOutlet="quizStart"></ng-container>
+  </ng-container>
 </ng-template>
 
 <ng-template #error>
   <div>No Document Found</div>
+</ng-template>
+
+<ng-template #quizStart>
+  <ng-container *ngIf="selectedSeason">
+    <bs-button class="quiz-button btn-success">Attempt season {{selectedSeason}} quiz</bs-button>
+  </ng-container>
 </ng-template>

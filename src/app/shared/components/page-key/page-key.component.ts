@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'quiz-page-key',
+  selector: 'bs-page-key',
   templateUrl: './page-key.component.html',
   styleUrls: ['./page-key.component.scss']
 })

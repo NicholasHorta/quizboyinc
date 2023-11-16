@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'quiz-quiz-result',
+  selector: 'bs-quiz-result',
   templateUrl: './quiz-result.component.html',
   styleUrls: ['./quiz-result.component.scss']
 })

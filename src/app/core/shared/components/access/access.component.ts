@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 
 @Component({
-  selector: 'quiz-access',
+  selector: 'bs-access',
   standalone: true,
   imports: [CommonModule, ButtonComponent],
   templateUrl: './access.component.html',

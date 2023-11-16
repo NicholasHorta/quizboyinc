@@ -4,7 +4,7 @@ import { QuizService } from '@app/services/quiz/quiz.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-quiz-shows',
+  selector: 'bs-quiz-shows',
   templateUrl: './quiz-shows.component.html',
   styleUrls: ['./quiz-shows.component.scss']
 })

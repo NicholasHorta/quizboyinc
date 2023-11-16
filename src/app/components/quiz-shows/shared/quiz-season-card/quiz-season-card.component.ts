@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'quiz-quiz-season-card',
+  selector: 'bs-quiz-season-card',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './quiz-season-card.component.html',
