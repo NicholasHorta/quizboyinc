@@ -3,8 +3,10 @@
 <ng-template #seasons>
   <div *ngIf="collection$ | async as collection; else error">
     <h1>{{ collection.title | presentAsTitle }}</h1>
-    <p>{{collection.info}}</p>
-    <button *ngFor="let season of numberOfSeasons" class="flex p-1">Season {{ season }}</button>
+    <p>{{ collection.info }}</p>
+    <quiz-button *ngFor="let season of numberOfSeasons" class="quiz-button btn-success">
+      Season {{ season }}
+    </quiz-button>
   </div>
 </ng-template>
 
