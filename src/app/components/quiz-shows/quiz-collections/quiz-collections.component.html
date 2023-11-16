@@ -17,6 +17,6 @@
 
 <ng-template #quizStart>
   <ng-container *ngIf="selectedSeason">
-    <bs-button class="quiz-button btn-success">Attempt season {{selectedSeason}} quiz</bs-button>
+    <bs-button class="quiz-button btn-success" [routerLink]="['quiz']">Attempt season {{selectedSeason}} quiz</bs-button>
   </ng-container>
 </ng-template>
