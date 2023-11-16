@@ -19,15 +19,15 @@ export class QuizCollectionsComponent implements OnInit {
   ) {}
 
   collection$: Observable<Show> = new Observable<Show>();
-  seasonsNumber: number[] = [];
+  numberOfSeasons: number[] = [];
 
   ngOnInit(): void {
     const showId = this.activeRoute?.snapshot?.paramMap?.get('show');
     this.collection$ = this.quizSVC.getSeasons(showId ?? '').pipe(
       tap(seasons => {
-        this.seasonsNumber = generateArrayFromNumber(seasons.seasons);
+        this.numberOfSeasons = generateArrayFromNumber(seasons.seasons);
       }),
-      catchError((seasons) => errorHandler(`Cannot retrieving data for show: ${showId}`))
+      catchError(() => errorHandler(`Cannot retrieving data for show: ${showId}`))
     );
   }
 }

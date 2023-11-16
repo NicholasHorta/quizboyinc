@@ -4,7 +4,7 @@
   <div *ngIf="collection$ | async as collection; else error">
     <h1>{{ collection.title | presentAsTitle }}</h1>
     <p>{{collection.info}}</p>
-    <button *ngFor="let number of seasonsNumber" class="flex p-1">Season {{ number }}</button>
+    <button *ngFor="let season of numberOfSeasons" class="flex p-1">Season {{ season }}</button>
   </div>
 </ng-template>
 
