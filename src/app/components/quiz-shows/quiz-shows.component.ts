@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowWithId } from '@app/models/quiz.interface';
+import { ShowWithId } from '@app/models/quiz.models';
+import { StorageKeys } from '@app/models/storage.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
-import { Observable } from 'rxjs';
+import { StorageService } from '@app/shared/services/storage.service';
+import { Observable, of, take, tap } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-shows',
@@ -9,12 +11,26 @@ import { Observable } from 'rxjs';
   styleUrls: ['./quiz-shows.component.scss']
 })
 export class QuizShowsComponent implements OnInit {
+  constructor(private quizSVC: QuizService, private storageSVC: StorageService) {}
 
-  constructor(private quizSVC: QuizService) { }
-
-  shows$: Observable<ShowWithId[]> = this.quizSVC.shows;
+  shows$: Observable<ShowWithId[]> = new Observable();
 
   ngOnInit(): void {
+    this.getDataFromStorage();
+  }
 
+
+  //? Bridge item??
+  private getDataFromStorage(): void {
+    const data = this.storageSVC.getItem(StorageKeys.SHOWS);
+    if (!data) {
+      this.quizSVC.shows$
+        .pipe(
+          take(1),
+          tap(shows => this.storageSVC.setItem('shows', JSON.stringify(shows)))
+        )
+        .subscribe(data => (this.shows$ = of(data) as Observable<ShowWithId[]>));
+    }
+    this.shows$ = of(data) as Observable<ShowWithId[]>;
   }
 }
