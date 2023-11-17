@@ -1,1 +1,13 @@
-<p>quiz-question works!</p>
+<ng-container *ngTemplateOutlet="quizQuestion"></ng-container>
+
+<ng-template #quizInit>
+  <h2>The timer will begin as soon as you start the quiz etc etc</h2>
+  <h2>Press the button below when you are ready to begin.</h2>
+  <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">Begin</bs-button>
+</ng-template>
+
+<ng-template #quizQuestion>
+  <ng-container *ngIf="confirmQuizInit; else quizInit">
+    <h2>Asses of fire</h2>
+  </ng-container>
+</ng-template>
