@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Show } from '@app/models/quiz.interface';
-import { QuizService } from '@app/services/quiz/quiz.service';
-import { ConsoleService } from '@app/shared/services/console.service';
-import { errorHandler, generateArrayFromNumber } from '@app/shared/utilities/utils';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Show, ShowWithId } from '@app/models/quiz.models';
+import { StorageKeys } from '@app/models/storage.models';
+import { StorageService } from '@app/shared/services/storage.service';
+import { generateArrayFromNumber } from '@app/shared/utilities/utils';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-collections',
@@ -13,26 +13,30 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 })
 export class QuizCollectionsComponent implements OnInit {
   constructor(
-    private quizSVC: QuizService,
-    private activeRoute: ActivatedRoute,
-    private consoleSVC: ConsoleService
+    private storageSVC: StorageService,
+    private activeRoute: ActivatedRoute
   ) {}
 
   collection$: Observable<Show> = new Observable<Show>();
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
+  showId: string | null = null;
 
   ngOnInit(): void {
-    const showId = this.activeRoute?.snapshot?.paramMap?.get('show');
-    this.collection$ = this.quizSVC.getSeasons(showId ?? '').pipe(
-      tap(seasons => {
-        this.numberOfSeasons = generateArrayFromNumber(seasons.seasons);
-      }),
-      catchError(() => errorHandler(`Cannot retrieving data for show: ${showId}`))
-    );
+    this.showId = this.activeRoute.snapshot.paramMap.get('id');
+    this.getDataFromStorage();
   }
 
   setAttemptButtonData(season: number): void {
     this.selectedSeason = season;
+  }
+
+  //? Bridge item??
+  private getDataFromStorage(): void {
+    const data = this.storageSVC.getShows(StorageKeys.SHOWS);
+    data?.find((show: ShowWithId) => {
+      show.id === this.showId ? this.collection$ = of(show) : of([]);
+      this.numberOfSeasons = generateArrayFromNumber(show.seasons);
+    });
   }
 }

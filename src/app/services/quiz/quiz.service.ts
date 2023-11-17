@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { Observable, of } from 'rxjs';
-import { ShowWithId } from '@app/models/quiz.interface';
+import { ShowWithId } from '@app/models/quiz.models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,11 @@ import { ShowWithId } from '@app/models/quiz.interface';
 export class QuizService {
   constructor(private firebaseSVC: FirebaseService) {}
 
-  get shows(): Observable<any> {
-    return this.firebaseSVC.db
-      .collection('shows')
-      .valueChanges({ idField: 'id' }) as unknown as Observable<ShowWithId>;
+  get shows$(): Observable<any> {
+    return this.firebaseSVC.db.collection('shows').valueChanges({idField: 'id'}) as unknown as Observable<ShowWithId>;
   }
 
-  getSeasons(show: string): Observable<any> {
+  getSeasons$(show: string): Observable<any> {
     return this.firebaseSVC.db.collection('shows').doc(show).valueChanges();
   }
 
