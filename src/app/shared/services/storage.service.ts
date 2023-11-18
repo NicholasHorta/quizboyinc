@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ShowWithId } from '@app/models/quiz.models';
+import { StorageKeys } from '@app/models/storage.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-
   setItem(key: string, value: string): void {
-    JSON.stringify(localStorage.setItem(key, value));
+    localStorage.setItem(key, value);
   }
 
-  getItem(key: string): string | number | Object | [] | undefined {
-    if(!localStorage.getItem(key)) return;
+  //* FIX THIS TYPE
+  getItem(key: string): any {
+    if (!localStorage.getItem(key)) return;
     return JSON.parse(localStorage.getItem(key)!);
   }
 
@@ -23,8 +24,14 @@ export class StorageService {
     localStorage.clear();
   }
 
-  getShows(key: string): ShowWithId[] | undefined {
-    if(!localStorage.getItem(key)) return;
+  getShows(): ShowWithId[] | undefined {
+    if (!localStorage.getItem(StorageKeys.SHOWS)) return;
+    return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
+  }
+
+  getSeasons(id: string): ShowWithId[] | undefined {
+    const key = `${id}_${StorageKeys.SEASONS}`;
+    if (!localStorage.getItem(key)) return;
     return JSON.parse(localStorage.getItem(key)!);
   }
 }

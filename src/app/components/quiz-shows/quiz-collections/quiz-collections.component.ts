@@ -33,7 +33,7 @@ export class QuizCollectionsComponent implements OnInit {
 
   //? Bridge item??
   private getDataFromStorage(): void {
-    const data = this.storageSVC.getShows(StorageKeys.SHOWS);
+    const data = this.storageSVC.getShows();
     data?.find((show: ShowWithId) => {
       show.id === this.showId ? this.collection$ = of(show) : of([]);
       this.numberOfSeasons = generateArrayFromNumber(show.seasons);

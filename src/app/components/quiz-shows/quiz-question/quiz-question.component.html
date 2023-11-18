@@ -1,13 +1,25 @@
 <ng-container *ngTemplateOutlet="quizQuestion"></ng-container>
 
+<ng-template #quizQuestion>
+  <ng-container *ngIf="confirmQuizInit; else quizInit">
+    <ng-container *ngIf="questions$ | async as questions">
+      <pre *ngFor="let question of questions">
+        <h1>{{question.question}}</h1>
+        <ng-container *ngTemplateOutlet="options"></ng-container>
+        {{question | json}}
+      </pre>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
 <ng-template #quizInit>
   <h2>The timer will begin as soon as you start the quiz etc etc</h2>
   <h2>Press the button below when you are ready to begin.</h2>
   <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">Begin</bs-button>
 </ng-template>
 
-<ng-template #quizQuestion>
-  <ng-container *ngIf="confirmQuizInit; else quizInit">
-    <h2>Asses of fire</h2>
+<ng-template #options>
+  <ng-container *ngIf="options$ | async as options">
+    <bs-button *ngFor="let option of options">{{option}}</bs-button>
   </ng-container>
 </ng-template>
