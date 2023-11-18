@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Show, ShowWithId } from '@app/models/quiz.models';
+import { GetParam } from '@app/models/shared/global.models';
 import { StorageKeys } from '@app/models/storage.models';
 import { StorageService } from '@app/shared/services/storage.service';
 import { generateArrayFromNumber } from '@app/shared/utilities/utils';
@@ -20,10 +21,10 @@ export class QuizCollectionsComponent implements OnInit {
   collection$: Observable<Show> = new Observable<Show>();
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
-  showId: string | null = null;
+  showIdParam: GetParam = null;
 
   ngOnInit(): void {
-    this.showId = this.activeRoute.snapshot.paramMap.get('id');
+    this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
     this.getDataFromStorage();
   }
 
@@ -35,7 +36,7 @@ export class QuizCollectionsComponent implements OnInit {
   private getDataFromStorage(): void {
     const data = this.storageSVC.getShows();
     data?.find((show: ShowWithId) => {
-      show.id === this.showId ? this.collection$ = of(show) : of([]);
+      show.id === this.showIdParam ? this.collection$ = of(show) : of([]);
       this.numberOfSeasons = generateArrayFromNumber(show.seasons);
     });
   }

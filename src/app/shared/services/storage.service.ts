@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ShowWithId } from '@app/models/quiz.models';
+import { Seasons, ShowWithId } from '@app/models/quiz.models';
 import { StorageKeys } from '@app/models/storage.models';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class StorageService {
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
   }
 
-  getSeasons(id: string): ShowWithId[] | undefined {
+  getSeasons(id: string): Seasons[] | undefined {
     const key = `${id}_${StorageKeys.SEASONS}`;
     if (!localStorage.getItem(key)) return;
     return JSON.parse(localStorage.getItem(key)!);

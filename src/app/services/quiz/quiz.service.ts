@@ -17,7 +17,7 @@ export class QuizService {
     return this.firebaseSVC.db.collection('shows').doc(show).valueChanges();
   }
 
-  getSeasonQuizData(showId: string) {
+  getSeasonQuizData$(showId: string) {
     return this.firebaseSVC.db
       .collectionGroup('seasons', ref => ref.where('showId', '==', showId))
       .valueChanges({ idField: 'id' });
