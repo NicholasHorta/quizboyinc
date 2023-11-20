@@ -6,23 +6,28 @@ export interface Show {
 }
 
 export interface Seasons {
-  seasons: Season[];
   showId: string;
+  seasons: IndividualSeason[];
 }
 
-export interface Season {
+export interface IndividualSeason {
   image: string;
   season: string;
-  quiz: Question[];
+  quiz: QuizItem[];
 }
 
-export interface Question {
+export interface QuizItem {
   question: string;
   answer: string;
-  decoys: string[];
+  alts: string[];
+}
+export interface Questions {
+  question: string;
+  options: string[];
 }
 
 export type ShowWithId = Show & FirestoreId
+export type SeasonsWithId = Seasons & FirestoreId
 
 interface FirestoreId {
   id: string;

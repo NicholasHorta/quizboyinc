@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-import { Observable, of } from 'rxjs';
-import { ShowWithId } from '@app/models/quiz.models';
+import { Observable, map, of } from 'rxjs';
+import { Seasons, SeasonsWithId, ShowWithId } from '@app/models/quiz.models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +9,16 @@ import { ShowWithId } from '@app/models/quiz.models';
 export class QuizService {
   constructor(private firebaseSVC: FirebaseService) {}
 
-  get shows$(): Observable<any> {
-    return this.firebaseSVC.db.collection('shows').valueChanges({idField: 'id'}) as unknown as Observable<ShowWithId>;
-  }
-
-  getSeasons$(show: string): Observable<any> {
-    return this.firebaseSVC.db.collection('shows').doc(show).valueChanges();
-  }
-
-  getSeasonQuizData(showId: string) {
+  get shows$(): Observable<ShowWithId[]> {
     return this.firebaseSVC.db
-      .collectionGroup('seasons', ref => ref.where('showId', '==', showId))
+      .collection<ShowWithId>('shows')
       .valueChanges({ idField: 'id' });
+  }
+
+  getSeasonQuizData$(showId: string): Observable<SeasonsWithId[]> {
+    return this.firebaseSVC.db
+      .collectionGroup<SeasonsWithId>('seasons', ref => ref.where('showId', '==', showId))
+      .valueChanges({ idField: 'id' })
+      .pipe(map(data => data));
   }
 }

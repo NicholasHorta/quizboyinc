@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ShowWithId } from '@app/models/quiz.models';
+import { SeasonsWithId, ShowWithId } from '@app/models/quiz.models';
+import { StorageKeys } from '@app/models/storage.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-
-  setItem(key: string, value: string): void {
-    JSON.stringify(localStorage.setItem(key, value));
+  setShows(value: ShowWithId[]): void {
+    localStorage.setItem(StorageKeys.SHOWS, this.toJSON(value));
   }
 
-  getItem(key: string): string | number | Object | [] | undefined {
-    if(!localStorage.getItem(key)) return;
+  setSeasons(id: string, value: SeasonsWithId[]): void {
+    const key = `${id}_${StorageKeys.SEASONS}`;
+    localStorage.setItem(key, this.toJSON(value));
+  }
+
+  getShows(): ShowWithId[] | undefined {
+    if (!localStorage.getItem(StorageKeys.SHOWS)) return;
+    return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
+  }
+
+  getSeasons(id: string): SeasonsWithId[] | undefined {
+    const key = `${id}_${StorageKeys.SEASONS}`;
+    if (!localStorage.getItem(key)) return;
     return JSON.parse(localStorage.getItem(key)!);
   }
 
@@ -23,8 +34,7 @@ export class StorageService {
     localStorage.clear();
   }
 
-  getShows(key: string): ShowWithId[] | undefined {
-    if(!localStorage.getItem(key)) return;
-    return JSON.parse(localStorage.getItem(key)!);
+  private toJSON(value: any): string {
+    return JSON.stringify(value);
   }
 }

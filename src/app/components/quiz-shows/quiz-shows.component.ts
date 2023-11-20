@@ -16,21 +16,27 @@ export class QuizShowsComponent implements OnInit {
   shows$: Observable<ShowWithId[]> = new Observable();
 
   ngOnInit(): void {
-    this.getDataFromStorage();
+    this.getDataAndSetInStorage();
   }
 
-
-  //? Bridge item??
-  private getDataFromStorage(): void {
-    const data = this.storageSVC.getItem(StorageKeys.SHOWS);
-    if (!data) {
-      this.quizSVC.shows$
-        .pipe(
-          take(1),
-          tap(shows => this.storageSVC.setItem('shows', JSON.stringify(shows)))
-        )
-        .subscribe(data => (this.shows$ = of(data) as Observable<ShowWithId[]>));
+  //? BRIDGE POSSIBLE
+  private getDataAndSetInStorage(): void {
+    const showData = this.storageSVC.getShows();
+    if (showData) {
+      this.shows$ = of(showData);
+      return;
     }
-    this.shows$ = of(data) as Observable<ShowWithId[]>;
+
+    this.quizSVC.shows$
+      .pipe(
+        take(1),
+        tap((shows: ShowWithId[]) => this.setShowDataInStorage(shows)),
+        tap(data => (this.shows$ = of(data)))
+      )
+      .subscribe();
+  }
+
+  private setShowDataInStorage(shows: ShowWithId[]): void {
+    this.storageSVC.setShows(shows);
   }
 }
