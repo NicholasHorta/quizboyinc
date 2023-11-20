@@ -12,8 +12,8 @@ import { Observable, of, take, tap } from 'rxjs';
   styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit {
-  seasonData$: Observable<Questions[]> = new Observable();
-  confirmQuizInit: boolean = false;
+  seasonQuizData$: Observable<Questions[]> = new Observable();
+  confirmQuizStart: boolean = false;
   questionLimit: number = 0;
   questionIndex: number = 0;
   seasonParam: GetParam = null;
@@ -32,7 +32,7 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   initiateQuiz(): void {
-    this.confirmQuizInit = true;
+    this.confirmQuizStart = true;
   }
 
   setQuestionRange(questions: Questions[]): void {
@@ -74,7 +74,7 @@ export class QuizQuestionComponent implements OnInit {
       );
       return selectedSeason!;
     });
-    this.seasonData$ = of(
+    this.seasonQuizData$ = of(
       season.quiz.map((data: QuizItem) => {
         return {
           question: data.question,

@@ -1,4 +1,4 @@
-<ng-container *ngIf="seasonData$ | async; else error">
+<ng-container *ngIf="seasonQuizData$ | async; else error">
   <ng-container *ngTemplateOutlet="quizQuestion"></ng-container>
 </ng-container>
 
@@ -13,8 +13,8 @@
 </ng-template>
 
 <ng-template #quizQuestion>
-  <ng-container *ngIf="confirmQuizInit; else quizInit">
-    <ng-container *ngIf="seasonData$ | async as seasonData">
+  <ng-container *ngIf="confirmQuizStart; else quizInit">
+    <ng-container *ngIf="seasonQuizData$ | async as seasonData">
       <h1>{{ seasonData[questionIndex].question }}</h1>
       <bs-button *ngFor="let d of seasonData[questionIndex].options" class="quiz-button btn-success">{{ d }}</bs-button>
       <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
