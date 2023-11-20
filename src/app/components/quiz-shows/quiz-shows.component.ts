@@ -27,7 +27,7 @@ export class QuizShowsComponent implements OnInit {
       this.quizSVC.shows$
         .pipe(
           take(1),
-          tap(shows => this.storageSVC.setItem('shows', JSON.stringify(shows)))
+          tap(shows => this.storageSVC.setItem('shows', shows))
         )
         .subscribe(data => (this.shows$ = of(data) as Observable<ShowWithId[]>));
     }

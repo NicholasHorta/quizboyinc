@@ -11,4 +11,12 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 })
 export class AccessComponent {
 
+  clearLS(){
+    localStorage.clear();
+  }
+
+  seeLS(){
+    console.log(`%c localStorage `, `background: yellow; color: black;`, localStorage);
+  }
+
 }

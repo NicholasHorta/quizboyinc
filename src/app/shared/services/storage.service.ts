@@ -7,7 +7,7 @@ import { StorageKeys } from '@app/models/storage.models';
 })
 export class StorageService {
   setItem(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, this.toJSON(value));
   }
 
   //* FIX THIS TYPE
@@ -24,6 +24,11 @@ export class StorageService {
     localStorage.clear();
   }
 
+  setSeasons(id: string, value: Seasons[] | any): void {
+    const key = `${id}_${StorageKeys.SEASONS}`;
+    localStorage.setItem(key, this.toJSON(value));
+  }
+
   getShows(): ShowWithId[] | undefined {
     if (!localStorage.getItem(StorageKeys.SHOWS)) return;
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
@@ -33,5 +38,9 @@ export class StorageService {
     const key = `${id}_${StorageKeys.SEASONS}`;
     if (!localStorage.getItem(key)) return;
     return JSON.parse(localStorage.getItem(key)!);
+  }
+
+  private toJSON(value: any): string {
+    return JSON.stringify(value);
   }
 }

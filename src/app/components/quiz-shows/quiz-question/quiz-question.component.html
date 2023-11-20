@@ -1,16 +1,6 @@
-<ng-container *ngTemplateOutlet="quizQuestion"></ng-container>
-
-<ng-template #quizQuestion>
-  <ng-container *ngIf="confirmQuizInit; else quizInit">
-    <ng-container *ngIf="questions$ | async as questions">
-      <pre *ngFor="let question of questions">
-        <h1>{{question.question}}</h1>
-        <ng-container *ngTemplateOutlet="options"></ng-container>
-        {{question | json}}
-      </pre>
-    </ng-container>
-  </ng-container>
-</ng-template>
+<ng-container *ngIf="seasonData$ | async; else error">
+  <ng-container *ngTemplateOutlet="quizQuestion"></ng-container>
+</ng-container>
 
 <ng-template #quizInit>
   <h2>The timer will begin as soon as you start the quiz etc etc</h2>
@@ -18,8 +8,20 @@
   <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">Begin</bs-button>
 </ng-template>
 
-<ng-template #options>
-  <ng-container *ngIf="options$ | async as options">
-    <bs-button *ngFor="let option of options">{{option}}</bs-button>
+<ng-template #error>
+  <h1>No data available</h1>
+</ng-template>
+
+<ng-template #quizQuestion>
+  <ng-container *ngIf="confirmQuizInit; else quizInit">
+    <ng-container *ngIf="seasonData$ | async as seasonData">
+      <h1>{{ seasonData[questionIndex].question }}</h1>
+      <bs-button *ngFor="let d of seasonData[questionIndex].options" class="quiz-button btn-success">{{ d }}</bs-button>
+      <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
+    </ng-container>
   </ng-container>
+</ng-template>
+
+<ng-template #nextQuestionBtn>
+  <bs-button class="quiz-button btn-success" (click)="toggleNextQuestion()">Next</bs-button>
 </ng-template>

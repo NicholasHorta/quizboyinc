@@ -6,8 +6,8 @@ export interface Show {
 }
 
 export interface Seasons {
-  seasons: Season[];
   showId: string;
+  seasons: Season[];
 }
 
 export interface Season {
@@ -23,6 +23,7 @@ export interface Question {
 }
 
 export type ShowWithId = Show & FirestoreId
+export type SeasonsWithId = Seasons & FirestoreId
 
 interface FirestoreId {
   id: string;
