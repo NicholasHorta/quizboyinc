@@ -18,6 +18,8 @@ export class QuizQuestionComponent implements OnInit {
   questionIndex: number = 0;
   seasonParam: GetParam = null;
   showIdParam: GetParam = null;
+  selectedOption: string = '';
+  answerStore: string[] = [];
 
   constructor(
     private quizSVC: QuizService,
@@ -47,6 +49,17 @@ export class QuizQuestionComponent implements OnInit {
       return;
     }
     this.questionIndex++;
+    this.storeSelectedAnswer();
+  }
+
+  setSelectedAnswer(answer: string): void {
+    console.log(`%c SELECTED `, `background: salmon; color: white;`, answer)
+    this.selectedOption = answer;
+  }
+
+  storeSelectedAnswer(){
+    this.answerStore = [...this.answerStore, this.selectedOption];
+    console.log(`%c SELECTED ANSWERS `, `background: yellow; color: black;`, this.answerStore)
   }
 
   //? BRIDGE POSSIBLE

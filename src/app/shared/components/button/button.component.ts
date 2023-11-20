@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 type ButtonType = 'button' | 'submit';
@@ -10,6 +10,14 @@ type ButtonType = 'button' | 'submit';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnChanges {
   @Input() type: ButtonType = 'button';
+  @Input() value: string = '';
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log(`%c CHANGES `, `background: #a1f2aa; color: #333;`, changes)
+      console.log(`%c VAL `, `background: #7AE216; color: black;`, this.value)
+  }
+
+
 }
