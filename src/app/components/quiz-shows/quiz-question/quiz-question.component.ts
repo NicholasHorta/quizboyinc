@@ -43,6 +43,7 @@ export class QuizQuestionComponent implements OnInit {
 
   toggleNextQuestion(): void {
     console.log(`%c NUM `, `background: cyan; color: black;`, this.questionIndex);
+    console.log(`%c SELECTED ANSWERS `, `background: yellow; color: black;`, this.answerStore)
     if (this.questionIndex === this.questionLimit - 1) {
       //@ Finish up quiz and tally score
       //@ Assign score to user
@@ -59,7 +60,6 @@ export class QuizQuestionComponent implements OnInit {
 
   storeSelectedAnswer(){
     this.answerStore = [...this.answerStore, this.selectedOption];
-    console.log(`%c SELECTED ANSWERS `, `background: yellow; color: black;`, this.answerStore)
   }
 
   //? BRIDGE POSSIBLE
