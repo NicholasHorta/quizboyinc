@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationLinks } from '../../interfaces/core.model';
+import { NavigationLinks } from '../../../models/core.model';
 import { AComponent } from '@app/shared/components/a/a.component';
-import { Paths } from '../../interfaces/core.enums';
+import { Paths } from '@app/models/shared/global.models';
 @Component({
   selector: 'bs-navigation',
   standalone: true,

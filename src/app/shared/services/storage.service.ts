@@ -6,6 +6,15 @@ import { StorageKeys } from '@app/models/storage.models';
   providedIn: 'root'
 })
 export class StorageService {
+
+  setQuizInit(): void {
+    localStorage.setItem(StorageKeys.IN_PROGRESS, 'true');
+  }
+
+  removeQuizInit(): void {
+    this.removeItem(StorageKeys.IN_PROGRESS);
+  }
+
   setShows(value: ShowWithId[]): void {
     localStorage.setItem(StorageKeys.SHOWS, this.toJSON(value));
   }
