@@ -19,6 +19,7 @@
         >{{ option }}</bs-button
       >
     </ng-container>
+    <ng-container *ngTemplateOutlet="result"></ng-container>
     <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
   </ng-container>
 </ng-template>
@@ -35,6 +36,15 @@
     (click)="quizBtnState === 'Next' ? toggleNext() : toggleComplete()"
     >{{ quizBtnState }}</bs-button
   >
+</ng-template>
+
+<ng-template #result>
+  <ng-container *ngIf="quizCompleted">
+    <p>
+      Your score: {{userQuizResult}}
+    </p>
+    <p>If you have a Profile you can view your results here</p>
+  </ng-container>
 </ng-template>
 
 <ng-template #error>

@@ -19,7 +19,6 @@ export class QuizShowsComponent implements OnInit {
     this.getDataAndSetInStorage();
   }
 
-  //? BRIDGE POSSIBLE
   private getDataAndSetInStorage(): void {
     const showData = this.storageSVC.getShows();
     if (showData) {

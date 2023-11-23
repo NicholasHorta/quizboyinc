@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IndividualSeason, Questions, QuizItem, SeasonsWithId } from '@app/models/quiz.models';
-import { GetParam, QuizButton } from '@app/models/shared/global.models';
+import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { Observable, of, take, tap } from 'rxjs';
@@ -16,6 +16,8 @@ export class QuizQuestionComponent implements OnInit {
   questionIndex: number = 0;
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
+  userQuizResult: number = 0;
+  quizCompleted: boolean = false;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -23,13 +25,12 @@ export class QuizQuestionComponent implements OnInit {
   private selectedOption: string = '';
   private seasonParam: GetParam = null;
   private showIdParam: GetParam = null;
-  private userQuizResult: number = 0;
-  private quizCompleted: boolean = false;
 
   constructor(
     private quizSVC: QuizService,
     private activeRoute: ActivatedRoute,
-    private storageSVC: StorageService
+    private storageSVC: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +60,9 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   toggleComplete(): void {
+    if(this.quizCompleted){
+      this.quizResetAndReturnHome();
+    }
     this.quizCompleted = true;
     this.totalQuizScore();
   }
@@ -100,7 +104,7 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   private setSeasonDataInStorage(data: SeasonsWithId[]): void {
-    this.storageSVC.setSeasons(this.showIdParam!, data);
+    if(data.length) this.storageSVC.setSeasons(this.showIdParam!, data);
   }
 
   private setQuestionRange(questions: Questions[]): void {
@@ -125,5 +129,10 @@ export class QuizQuestionComponent implements OnInit {
 
   private storeQuizAnswers(season: IndividualSeason) {
     this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
+  }
+
+  private quizResetAndReturnHome(): void {
+    this.storageSVC.removeQuizInit();
+    this.router.navigateByUrl(Paths.HOME);
   }
 }
