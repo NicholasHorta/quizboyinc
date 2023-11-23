@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IndividualSeason, Questions, QuizItem, SeasonsWithId } from '@app/models/quiz.models';
-import { GetParam } from '@app/models/shared/global.models';
+import { GetParam, QuizButton } from '@app/models/shared/global.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { Observable, of, take, tap } from 'rxjs';
@@ -13,13 +13,18 @@ import { Observable, of, take, tap } from 'rxjs';
 })
 export class QuizQuestionComponent implements OnInit {
   seasonQuizData$: Observable<Questions[]> = new Observable();
-  confirmQuizStart: boolean = false;
-  questionLimit: number = 0;
   questionIndex: number = 0;
-  seasonParam: GetParam = null;
-  showIdParam: GetParam = null;
-  selectedOption: string = '';
-  answerStore: string[] = [];
+  quizBtnState: QuizButton = 'Begin';
+  confirmQuizStart: boolean = false;
+
+  private seasonQuizAnswers: string[] = [];
+  private userAnswerStore: string[] = [];
+  private questionLimit: number = 0;
+  private selectedOption: string = '';
+  private seasonParam: GetParam = null;
+  private showIdParam: GetParam = null;
+  private userQuizResult: number = 0;
+  private quizCompleted: boolean = false;
 
   constructor(
     private quizSVC: QuizService,
@@ -35,31 +40,27 @@ export class QuizQuestionComponent implements OnInit {
 
   initiateQuiz(): void {
     this.confirmQuizStart = true;
+    this.updateQuizButtonState('Next');
+    this.storageSVC.setQuizInit();
   }
 
-  setQuestionRange(questions: Questions[]): void {
-    this.questionLimit = questions.length;
-  }
-
-  toggleNextQuestion(): void {
-    console.log(`%c NUM `, `background: cyan; color: black;`, this.questionIndex);
-    console.log(`%c SELECTED ANSWERS `, `background: yellow; color: black;`, this.answerStore)
+  toggleNext(): void {
     if (this.questionIndex === this.questionLimit - 1) {
-      //@ Finish up quiz and tally score
-      //@ Assign score to user
+      this.storeSelectedAnswer();
+      this.updateQuizButtonState('Finish');
       return;
     }
-    this.questionIndex++;
     this.storeSelectedAnswer();
+    this.questionIndex++;
   }
 
   setSelectedAnswer(answer: string): void {
-    console.log(`%c SELECTED `, `background: salmon; color: white;`, answer)
     this.selectedOption = answer;
   }
 
-  storeSelectedAnswer(){
-    this.answerStore = [...this.answerStore, this.selectedOption];
+  toggleComplete(): void {
+    this.quizCompleted = true;
+    this.totalQuizScore();
   }
 
   //? BRIDGE POSSIBLE
@@ -85,13 +86,14 @@ export class QuizQuestionComponent implements OnInit {
       const selectedSeason = data.seasons.find(
         (season: IndividualSeason) => season.season === this.seasonParam
       );
+      this.storeQuizAnswers(selectedSeason!);
       return selectedSeason!;
     });
     this.seasonQuizData$ = of(
       season.quiz.map((data: QuizItem) => {
         return {
           question: data.question,
-          options: [...data.alts, data.answer]
+          options: [...data.alts, data.answer].sort(() => Math.random() - 0.5)
         };
       })
     ).pipe(tap((questions: Questions[]) => this.setQuestionRange(questions)));
@@ -99,5 +101,29 @@ export class QuizQuestionComponent implements OnInit {
 
   private setSeasonDataInStorage(data: SeasonsWithId[]): void {
     this.storageSVC.setSeasons(this.showIdParam!, data);
+  }
+
+  private setQuestionRange(questions: Questions[]): void {
+    this.questionLimit = questions.length;
+  }
+
+  private totalQuizScore(): void {
+    let totalScore = 0;
+    for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
+      if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
+    }
+    this.userQuizResult = totalScore;
+  }
+
+  private updateQuizButtonState(state: QuizButton): void {
+    this.quizBtnState = state;
+  }
+
+  private storeSelectedAnswer() {
+    this.userAnswerStore = [...this.userAnswerStore, this.selectedOption];
+  }
+
+  private storeQuizAnswers(season: IndividualSeason) {
+    this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
   }
 }

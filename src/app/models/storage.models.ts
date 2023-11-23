@@ -1,4 +1,5 @@
 export enum StorageKeys {
   SHOWS = 'shows',
-  SEASONS = 'seasons'
+  SEASONS = 'seasons',
+  IN_PROGRESS = 'initiated'
 }
