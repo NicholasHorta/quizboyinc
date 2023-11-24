@@ -24,6 +24,11 @@ export class StorageService {
     localStorage.setItem(key, this.toJSON(value));
   }
 
+  //: DO WE NEED THIS?
+  isQuizInProgress(): boolean {
+    return !!localStorage.getItem(StorageKeys.IN_PROGRESS);
+  }
+
   getShows(): ShowWithId[] | undefined {
     if (!localStorage.getItem(StorageKeys.SHOWS)) return;
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
