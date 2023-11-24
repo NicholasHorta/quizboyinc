@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IndividualSeason, Questions, QuizItem, SeasonsWithId } from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
@@ -11,7 +11,7 @@ import { Observable, of, take, tap } from 'rxjs';
   templateUrl: './quiz-question.component.html',
   styleUrls: ['./quiz-question.component.scss']
 })
-export class QuizQuestionComponent implements OnInit {
+export class QuizQuestionComponent implements OnInit, OnDestroy {
   seasonQuizData$: Observable<Questions[]> = new Observable();
   questionIndex: number = 0;
   quizBtnState: QuizButton = 'Begin';
@@ -61,7 +61,7 @@ export class QuizQuestionComponent implements OnInit {
 
   toggleComplete(): void {
     if(this.quizCompleted){
-      this.quizResetAndReturnHome();
+      this.closeQuizAndReturnHome();
     }
     this.quizCompleted = true;
     this.totalQuizScore();
@@ -131,8 +131,12 @@ export class QuizQuestionComponent implements OnInit {
     this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
   }
 
-  private quizResetAndReturnHome(): void {
+  private closeQuizAndReturnHome(): void {
     this.storageSVC.removeQuizInit();
     this.router.navigateByUrl(Paths.HOME);
+  }
+
+  ngOnDestroy(): void {
+    this.storageSVC.removeQuizInit();
   }
 }
