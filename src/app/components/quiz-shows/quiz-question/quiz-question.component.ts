@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IndividualSeason, Questions, QuizItem, SeasonsWithId } from '@app/models/quiz.models';
+import {
+  IndividualSeason,
+  Questions,
+  QuizItem,
+  SeasonsWithId,
+  Timer
+} from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
@@ -13,11 +19,12 @@ import { Observable, of, take, tap } from 'rxjs';
 })
 export class QuizQuestionComponent implements OnInit, OnDestroy {
   seasonQuizData$: Observable<Questions[]> = new Observable();
-  questionIndex: number = 0;
+  quizTimer$: Observable<Timer> = new Observable();
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
-  userQuizResult: number = 0;
   quizCompleted: boolean = false;
+  userQuizResult: number = 0;
+  questionIndex: number = 0;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -36,38 +43,92 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.seasonParam = this.activeRoute.snapshot.paramMap.get('season');
     this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
+    this.storageSVC.removeQuizInit();
     this.getDataAndSetInStorage();
   }
 
-  initiateQuiz(): void {
-    this.confirmQuizStart = true;
-    this.updateQuizButtonState('Next');
-    this.storageSVC.setQuizInit();
+  ngOnDestroy(): void {
+    this.storageSVC.removeQuizInit();
   }
 
-  toggleNext(): void {
-    if (this.questionIndex === this.questionLimit - 1) {
-      this.storeSelectedAnswer();
-      this.updateQuizButtonState('Finish');
-      return;
-    }
+  get isQuizInProgress(): boolean {
+    return this.storageSVC.isQuizInProgress();
+  }
+
+  initiateQuiz(): void {
+    this.updateActionButtonState('Next');
+    this.storageSVC.setQuizInProgress();
+    this.runQuestionTimer();
+  }
+
+  toggleNextQuestion(): void {
+    if (this.questionIndex === this.questionLimit - 1) return this.confirmQuizCompleted();
+    this.incrementQuestionIndex();
     this.storeSelectedAnswer();
-    this.questionIndex++;
+    this.runQuestionTimer();
   }
 
   setSelectedAnswer(answer: string): void {
     this.selectedOption = answer;
   }
 
-  toggleComplete(): void {
-    if(this.quizCompleted){
+  toggleQuizComplete(): void {
+    if (this.quizCompleted) {
       this.closeQuizAndReturnHome();
     }
+    this.updateActionButtonState('Return home');
     this.quizCompleted = true;
     this.totalQuizScore();
   }
 
-  //? BRIDGE POSSIBLE
+  private runQuestionTimer(): void {
+    this.quizTimer$ = this.quizSVC.quizQuestionTimer$();
+  }
+
+  private updateActionButtonState(state: QuizButton): void {
+    this.quizBtnState = state;
+  }
+
+  private setSeasonDataInStorage(data: SeasonsWithId[]): void {
+    if (data.length) this.storageSVC.setSeasons(this.showIdParam!, data);
+  }
+
+  private setQuestionRange(questions: Questions[]): void {
+    this.questionLimit = questions.length;
+  }
+
+  private storeQuizAnswers(season: IndividualSeason) {
+    this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
+  }
+
+  private incrementQuestionIndex() {
+    this.questionIndex++;
+  }
+
+  private storeSelectedAnswer() {
+    this.userAnswerStore = [...this.userAnswerStore, this.selectedOption];
+    this.selectedOption = '';
+  }
+
+  private closeQuizAndReturnHome(): void {
+    this.storageSVC.removeQuizInit();
+    this.router.navigateByUrl(Paths.HOME);
+  }
+
+  private confirmQuizCompleted(): void {
+    this.storeSelectedAnswer();
+    this.updateActionButtonState('Complete quiz');
+    this.quizTimer$ = of({ time: 0, isTimeUp: true });
+  }
+
+  private totalQuizScore(): void {
+    let totalScore = 0;
+    for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
+      if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
+    }
+    this.userQuizResult = totalScore;
+  }
+
   private getDataAndSetInStorage(): void {
     const seasonData: SeasonsWithId[] = this.storageSVC.getSeasons(this.showIdParam!)!;
     if (seasonData) {
@@ -101,42 +162,5 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
         };
       })
     ).pipe(tap((questions: Questions[]) => this.setQuestionRange(questions)));
-  }
-
-  private setSeasonDataInStorage(data: SeasonsWithId[]): void {
-    if(data.length) this.storageSVC.setSeasons(this.showIdParam!, data);
-  }
-
-  private setQuestionRange(questions: Questions[]): void {
-    this.questionLimit = questions.length;
-  }
-
-  private totalQuizScore(): void {
-    let totalScore = 0;
-    for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
-      if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
-    }
-    this.userQuizResult = totalScore;
-  }
-
-  private updateQuizButtonState(state: QuizButton): void {
-    this.quizBtnState = state;
-  }
-
-  private storeSelectedAnswer() {
-    this.userAnswerStore = [...this.userAnswerStore, this.selectedOption];
-  }
-
-  private storeQuizAnswers(season: IndividualSeason) {
-    this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
-  }
-
-  private closeQuizAndReturnHome(): void {
-    this.storageSVC.removeQuizInit();
-    this.router.navigateByUrl(Paths.HOME);
-  }
-
-  ngOnDestroy(): void {
-    this.storageSVC.removeQuizInit();
   }
 }

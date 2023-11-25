@@ -7,7 +7,7 @@ import { StorageKeys } from '@app/models/storage.models';
 })
 export class StorageService {
 
-  setQuizInit(): void {
+  setQuizInProgress(): void {
     localStorage.setItem(StorageKeys.IN_PROGRESS, 'true');
   }
 
@@ -24,19 +24,18 @@ export class StorageService {
     localStorage.setItem(key, this.toJSON(value));
   }
 
-  //: DO WE NEED THIS?
   isQuizInProgress(): boolean {
     return !!localStorage.getItem(StorageKeys.IN_PROGRESS);
   }
 
   getShows(): ShowWithId[] | undefined {
-    if (!localStorage.getItem(StorageKeys.SHOWS)) return;
+    if (!localStorage.getItem(StorageKeys.SHOWS)) return undefined;
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
   }
 
   getSeasons(id: string): SeasonsWithId[] | undefined {
     const key = `${id}_${StorageKeys.SEASONS}`;
-    if (!localStorage.getItem(key)) return;
+    if (!localStorage.getItem(key)) return undefined;
     return JSON.parse(localStorage.getItem(key)!);
   }
 

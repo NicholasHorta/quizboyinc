@@ -26,6 +26,11 @@ export interface Questions {
   options: string[];
 }
 
+export interface Timer {
+  time: number;
+  isTimeUp: boolean;
+}
+
 export type ShowWithId = Show & FirestoreId
 export type SeasonsWithId = Seasons & FirestoreId
 
