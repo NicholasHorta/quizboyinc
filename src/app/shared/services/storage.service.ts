@@ -30,13 +30,13 @@ export class StorageService {
   }
 
   getShows(): ShowWithId[] | undefined {
-    if (!localStorage.getItem(StorageKeys.SHOWS)) return;
+    if (!localStorage.getItem(StorageKeys.SHOWS)) return undefined;
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
   }
 
   getSeasons(id: string): SeasonsWithId[] | undefined {
     const key = `${id}_${StorageKeys.SEASONS}`;
-    if (!localStorage.getItem(key)) return;
+    if (!localStorage.getItem(key)) return undefined;
     return JSON.parse(localStorage.getItem(key)!);
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IndividualSeason, Questions, QuizItem, SeasonsWithId } from '@app/models/quiz.models';
+import { IndividualSeason, Questions, QuizItem, SeasonsWithId, Timer } from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
@@ -12,12 +12,14 @@ import { Observable, of, take, tap } from 'rxjs';
   styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit, OnDestroy {
+
   seasonQuizData$: Observable<Questions[]> = new Observable();
-  questionIndex: number = 0;
+  quizTimer$: Observable<Timer> = new Observable();
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
-  userQuizResult: number = 0;
   quizCompleted: boolean = false;
+  userQuizResult: number = 0;
+  questionIndex: number = 0;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -43,16 +45,24 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     this.confirmQuizStart = true;
     this.updateQuizButtonState('Next');
     this.storageSVC.setQuizInit();
+    this.toggleStartQuestionTime()
   }
 
   toggleNext(): void {
     if (this.questionIndex === this.questionLimit - 1) {
       this.storeSelectedAnswer();
-      this.updateQuizButtonState('Finish');
+      this.updateQuizButtonState('Complete quiz');
+      this.quizTimer$ = of({ time: 0, isTimeUp: true });
       return;
     }
-    this.storeSelectedAnswer();
     this.questionIndex++;
+    this.storeSelectedAnswer();
+    this.toggleStartQuestionTime()
+  }
+
+  toggleStartQuestionTime(): void {
+    console.log(`%c EMIT SHOULD FIRE `, `background: cyan; color: black;`, )
+    this.quizTimer$ = this.quizSVC.initQuizTimer$();
   }
 
   setSelectedAnswer(answer: string): void {
@@ -63,6 +73,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     if(this.quizCompleted){
       this.closeQuizAndReturnHome();
     }
+    this.updateQuizButtonState('Return home');
     this.quizCompleted = true;
     this.totalQuizScore();
   }

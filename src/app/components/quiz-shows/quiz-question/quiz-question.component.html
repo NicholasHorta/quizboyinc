@@ -9,15 +9,21 @@
 </ng-template>
 
 <ng-template #quizQuestions>
-  <ng-container *ngIf="seasonQuizData$ | async as seasonData">
-    <ng-container *ngIf="quizBtnState !== 'Finish'">
-      <h1>{{ seasonData[questionIndex].question }}</h1>
-      <bs-button
-        *ngFor="let option of seasonData[questionIndex].options"
-        class="quiz-button btn-success"
-        (click)="setSelectedAnswer(option)"
-        >{{ option }}</bs-button
-      >
+  <ng-container *ngIf="{seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async} as vm">
+    <ng-container *ngIf="quizBtnState !== 'Complete quiz'">
+        <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
+
+        <div *ngIf="!quizCompleted">
+          <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
+          <bs-button
+            *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
+            class="quiz-button btn-success"
+            (click)="setSelectedAnswer(option)"
+            [hidden]="vm?.quizTimer?.isTimeUp"
+            >{{ option }}</bs-button
+          >
+        </div>
+
     </ng-container>
     <ng-container *ngTemplateOutlet="result"></ng-container>
     <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
@@ -40,9 +46,7 @@
 
 <ng-template #result>
   <ng-container *ngIf="quizCompleted">
-    <p>
-      Your score: {{userQuizResult}}
-    </p>
+    <p>Your score: {{ userQuizResult }}</p>
     <p>If you have a Profile you can view your results here</p>
   </ng-container>
 </ng-template>
