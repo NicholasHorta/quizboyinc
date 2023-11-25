@@ -9,21 +9,20 @@
 </ng-template>
 
 <ng-template #quizQuestions>
-  <ng-container *ngIf="{seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async} as vm">
-    <ng-container *ngIf="quizBtnState !== 'Complete quiz'">
-        <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
+  <ng-container
+    *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
+  >
+    <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
+      <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
 
-        <div *ngIf="!quizCompleted">
-          <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
-          <bs-button
-            *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
-            class="quiz-button btn-success"
-            (click)="setSelectedAnswer(option)"
-            [hidden]="vm?.quizTimer?.isTimeUp"
-            >{{ option }}</bs-button
-          >
-        </div>
-
+      <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
+      <bs-button
+        *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
+        class="quiz-button btn-success"
+        (click)="setSelectedAnswer(option)"
+        [hidden]="vm?.quizTimer?.isTimeUp"
+        >{{ option }}</bs-button
+      >
     </ng-container>
     <ng-container *ngTemplateOutlet="result"></ng-container>
     <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
