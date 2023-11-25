@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./quiz-collections.component.scss']
 })
 export class QuizCollectionsComponent implements OnInit {
+
   constructor(
     private storageSVC: StorageService,
     private activeRoute: ActivatedRoute

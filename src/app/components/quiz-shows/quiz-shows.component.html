@@ -1,10 +1,7 @@
-<ng-container *ngTemplateOutlet="titles">
-
-</ng-container>
+<ng-container *ngTemplateOutlet="titles"></ng-container>
 
 <ng-template #titles>
-  <div *ngIf="shows$ | async as shows">
-    <a [routerLink]="[show.id]" *ngFor="let show of shows">{{show.title | presentAsTitle}}</a>
-    <pre>{{shows | json}}</pre>
+  <div *ngIf="shows$ | async as shows" class="flex flex-col">
+    <a [routerLink]="[show.id]" *ngFor="let show of shows">{{ show.title | presentAsTitle }}</a>
   </div>
 </ng-template>
