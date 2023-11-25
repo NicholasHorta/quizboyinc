@@ -20,8 +20,7 @@ export class QuizService {
       .pipe(map(data => data));
   }
 
-  // initQuizTimer(milliseconds: number): Observable<boolean> {
-  initQuizTimer$(): Observable<Timer> {
+  quizQuestionTimer$(): Observable<Timer> {
     return interval(1000).pipe(
       take(15),
       // take(31),
@@ -37,7 +36,13 @@ export class QuizService {
         // if (second === 30) return { time: second, isTimeUp: true };
         return { time: second, isTimeUp: false };
       }),
-      tap(i => console.log('%c < Tap Log > ', 'color: deeppink; border: 2px solid deeppink; border-radius: 8px;', i))
+      tap(i =>
+        console.log(
+          '%c < Tap Log > ',
+          'color: deeppink; border: 2px solid deeppink; border-radius: 8px;',
+          i
+        )
+      )
     );
   }
 }
