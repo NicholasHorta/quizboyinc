@@ -43,7 +43,7 @@ import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
     {
       provide: USE_AUTH_EMULATOR,
       useValue: devEnvironment.useEmulators
-        ? ['http://localhost', 9099]
+        ? ['http://localhost:9099', 9099]
         : undefined,
     },
     {
