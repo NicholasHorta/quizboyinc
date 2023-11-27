@@ -24,13 +24,6 @@ export class QuizService {
     return interval(1000).pipe(
       take(15),
       // take(31),
-      tap(i =>
-        console.log(
-          '%c < Tap Log > ',
-          'color: deeppink; border: 2px solid deeppink; border-radius: 8px;',
-          i
-        )
-      ),
       map(second => {
         if (second === 14) return { time: second, isTimeUp: true };
         // if (second === 30) return { time: second, isTimeUp: true };

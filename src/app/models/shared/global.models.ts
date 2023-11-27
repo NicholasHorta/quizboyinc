@@ -6,5 +6,7 @@ export enum Paths {
   HOME = 'shows',
   STATIC = 'info',
   AUTH = 'auth',
-  PROFILE = 'profile'
+  PROFILE = 'profile',
+  REGISTER = 'register',
+  SIGN_IN = 'sign-in',
 }

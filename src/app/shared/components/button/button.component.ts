@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 type ButtonType = 'button' | 'submit';
@@ -12,6 +12,10 @@ type ButtonType = 'button' | 'submit';
 })
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';
+  @Input() value: string = '';
+  @Output() routeChange: EventEmitter<string> = new EventEmitter<string>();
 
-
+  clickEvent(route: string): void {
+    this.routeChange.emit(route);
+  }
 }

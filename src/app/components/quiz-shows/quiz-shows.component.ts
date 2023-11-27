@@ -18,6 +18,10 @@ export class QuizShowsComponent implements OnInit {
     this.getDataAndSetInStorage();
   }
 
+  private setShowDataInStorage(shows: ShowWithId[]): void {
+    this.storageSVC.setShows(shows);
+  }
+
   private getDataAndSetInStorage(): void {
     const showData = this.storageSVC.getShows();
     if (showData) {
@@ -32,9 +36,5 @@ export class QuizShowsComponent implements OnInit {
         tap(data => (this.shows$ = of(data)))
       )
       .subscribe();
-  }
-
-  private setShowDataInStorage(shows: ShowWithId[]): void {
-    this.storageSVC.setShows(shows);
   }
 }

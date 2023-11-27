@@ -6,14 +6,15 @@ import { LogoComponent } from './components/logo/logo.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AccessComponent } from './components/access/access.component';
 import { IconComponent } from '../shared/components/icon/icon.component';
+import { CoreRoutingModule } from './core-routing.module';
 
 const components = [LogoComponent, NavigationComponent, AccessComponent];
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, IconComponent],
-  imports: [CommonModule, ...components],
+  imports: [CommonModule, ...components, CoreRoutingModule],
   exports: [
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ]
 })
 export class CoreModule {}

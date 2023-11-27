@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Timer } from '@app/models/quiz.models';
 
@@ -9,12 +9,6 @@ import { Timer } from '@app/models/quiz.models';
   templateUrl: './quiz-timer.component.html',
   styleUrls: ['./quiz-timer.component.scss']
 })
-export class QuizTimerComponent implements OnInit {
-
+export class QuizTimerComponent {
   @Input() quizTimer: Timer = {time: 0, isTimeUp: false};
-
-  ngOnInit(): void {
-    console.log(`%c RUN `, `background: purple; color: white;`, )
-  }
-
 }
