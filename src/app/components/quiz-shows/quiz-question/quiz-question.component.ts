@@ -149,7 +149,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   private configureQuizData(data: SeasonsWithId[]): void {
     const [season] = data.map((data: SeasonsWithId) => {
       const selectedSeason = data.seasons.find(
-        (season: IndividualSeason) => season.season === this.seasonParam
+        (season: IndividualSeason) => season.season === +this.seasonParam
       );
       this.storeQuizAnswers(selectedSeason!);
       return selectedSeason!;
