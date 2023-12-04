@@ -12,7 +12,7 @@ export interface Seasons {
 
 export interface IndividualSeason {
   image: string;
-  season: string;
+  season: number;
   quiz: QuizItem[];
 }
 

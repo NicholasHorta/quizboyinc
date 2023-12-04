@@ -30,7 +30,6 @@ export class QuizCollectionsComponent implements OnInit {
 
   private getDataFromStorage(): void {
     const data = this.storageSVC.getShows();
-    console.log(`%c DTA `, `background: navy; color: yellow;`, data);
     data?.find((show: ShowWithId) => {
       show.id === this.showIdParam
         ? (this.collection$ = of(show).pipe(

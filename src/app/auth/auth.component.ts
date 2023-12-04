@@ -18,7 +18,7 @@ export class AuthComponent {
           { answer: 'Two', question: 'QQQQQ Two', alts: ['Two', 'C', 'A'] },
           { answer: '3', question: 'QQQQQ Three', alts: ['XXY', 'YYZ', '3'] }
         ],
-        season: "1"
+        season: 1
       },
       {
         quiz: [
@@ -26,7 +26,7 @@ export class AuthComponent {
           { answer: '92vh', question: 'VNVBUIJBC', alts: ['89149479', '92vh', 'aca78dv88'] },
           { answer: '1qaz', question: 'QW----ajd ia', alts: ['Unnn', '1qaz', 'Boob'] }
         ],
-        season: "2"
+        season: 2
       }
     ],
     showId: this.showid
@@ -34,7 +34,7 @@ export class AuthComponent {
   readonly shows = {
       image: 'https://www.gstatic.com/tv/thumb/tvbanners/17420/p17420_b_v8_aa.jpg',
       info: 'A show about a guy who does stuff',
-      seasons: "12",
+      seasons: 12,
       title: 'the-tit-boob-show'
   };
 
