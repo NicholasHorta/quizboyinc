@@ -21,6 +21,13 @@ export class AuthService {
     return this.firebaseSVC.registerUser(email, password);
   }
 
+  check(){
+    return this.firebaseSVC.check();
+  }
+  checkIn(){
+    return this.firebaseSVC.checkIn();
+  }
+
   // userLogin(email: string, password: string) {
   //   this.fireAuth
   //     .signInWithEmailAndPassword(email, password)

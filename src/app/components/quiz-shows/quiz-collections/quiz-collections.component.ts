@@ -4,7 +4,7 @@ import { Show, ShowWithId } from '@app/models/quiz.models';
 import { GetParam } from '@app/models/shared/global.models';
 import { StorageService } from '@app/shared/services/storage.service';
 import { generateArrayFromNumber } from '@app/shared/utilities/utils';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-collections',
@@ -12,11 +12,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./quiz-collections.component.scss']
 })
 export class QuizCollectionsComponent implements OnInit {
-
-  constructor(
-    private storageSVC: StorageService,
-    private activeRoute: ActivatedRoute
-  ) {}
+  constructor(private storageSVC: StorageService, private activeRoute: ActivatedRoute) {}
 
   collection$: Observable<Show> = new Observable<Show>();
   numberOfSeasons: number[] = [];
@@ -34,9 +30,13 @@ export class QuizCollectionsComponent implements OnInit {
 
   private getDataFromStorage(): void {
     const data = this.storageSVC.getShows();
+    console.log(`%c DTA `, `background: navy; color: yellow;`, data);
     data?.find((show: ShowWithId) => {
-      show.id === this.showIdParam ? this.collection$ = of(show) : of([]);
-      this.numberOfSeasons = generateArrayFromNumber(show.seasons);
+      show.id === this.showIdParam
+        ? (this.collection$ = of(show).pipe(
+            tap(show => (this.numberOfSeasons = generateArrayFromNumber(show.seasons)))
+          ))
+        : of([]);
     });
   }
 }

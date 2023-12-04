@@ -27,6 +27,7 @@ export class UserPortalComponent implements OnInit {
 
   ngOnInit(): void {
     this.path;
+    this.authSVC.check();
   }
 
   get path() {

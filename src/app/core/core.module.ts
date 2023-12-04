@@ -7,11 +7,12 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { AccessComponent } from './components/access/access.component';
 import { IconComponent } from '../shared/components/icon/icon.component';
 import { CoreRoutingModule } from './core-routing.module';
+import { AuthModule } from '@app/auth/auth.module';
 
 const components = [LogoComponent, NavigationComponent, AccessComponent];
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, IconComponent],
-  imports: [CommonModule, ...components, CoreRoutingModule],
+  imports: [CommonModule, ...components, CoreRoutingModule, AuthModule],
   exports: [
     HeaderComponent,
     FooterComponent
