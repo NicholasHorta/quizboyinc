@@ -10,3 +10,12 @@ export enum Paths {
   REGISTER = 'register',
   SIGN_IN = 'sign-in',
 }
+
+export type ConsoleMsgType = 'info' | 'warn' | 'error' | 'log';
+
+export enum Emoji {
+  info = '🔵',
+  warn = '🟡',
+  error = '🛑',
+  log = '🟢'
+}
