@@ -17,16 +17,16 @@ export class AuthService {
   // private role: string = 'user';
 
 
+  get user$(){
+    return this.firebaseSVC.user$;
+  }
+
   register(email: string, password: string) {
     return this.firebaseSVC.register(email, password);
   }
 
   signIn(email: string, password: string){
     return this.firebaseSVC.signIn(email, password);
-  }
-
-  get user$(){
-    return this.firebaseSVC.user$;
   }
 
   logout(){
@@ -54,12 +54,5 @@ export class AuthService {
   //     });
   // };
 
-  // redirectAfterAuth(location: string) {
-  //   this.router.navigate([`/${location}`]);
-  // };
-
-  // //* Store in a component that isn't destroyed
-  // storeUID(userId: any) {
-  //   localStorage.setItem('uid', userId);
-  // }
 }
+
