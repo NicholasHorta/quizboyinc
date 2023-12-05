@@ -31,4 +31,12 @@ export class AccessComponent {
   checkUser(){
     this.authSvc.checkIn()
   }
+
+  get user$(){
+    return this.authSvc.user$;
+  }
+
+  logout(){
+    this.authSvc.logout();
+  }
 }

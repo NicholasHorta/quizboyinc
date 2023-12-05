@@ -13,6 +13,7 @@ type ButtonType = 'button' | 'submit';
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';
   @Input() value: string = '';
+  @Input() disabled: boolean = false;
   @Output() routeChange: EventEmitter<string> = new EventEmitter<string>();
 
   clickEvent(route: string): void {

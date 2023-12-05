@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { LogService } from '@app/shared/services/log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  constructor(private ngFirestore: AngularFirestore, private ngFireAuth: AngularFireAuth) {}
+  constructor(private ngFirestore: AngularFirestore, private ngFireAuth: AngularFireAuth, private logSVC: LogService) {}
 
   get db(): AngularFirestore {
     return this.ngFirestore;
@@ -17,10 +18,32 @@ export class FirebaseService {
     return this.ngFirestore.createId();
   }
 
+  get user$(): Observable<any> {
+    return this.ngFireAuth.user;
+  }
+
   // test@gmail.com
-  registerUser(email: string, password: string) {
-    return this.ngFireAuth.createUserWithEmailAndPassword(email, password).then(user => {
-      console.log(`%c USER `, `background: red; color: white;`, user)
+  register(email: string, password: string) {
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, password).then(() => {
+      this.logSVC.emit('log', 'User registered successfully.')
+    }).catch(error => {
+      this.logSVC.emit('error', `Register error: ${error}`)
+    });
+  }
+
+  signIn(email: string, password: string){
+    return this.ngFireAuth.signInWithEmailAndPassword(email, password).then(() => {
+      this.logSVC.emit('log', 'User signed in successfully.')
+    }).catch(error => {
+      this.logSVC.emit('error', `Sign in error: ${error}`)
+    });
+  }
+
+  logout(){
+    this.ngFireAuth.signOut().then(() => {
+      this.logSVC.emit('log', 'User logged out successfully.')
+    }).catch(error => {
+      this.logSVC.emit('error', `Logout error: ${error}`)
     });
   }
 

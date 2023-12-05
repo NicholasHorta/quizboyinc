@@ -1,14 +1,20 @@
-<form [formGroup]="form" (ngSubmit)="register()">
-  <h1>{{ currentForm }}</h1>
-  <div class="flex flex-col">
-    <ng-container *ngIf="path === Paths.REGISTER">
-      <label for="">Username:</label>
-      <input formControlName="username" type="text" />
-    </ng-container>
-    <label for="">Email:</label>
-    <input formControlName="email" type="text" />
-    <label for="">Password:</label>
-    <input formControlName="password" type="password" />
-  </div>
-  <bs-button type="submit" class="quiz-button btn-success">Register</bs-button>
-</form>
+<ng-container *ngIf="user$ | async as user; else portal">
+  <h1>You're currently signed in</h1>
+</ng-container>
+
+<ng-template #portal>
+  <form [formGroup]="form" (ngSubmit)="path === Paths.SIGN_IN ? signInUser() : registerUser()">
+    <h1>{{ currentForm }}</h1>
+    <div class="flex flex-col">
+      <ng-container *ngIf="path === Paths.REGISTER">
+        <label for="">Username:</label>
+        <input formControlName="username" type="text" />
+      </ng-container>
+      <label for="">Email:</label>
+      <input formControlName="email" type="text" />
+      <label for="">Password:</label>
+      <input formControlName="password" type="password" />
+    </div>
+    <bs-button type="submit" [disabled]="!form.valid" class="quiz-button btn-success">{{ currentForm }}</bs-button>
+  </form>
+</ng-template>

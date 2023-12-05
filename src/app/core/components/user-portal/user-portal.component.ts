@@ -24,11 +24,12 @@ export class UserPortalComponent implements OnInit {
   });
 
   Paths = Paths;
+  user$ = this.authSVC.user$
 
   ngOnInit(): void {
     this.path;
     this.authSVC.check();
-  }
+      }
 
   get path() {
     const [url] = this.activeRoute.snapshot.url;
@@ -42,9 +43,14 @@ export class UserPortalComponent implements OnInit {
     return 'Register';
   }
 
-  register(){
-    console.log(`%c INFO `, `background: purple; color: white;`, this.form.value.email, this.form.value.password)
-    this.authSVC.registerUser(this.form.value.email, this.form.value.password);
+  registerUser(){
+    console.log(`%c INFO `, `background: purple; color: white;`, this.form.value.email, this.form.value.password, 'registerUser')
+    this.authSVC.register(this.form.value.email, this.form.value.password);
+  }
+
+  signInUser(){
+    console.log(`%c INFO `, `background: purple; color: white;`, this.form.value.email, this.form.value.password, 'signInUser')
+    this.authSVC.signIn(this.form.value.email, this.form.value.password)
   }
 
 
