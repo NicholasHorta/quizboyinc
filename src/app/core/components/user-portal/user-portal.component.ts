@@ -18,18 +18,18 @@ export class UserPortalComponent implements OnInit {
   constructor(private activeRoute: ActivatedRoute, private authSVC: AuthService) {}
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
-    username: new FormControl('')
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    password: new FormControl<string>('', Validators.required),
+    username: new FormControl<string>('')
   });
 
   Paths = Paths;
-  user$ = this.authSVC.user$
+  user$ = this.authSVC.user$;
 
   ngOnInit(): void {
     this.path;
     this.authSVC.check();
-      }
+  }
 
   get path() {
     const [url] = this.activeRoute.snapshot.url;
@@ -37,21 +37,35 @@ export class UserPortalComponent implements OnInit {
   }
 
   get currentForm(): PortalType {
-    if(this.path === Paths.SIGN_IN) {
-      return 'Login'
+    if (this.path === Paths.SIGN_IN) {
+      return 'Login';
     }
     return 'Register';
   }
 
-  registerUser(){
-    console.log(`%c INFO `, `background: purple; color: white;`, this.form.value.email, this.form.value.password, 'registerUser')
-    this.authSVC.register(this.form.value.email, this.form.value.password);
+  registerUser() {
+    console.log(
+      `%c INFO `,
+      `background: purple; color: white;`,
+      this.form.value.email,
+      this.form.value.password,
+      'registerUser'
+    );
+    this.authSVC.register(
+      this.form.value.email,
+      this.form.value.password,
+      this.form.value.username
+    );
   }
 
-  signInUser(){
-    console.log(`%c INFO `, `background: purple; color: white;`, this.form.value.email, this.form.value.password, 'signInUser')
-    this.authSVC.signIn(this.form.value.email, this.form.value.password)
+  signInUser() {
+    console.log(
+      `%c INFO `,
+      `background: purple; color: white;`,
+      this.form.value.email,
+      this.form.value.password,
+      'signInUser'
+    );
+    this.authSVC.signIn(this.form.value.email, this.form.value.password);
   }
-
-
 }

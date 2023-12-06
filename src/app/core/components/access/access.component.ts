@@ -9,7 +9,7 @@ import { AuthService } from '@app/services/auth/auth.service';
   standalone: true,
   imports: [CommonModule, ButtonComponent],
   templateUrl: './access.component.html',
-  styleUrls: ['./access.component.scss']
+  styleUrls: ['./access.component.scss'],
 })
 export class AccessComponent {
 

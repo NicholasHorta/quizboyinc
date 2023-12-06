@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, take, tap } from 'rxjs';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { Router } from '@angular/router';
+import { UserData } from '@app/models/auth.models';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,35 @@ export class FirebaseService {
     return this.ngFireAuth.user;
   }
 
-  register(email: string, password: string) {
+  get userData$(): Observable<UserData> {
+    return this.user$.pipe(
+      take(1),
+      tap(i => console.log('%c < Tap Log > ', 'color: deeppink; border: 2px solid deeppink; border-radius: 8px;', i)),
+      switchMap(user => {
+        return this.ngFirestore.collection<UserData>('users').doc(user.uid).valueChanges();
+      })
+    );
+  }
+
+  register(data) {
+    const { email, password, username, avatar } = data as {
+      email: string;
+      password: string;
+      username: string;
+      avatar: string;
+    };
     return this.ngFireAuth
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(data => {
+        this.db.collection('users').doc(data.user.uid).set({
+          avatar,
+          username,
+          email,
+          uid: data.user.uid,
+          role: 'user',
+          created: Date.now(),
+          achievements: []
+        });
         this.logSVC.emit('log', 'User registered successfully.');
         this.router.navigate(['/profile']);
       })

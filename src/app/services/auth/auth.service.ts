@@ -21,8 +21,15 @@ export class AuthService {
     return this.firebaseSVC.user$;
   }
 
-  register(email: string, password: string) {
-    return this.firebaseSVC.register(email, password);
+  register(email: string, password: string, username: string) {
+    if(!username) username = this.assignUsername();
+    const newUserData = {
+      username,
+      email,
+      password,
+      avatar: this.assignAvatar(),
+    }
+    return this.firebaseSVC.register(newUserData);
   }
 
   signIn(email: string, password: string){
@@ -41,7 +48,13 @@ export class AuthService {
   }
 
 
+  private assignUsername(): string {
+    return `Automated Username ${Math.floor(Math.random() * 1000) + 1}`
+  }
 
+  private assignAvatar(): string {
+    return `https://api.dicebear.com/8.x/thumbs/svg`
+  }
 
   // resetPassword(email: string) {
   //   this.fireAuth
