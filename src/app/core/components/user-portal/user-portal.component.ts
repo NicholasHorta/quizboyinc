@@ -6,6 +6,7 @@ import { Paths } from '@app/models/shared/global.models';
 import { PortalType } from '@app/models/core.model';
 import { AuthService } from '@app/services/auth/auth.service';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-portal',
@@ -25,9 +26,11 @@ export class UserPortalComponent implements OnInit {
 
   Paths = Paths;
   user$ = this.authSVC.user$;
+  authError$: Observable<string>;
 
   ngOnInit(): void {
     this.path;
+    this.authError$ = this.authSVC.authError$;
     this.authSVC.check();
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, switchMap, take, tap } from 'rxjs';
+import { Observable, Subject, switchMap, take, tap } from 'rxjs';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { Router } from '@angular/router';
@@ -19,6 +19,11 @@ export class FirebaseService {
     private router: Router
   ) {}
 
+  error: Subject<string> = new Subject();
+  error$ = this.error.asObservable();
+  readonly errorMsgPreface: string = 'Hmm... an error occured while attempting to';
+
+
   get db(): AngularFirestore {
     return this.ngFirestore;
   }
@@ -34,20 +39,14 @@ export class FirebaseService {
   get userData$(): Observable<UserData> {
     return this.user$.pipe(
       take(1),
-      tap(i => console.log('%c < Tap Log > ', 'color: deeppink; border: 2px solid deeppink; border-radius: 8px;', i)),
       switchMap(user => {
         return this.ngFirestore.collection<UserData>('users').doc(user.uid).valueChanges();
       })
     );
   }
 
-  register(data) {
-    const { email, password, username, avatar } = data as {
-      email: string;
-      password: string;
-      username: string;
-      avatar: string;
-    };
+  async register(data: Partial<UserData>, password: string) {
+    const { email, username, avatar } = data;
     return this.ngFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(data => {
@@ -65,10 +64,11 @@ export class FirebaseService {
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
+        this.error.next(`${this.errorMsgPreface} register the account. Most likely the email already exists, try logging in.`)
       });
   }
 
-  signIn(email: string, password: string) {
+  async signIn(email: string, password: string) {
     return this.ngFireAuth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -77,10 +77,11 @@ export class FirebaseService {
       })
       .catch(error => {
         this.logSVC.emit('error', `Sign in error: ${error}`);
+        this.error.next(`${this.errorMsgPreface} login. Possibly an incorrect email or password?`)
       });
   }
 
-  logout() {
+  async logout() {
     this.ngFireAuth
       .signOut()
       .then(() => {

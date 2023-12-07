@@ -6,6 +6,7 @@ export interface Show {
 }
 
 export interface Seasons {
+  preface: string;
   showId: string;
   seasons: IndividualSeason[];
 }

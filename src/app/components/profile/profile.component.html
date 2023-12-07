@@ -1,5 +1,6 @@
 <h1>Profile View</h1>
 <ng-container *ngIf="currentUser$ | async as currentUser">
   <pre>{{currentUser | json}}</pre>
+  <img [src]="currentUser.avatar" alt="">
   <a [routerLink]="['achievements']">Go to Achievements</a>
 </ng-container>
