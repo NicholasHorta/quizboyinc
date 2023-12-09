@@ -12,28 +12,30 @@ import { Observable, of, take, tap } from 'rxjs';
 export class QuizShowsComponent implements OnInit {
   constructor(private quizSVC: QuizService, private storageSVC: StorageService) {}
 
-  shows$: Observable<ShowWithId[]> = new Observable();
+  shows$: Observable<ShowWithId[]>;
 
   ngOnInit(): void {
-    this.getDataAndSetInStorage();
+    this.getShowsAndSetInStorage();
   }
 
   private setShowDataInStorage(shows: ShowWithId[]): void {
     this.storageSVC.setShows(shows);
   }
 
-  private getDataAndSetInStorage(): void {
-    const showData = this.storageSVC.getShows();
-    if (showData) {
-      this.shows$ = of(showData);
+  private getShowsAndSetInStorage(): void {
+    const shows = this.storageSVC.getShows();
+    if (shows) {
+      this.shows$ = of(shows);
       return;
     }
 
-    this.quizSVC.shows$
+    this.quizSVC.getShowsFromDB$()
       .pipe(
         take(1),
-        tap((shows: ShowWithId[]) => this.setShowDataInStorage(shows)),
-        tap(data => (this.shows$ = of(data)))
+        tap((shows: ShowWithId[]) => {
+          this.setShowDataInStorage(shows)
+          this.shows$ = of(shows)
+        }),
       )
       .subscribe();
   }

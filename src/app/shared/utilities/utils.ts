@@ -7,8 +7,12 @@ export function GenerateArrayFromNumber(num: number | string, increment: boolean
 }
 
 //> Rename to something more appropriate
-export function LogErrorMessage(message: string): Observable<never> {
+export function LogErrorMessage$(message: string): Observable<never> {
   return throwError(() => new Error(message));
+}
+
+export function LogErrorMessage(message: string): void {
+  throw new Error(message);
 }
 
 export function RandomUsernameCreation(): string {

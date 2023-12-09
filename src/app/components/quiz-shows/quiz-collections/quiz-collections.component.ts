@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Show, ShowWithId } from '@app/models/quiz.models';
+import { ShowWithId } from '@app/models/quiz.models';
 import { GetParam } from '@app/models/shared/global.models';
 import { StorageService } from '@app/shared/services/storage.service';
 import { GenerateArrayFromNumber, LogErrorMessage } from '@app/shared/utilities/utils';
@@ -14,7 +14,7 @@ import { Observable, of } from 'rxjs';
 export class QuizCollectionsComponent implements OnInit {
   constructor(private storageSVC: StorageService, private activeRoute: ActivatedRoute) {}
 
-  selectedShow$: Observable<Show>;
+  selectedShow$: Observable<ShowWithId>;
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
   private showIdParam: GetParam = null;

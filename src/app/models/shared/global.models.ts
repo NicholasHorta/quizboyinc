@@ -19,3 +19,5 @@ export enum Emoji {
   error = '🛑',
   log = '🟢'
 }
+
+export type DbCollectionTypes = 'shows' | 'seasons' | 'users';

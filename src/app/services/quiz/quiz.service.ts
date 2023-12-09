@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-import { Observable, interval, map, take, tap } from 'rxjs';
+import { Observable, catchError, interval, map, of, take, tap } from 'rxjs';
 import { SeasonsWithId, ShowWithId, Timer } from '@app/models/quiz.models';
+import { LogErrorMessage } from '@app/shared/utilities/utils';
+import { DbCollectionTypes } from '@app/models/shared/global.models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +11,39 @@ import { SeasonsWithId, ShowWithId, Timer } from '@app/models/quiz.models';
 export class QuizService {
   constructor(private firebaseSVC: FirebaseService) {}
 
-  get shows$(): Observable<ShowWithId[]> {
-    return this.firebaseSVC.db.collection<ShowWithId>('shows').valueChanges({ idField: 'id' });
+  collection: DbCollectionTypes;
+
+  getShowsFromDB$(): Observable<ShowWithId[]> {
+    this.collection = 'shows';
+    return this.firebaseSVC.db
+      .collection<ShowWithId>(this.collection)
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        tap(data => {
+          if (!data || data.length === 0) {
+            LogErrorMessage('No shows found in database');
+          }
+        })
+      );
   }
 
   getSeasonQuizData$(showId: string): Observable<SeasonsWithId[]> {
+    this.collection = 'seasons';
     return this.firebaseSVC.db
-      .collectionGroup<SeasonsWithId>('seasons', ref => ref.where('showId', '==', showId))
+      .collectionGroup<SeasonsWithId>('seasosns', ref => ref.where('showId', '==', showId))
       .valueChanges({ idField: 'id' })
-      .pipe(map(data => data));
+      .pipe(map(data => data), catchError(err => of(err)));
   }
 
   quizQuestionTimer$(): Observable<Timer> {
+    const maximumSecs = 30;
+    const events = maximumSecs + 1;
     return interval(1000).pipe(
-      take(15),
-      // take(31),
+      take(events),
       map(second => {
-        if (second === 14) return { time: second, isTimeUp: true };
-        // if (second === 30) return { time: second, isTimeUp: true };
-        return { time: second, isTimeUp: false };
+        return second === maximumSecs
+          ? { time: second, isTimeUp: true }
+          : { time: second, isTimeUp: false };
       }),
       tap(i =>
         console.log(
