@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from '../firebase/firebase.service';
+import { UserService } from '../auth/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(private firebaseSVC: FirebaseService) { }
+  constructor(private userSVC: UserService) { }
 
   get currentUser$(){
-    return this.firebaseSVC.userData$;
+    return this.userSVC.userData$;
   }
 }

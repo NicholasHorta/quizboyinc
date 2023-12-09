@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { AchievementsComponent } from './achievements/achievements.component';
+import { Paths } from '@app/models/shared/global.models';
 
 const routes: Routes = [
   {
-    path: '',
+    path: Paths.EMPTY,
     component: ProfileComponent
   },
   {
-    path: 'achievements',
+    path: Paths.ACHIEVEMENTS,
     component: AchievementsComponent
   }
 ];

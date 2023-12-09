@@ -3,7 +3,7 @@ import { FirebaseService } from '../firebase/firebase.service';
 import { Observable, catchError, interval, map, of, take, tap } from 'rxjs';
 import { SeasonsWithId, ShowWithId, Timer } from '@app/models/quiz.models';
 import { LogErrorMessage } from '@app/shared/utilities/utils';
-import { DbCollectionTypes } from '@app/models/shared/global.models';
+import { DbRootKey } from '@app/models/shared/global.models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,9 @@ import { DbCollectionTypes } from '@app/models/shared/global.models';
 export class QuizService {
   constructor(private firebaseSVC: FirebaseService) {}
 
-  collection: DbCollectionTypes;
-
   getShowsFromDB$(): Observable<ShowWithId[]> {
-    this.collection = 'shows';
     return this.firebaseSVC.db
-      .collection<ShowWithId>(this.collection)
+      .collection<ShowWithId>(DbRootKey.SHOWS)
       .valueChanges({ idField: 'id' })
       .pipe(
         tap(data => {
@@ -28,9 +25,8 @@ export class QuizService {
   }
 
   getSeasonQuizData$(showId: string): Observable<SeasonsWithId[]> {
-    this.collection = 'seasons';
     return this.firebaseSVC.db
-      .collectionGroup<SeasonsWithId>('seasosns', ref => ref.where('showId', '==', showId))
+      .collectionGroup<SeasonsWithId>(DbRootKey.SEASONS, ref => ref.where('showId', '==', showId))
       .valueChanges({ idField: 'id' })
       .pipe(map(data => data), catchError(err => of(err)));
   }

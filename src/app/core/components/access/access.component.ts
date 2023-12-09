@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/services/auth/auth.service';
+import { UserService } from '@app/services/auth/user.service';
 
 @Component({
   selector: 'bs-access',
@@ -13,7 +13,12 @@ import { AuthService } from '@app/services/auth/auth.service';
 })
 export class AccessComponent {
 
-  constructor(private router: Router, private authSvc: AuthService) { }
+  constructor(private router: Router, private userSVC: UserService) { }
+
+
+  get user$(){
+    return this.userSVC.user$;
+  }
 
   accessEvent(route: string) {
     this.router.navigate(['login', route]);
@@ -27,16 +32,11 @@ export class AccessComponent {
     console.log(`%c localStorage `, `background: yellow; color: black;`, localStorage);
   }
 
-
   checkUser(){
-    this.authSvc.checkIn()
-  }
-
-  get user$(){
-    return this.authSvc.user$;
+    this.userSVC.checkIn();
   }
 
   logout(){
-    this.authSvc.logout();
+    this.userSVC.logout();
   }
 }
