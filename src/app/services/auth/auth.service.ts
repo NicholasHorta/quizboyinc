@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-
+import { RandomUsernameCreation } from '@app/shared/utilities/utils';
 @Injectable({
   providedIn: 'root',
 })
@@ -9,20 +9,22 @@ export class AuthService {
     private firebaseSVC: FirebaseService,
   ) {}
 
-  // errorMsgPreface: string = 'Hmm... an error occured while attempting to';
-  // registerErrorMsg: string = `${this.errorMsgPreface} register the account. Most likely the email already exists, try logging in.`;
-  // loginErrorMsg: string = `${this.errorMsgPreface} login. Possibly an incorrect email or password?`;
-  // error$: Subject<string> = new Subject();
-  // private currentUser: string | undefined = '';
-  // private role: string = 'user';
-
-
   get user$(){
     return this.firebaseSVC.user$;
   }
 
-  register(email: string, password: string) {
-    return this.firebaseSVC.register(email, password);
+  get authError$(){
+    return this.firebaseSVC.error$;
+  }
+
+  register(email: string, password: string, username: string) {
+    if(!username) username = RandomUsernameCreation();
+    const newUserData = {
+      username,
+      email,
+      avatar: this.assignAvatar(username),
+    }
+    return this.firebaseSVC.register(newUserData, password);
   }
 
   signIn(email: string, password: string){
@@ -41,7 +43,9 @@ export class AuthService {
   }
 
 
-
+  private assignAvatar(username: string): string {
+    return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`
+  }
 
   // resetPassword(email: string) {
   //   this.fireAuth

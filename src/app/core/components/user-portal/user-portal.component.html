@@ -15,6 +15,11 @@
       <label for="">Password:</label>
       <input formControlName="password" type="password" />
     </div>
-    <bs-button type="submit" [disabled]="!form.valid" class="quiz-button btn-success">{{ currentForm }}</bs-button>
+    <bs-button type="submit" [disabled]="!form.valid" class="quiz-button btn-success">
+      {{ currentForm }}
+    </bs-button>
+    <ng-container *ngIf="authError$ | async as authError">
+      <p>{{authError}}</p>
+    </ng-container>
   </form>
 </ng-template>
