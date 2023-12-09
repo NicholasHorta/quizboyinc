@@ -5,7 +5,7 @@ export interface Show {
   seasons: number;
 }
 
-export interface Seasons {
+export interface ShowCollection {
   preface: string;
   showId: string;
   seasons: IndividualSeason[];
@@ -33,7 +33,7 @@ export interface Timer {
 }
 
 export type ShowWithId = Show & FirestoreId
-export type SeasonsWithId = Seasons & FirestoreId
+export type ShowCollectionWithId = ShowCollection & FirestoreId
 
 interface FirestoreId {
   id: string;

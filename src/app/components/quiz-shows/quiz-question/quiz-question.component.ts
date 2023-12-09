@@ -4,7 +4,7 @@ import {
   IndividualSeason,
   Questions,
   QuizItem,
-  SeasonsWithId,
+  ShowCollection,
   Timer
 } from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
@@ -18,13 +18,13 @@ import { Observable, of, take, tap } from 'rxjs';
   styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit, OnDestroy {
-  seasonQuizData$: Observable<Questions[]> = new Observable();
-  quizTimer$: Observable<Timer> = new Observable();
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
   quizCompleted: boolean = false;
   userQuizResult: number = 0;
   questionIndex: number = 0;
+  quizTimer$: Observable<Timer>;
+  seasonQuizData$: Observable<Questions[]>;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -43,12 +43,12 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.seasonParam = this.activeRoute.snapshot.paramMap.get('season');
     this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
-    this.storageSVC.removeQuizInit();
-    this.getDataAndSetInStorage();
+    this.storageSVC.removeQuizInProgress();
+    this.getShowCollectionAndSetInStorage();
   }
 
   ngOnDestroy(): void {
-    this.storageSVC.removeQuizInit();
+    this.storageSVC.removeQuizInProgress();
   }
 
   get isQuizInProgress(): boolean {
@@ -89,7 +89,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     this.quizBtnState = state;
   }
 
-  private setSeasonDataInStorage(data: SeasonsWithId[]): void {
+  private setSeasonDataInStorage(data: ShowCollection[]): void {
     if (data.length) this.storageSVC.setSeasons(this.showIdParam!, data);
   }
 
@@ -111,7 +111,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   }
 
   private closeQuizAndReturnHome(): void {
-    this.storageSVC.removeQuizInit();
+    this.storageSVC.removeQuizInProgress();
     this.router.navigateByUrl(Paths.HOME);
   }
 
@@ -129,36 +129,38 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     this.userQuizResult = totalScore;
   }
 
-  private getDataAndSetInStorage(): void {
-    const seasonData: SeasonsWithId[] = this.storageSVC.getSeasons(this.showIdParam!)!;
+  private getShowCollectionAndSetInStorage(): void {
+    const seasonData: ShowCollection[] = this.storageSVC.getSeasons(this.showIdParam!)!;
     if (seasonData) {
       this.configureQuizData(seasonData);
       return;
     }
-
     this.quizSVC
       .getSeasonQuizData$(this.showIdParam!)
       .pipe(
         take(1),
-        tap((seasons: SeasonsWithId[]) => this.setSeasonDataInStorage(seasons)),
-        tap((seasonData: SeasonsWithId[]) => this.configureQuizData(seasonData))
+        tap((seasons: ShowCollection[]) => {
+          this.setSeasonDataInStorage(seasons);
+          this.configureQuizData(seasons);
+        })
       )
       .subscribe();
   }
 
-  private configureQuizData(data: SeasonsWithId[]): void {
-    const [season] = data.map((data: SeasonsWithId) => {
-      const selectedSeason = data.seasons.find(
+  private configureQuizData(showCollection: ShowCollection[]): void {
+    const [selectedSeason] = showCollection.map((collection: ShowCollection) => {
+      return collection.seasons.find(
         (season: IndividualSeason) => season.season === +this.seasonParam
       );
-      this.storeQuizAnswers(selectedSeason!);
-      return selectedSeason!;
     });
+
+    this.storeQuizAnswers(selectedSeason);
+
     this.seasonQuizData$ = of(
-      season.quiz.map((data: QuizItem) => {
+      selectedSeason.quiz.map((data: QuizItem) => {
         return {
           question: data.question,
-          options: [...data.alts, data.answer].sort(() => Math.random() - 0.5)
+          options: [...data.alts, data.answer].sort(() => Math.random() - 0.5) // Randomise order of options
         };
       })
     ).pipe(tap((questions: Questions[]) => this.setQuestionRange(questions)));

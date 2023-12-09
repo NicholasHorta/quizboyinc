@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SeasonsWithId, ShowWithId } from '@app/models/quiz.models';
+import { ShowCollection, ShowWithId } from '@app/models/quiz.models';
 import { StorageKeys } from '@app/models/storage.models';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class StorageService {
     localStorage.setItem(StorageKeys.IN_PROGRESS, 'true');
   }
 
-  removeQuizInit(): void {
+  removeQuizInProgress(): void {
     this.removeItem(StorageKeys.IN_PROGRESS);
   }
 
@@ -19,7 +19,7 @@ export class StorageService {
     localStorage.setItem(StorageKeys.SHOWS, this.toJSON(value));
   }
 
-  setSeasons(id: string, value: SeasonsWithId[]): void {
+  setSeasons(id: string, value: ShowCollection[]): void {
     const key = `${id}_${StorageKeys.SEASONS}`;
     localStorage.setItem(key, this.toJSON(value));
   }
@@ -33,7 +33,7 @@ export class StorageService {
     return JSON.parse(localStorage.getItem(StorageKeys.SHOWS)!);
   }
 
-  getSeasons(id: string): SeasonsWithId[] | undefined {
+  getSeasons(id: string): ShowCollection[] | undefined {
     const key = `${id}_${StorageKeys.SEASONS}`;
     if (!localStorage.getItem(key)) return undefined;
     return JSON.parse(localStorage.getItem(key)!);
