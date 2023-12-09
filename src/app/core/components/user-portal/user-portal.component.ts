@@ -41,7 +41,7 @@ export class UserPortalComponent implements OnInit {
 
   get currentForm(): PortalType {
     if (this.path === Paths.SIGN_IN) {
-      return 'Login';
+      return 'Sign in';
     }
     return 'Register';
   }

@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { Paths } from '@app/models/shared/global.models';
 
 const routes: Routes = [
+  {path: Paths.EMPTY, redirectTo: Paths.ABOUT, pathMatch: 'full'},
   {path: Paths.ABOUT, component: AboutComponent},
   {path: Paths.CONTACT, component: ContactComponent}
 ];

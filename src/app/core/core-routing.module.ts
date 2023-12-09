@@ -4,6 +4,7 @@ import { UserPortalComponent } from './components/user-portal/user-portal.compon
 import { Paths } from '@app/models/shared/global.models';
 
 const routes: Routes = [
+  { path: Paths.EMPTY, redirectTo: Paths.SIGN_IN, pathMatch: 'full' },
   { path: Paths.SIGN_IN, component: UserPortalComponent },
   { path: Paths.REGISTER, component: UserPortalComponent },
 ];

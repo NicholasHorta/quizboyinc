@@ -10,7 +10,6 @@ export enum Paths {
   PROFILE = 'profile',
   REGISTER = 'register',
   SIGN_IN = 'sign-in',
-  LOGIN = 'login',
   ACHIEVEMENTS = 'achievements',
   ABOUT = 'about',
   CONTACT = 'contact',

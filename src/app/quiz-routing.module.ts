@@ -6,7 +6,7 @@ import { Paths } from './models/shared/global.models';
 
 const routes: Routes = [
   { path: Paths.EMPTY, redirectTo: Paths.HOME, pathMatch: 'full' },
-  { path: Paths.LOGIN, loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
+  { path: Paths.AUTH, loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
   {
     path: Paths.STATIC,
     loadChildren: () => import('./static/static.module').then(m => m.StaticModule)

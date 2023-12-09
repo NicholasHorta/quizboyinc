@@ -21,7 +21,7 @@ export class AccessComponent {
   }
 
   accessEvent(route: string) {
-    this.router.navigate(['login', route]);
+    this.router.navigate(['auth', route]);
   }
 
   clearLS(){
