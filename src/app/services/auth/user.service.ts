@@ -22,11 +22,11 @@ export class UserService {
   error$ = this.error.asObservable();
   readonly errorMsgPreface: string = 'Hmm... an error occured while attempting to';
 
-  get user$(){
+  get user$(): Observable<any> {
     return this.firebaseSVC.auth.user;
   }
 
-  get authError$(){
+  get authError$(): Observable<string> {
     return this.error$;
   }
 
@@ -39,10 +39,12 @@ export class UserService {
     );
   }
 
-  async register(email: string, password: string, username: string) {
+  async register(email: string, password: string, username: string): Promise<void> {
+
     if(!username) username = RandomUsernameCreation();
     const avatar = this.assignAvatar(username);
-    return this.firebaseSVC.auth
+
+    await this.firebaseSVC.auth
       .createUserWithEmailAndPassword(email, password)
       .then(data => {
         this.firebaseSVC.db.collection(DbRootKey.USERS).doc(data.user.uid).set({
@@ -63,8 +65,8 @@ export class UserService {
       });
   }
 
-  async signIn(email: string, password: string) {
-    return this.firebaseSVC.auth
+  async signIn(email: string, password: string): Promise<void> {
+    await this.firebaseSVC.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.logSVC.emit('log', 'User signed in successfully.');
@@ -76,8 +78,8 @@ export class UserService {
       });
   }
 
-  async logout() {
-    this.firebaseSVC.auth
+  async logout(): Promise<void> {
+    await this.firebaseSVC.auth
       .signOut()
       .then(() => {
         this.storageSVC.wipeStorage();

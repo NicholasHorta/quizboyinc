@@ -97,15 +97,15 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     this.questionLimit = questions.length;
   }
 
-  private storeQuizAnswers(season: IndividualSeason) {
+  private storeQuizAnswers(season: IndividualSeason): void {
     this.seasonQuizAnswers = season!.quiz.map((data: QuizItem) => data.answer);
   }
 
-  private incrementQuestionIndex() {
+  private incrementQuestionIndex(): void {
     this.questionIndex++;
   }
 
-  private storeSelectedAnswer() {
+  private storeSelectedAnswer(): void {
     this.userAnswerStore = [...this.userAnswerStore, this.selectedOption];
     this.selectedOption = '';
   }
@@ -147,7 +147,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  private configureQuizData(showCollection: ShowCollection[]): void {
+  private configureQuizData(showCollection: ShowCollection[]) {
     const [selectedSeason] = showCollection.map((collection: ShowCollection) => {
       return collection.seasons.find(
         (season: IndividualSeason) => season.season === +this.seasonParam
