@@ -8,7 +8,7 @@ export class PresentAsTitlePipe implements PipeTransform {
   transform(title: string): string {
     const modifiedTitle = title
       .split('-')
-      .map(l => l.charAt(0).toUpperCase() + l.slice(1))
+      .map(str => str.charAt(0).toUpperCase() + str.slice(1))
       .join(' ');
 
     return modifiedTitle;

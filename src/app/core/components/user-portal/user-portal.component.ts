@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Paths } from '@app/models/shared/global.models';
 import { PortalType } from '@app/models/core.model';
-import { AuthService } from '@app/services/auth/auth.service';
+import { UserService } from '@app/services/auth/user.service';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-portal.component.scss']
 })
 export class UserPortalComponent implements OnInit {
-  constructor(private activeRoute: ActivatedRoute, private authSVC: AuthService) {}
+  constructor(private activeRoute: ActivatedRoute, private userSVC: UserService) {}
 
   form: FormGroup = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
@@ -25,13 +25,13 @@ export class UserPortalComponent implements OnInit {
   });
 
   Paths = Paths;
-  user$ = this.authSVC.user$;
+  user$ = this.userSVC.user$;
   authError$: Observable<string>;
 
   ngOnInit(): void {
     this.path;
-    this.authError$ = this.authSVC.authError$;
-    this.authSVC.check();
+    this.authError$ = this.userSVC.authError$;
+    this.userSVC.checkIn();
   }
 
   get path() {
@@ -41,7 +41,7 @@ export class UserPortalComponent implements OnInit {
 
   get currentForm(): PortalType {
     if (this.path === Paths.SIGN_IN) {
-      return 'Login';
+      return 'Sign in';
     }
     return 'Register';
   }
@@ -54,7 +54,7 @@ export class UserPortalComponent implements OnInit {
       this.form.value.password,
       'registerUser'
     );
-    this.authSVC.register(
+    this.userSVC.register(
       this.form.value.email,
       this.form.value.password,
       this.form.value.username
@@ -69,6 +69,6 @@ export class UserPortalComponent implements OnInit {
       this.form.value.password,
       'signInUser'
     );
-    this.authSVC.signIn(this.form.value.email, this.form.value.password);
+    this.userSVC.signIn(this.form.value.email, this.form.value.password);
   }
 }

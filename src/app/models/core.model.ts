@@ -3,4 +3,4 @@ export interface NavigationLinks {
   path: string;
 }
 
-export type PortalType = 'Login' | 'Register';
+export type PortalType = 'Sign in' | 'Register';

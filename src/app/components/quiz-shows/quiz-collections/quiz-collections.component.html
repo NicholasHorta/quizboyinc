@@ -1,11 +1,15 @@
 <ng-container *ngTemplateOutlet="seasons"></ng-container>
 
 <ng-template #seasons>
-  <ng-container *ngIf="collection$ | async as collection; else error">
-    <pre>{{collection | json}}</pre>
-    <h1>{{ collection.title | presentAsTitle }}</h1>
-    <p>{{ collection.info }}</p>
-    <bs-button *ngFor="let season of numberOfSeasons" class="quiz-button btn-success" (click)="setAttemptButtonData(season)">
+  <ng-container *ngIf="selectedShow$ | async as show; else error">
+    <pre>{{ show | json }}</pre>
+    <h1>{{ show.title | presentAsTitle }}</h1>
+    <p>{{ show.info }}</p>
+    <bs-button
+      *ngFor="let season of numberOfSeasons"
+      class="quiz-button btn-success"
+      (click)="setAttemptBtnWithSelectedSeason(season)"
+    >
       Season {{ season }}
     </bs-button>
     <ng-container *ngTemplateOutlet="quizStart"></ng-container>
@@ -14,7 +18,9 @@
 
 <ng-template #quizStart>
   <ng-container *ngIf="selectedSeason">
-    <bs-button [routerLink]="[selectedSeason]" class="quiz-button btn-success">Attempt season {{selectedSeason}} quiz</bs-button>
+    <bs-button [routerLink]="[selectedSeason]" class="quiz-button btn-success"
+      >Attempt season {{ selectedSeason }} quiz</bs-button
+    >
   </ng-container>
 </ng-template>
 

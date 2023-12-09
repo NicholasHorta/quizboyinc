@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { Paths } from '@app/models/shared/global.models';
 
 const routes: Routes = [
-  {path: 'about', component: AboutComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: Paths.EMPTY, redirectTo: Paths.ABOUT, pathMatch: 'full'},
+  {path: Paths.ABOUT, component: AboutComponent},
+  {path: Paths.CONTACT, component: ContactComponent}
 ];
 
 @NgModule({
