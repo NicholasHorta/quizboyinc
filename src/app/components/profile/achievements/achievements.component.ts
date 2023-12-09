@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Achievements } from '@app/models/auth.models';
 
 @Component({
   selector: 'bs-achievements',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./achievements.component.scss']
 })
 export class AchievementsComponent {
-
+  @Input() achievements: Achievements[];
 }

@@ -4,8 +4,6 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { AchievementsComponent } from './achievements/achievements.component';
 
-
-
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -16,4 +14,5 @@ import { AchievementsComponent } from './achievements/achievements.component';
     ProfileRoutingModule
   ]
 })
+
 export class ProfileModule { }

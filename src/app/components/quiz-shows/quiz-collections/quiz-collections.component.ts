@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Show, ShowWithId } from '@app/models/quiz.models';
 import { GetParam } from '@app/models/shared/global.models';
 import { StorageService } from '@app/shared/services/storage.service';
-import { generateArrayFromNumber } from '@app/shared/utilities/utils';
-import { Observable, of, tap } from 'rxjs';
+import { GenerateArrayFromNumber, LogErrorMessage } from '@app/shared/utilities/utils';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-collections',
@@ -14,28 +14,35 @@ import { Observable, of, tap } from 'rxjs';
 export class QuizCollectionsComponent implements OnInit {
   constructor(private storageSVC: StorageService, private activeRoute: ActivatedRoute) {}
 
-  collection$: Observable<Show> = new Observable<Show>();
+  selectedShow$: Observable<Show>;
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
-  showIdParam: GetParam = null;
+  private showIdParam: GetParam = null;
 
   ngOnInit(): void {
     this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
-    this.getDataFromStorage();
+    this.getSelectedShowFromStorage();
   }
 
-  setAttemptButtonData(season: number): void {
+  setAttemptBtnWithSelectedSeason(season: number): void {
     this.selectedSeason = season;
   }
 
-  private getDataFromStorage(): void {
-    const data = this.storageSVC.getShows();
-    data?.find((show: ShowWithId) => {
-      show.id === this.showIdParam
-        ? (this.collection$ = of(show).pipe(
-            tap(show => (this.numberOfSeasons = generateArrayFromNumber(show.seasons)))
-          ))
-        : of([]);
-    });
+  private getSelectedShowFromStorage(): void {
+    const show = this.storageSVC
+      .getShows()
+      ?.find((show: ShowWithId) => show.id === this.showIdParam);
+
+    if (!show) {
+      LogErrorMessage(`No document found for: ${this.showIdParam}`);
+      return;
+    }
+
+    this.setSelectedShowData(show);
+  }
+
+  private setSelectedShowData(show: ShowWithId): void {
+    this.numberOfSeasons = GenerateArrayFromNumber(show.seasons);
+    this.selectedShow$ = of(show);
   }
 }
