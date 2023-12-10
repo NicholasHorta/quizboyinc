@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShowWithId } from '@app/models/quiz.models';
-import { GetParam } from '@app/models/shared/global.models';
+import { GetParam, Paths } from '@app/models/shared/global.models';
 import { StorageService } from '@app/shared/services/storage.service';
 import { GenerateArrayFromNumber, LogErrorMessage } from '@app/shared/utilities/utils';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,11 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./quiz-collections.component.scss']
 })
 export class QuizCollectionsComponent implements OnInit {
-  constructor(private storageSVC: StorageService, private activeRoute: ActivatedRoute) {}
+  constructor(
+    private storageSVC: StorageService,
+    private activeRoute: ActivatedRoute,
+    private route: Router
+  ) {}
 
   selectedShow$: Observable<ShowWithId>;
   numberOfSeasons: number[] = [];
@@ -26,6 +30,13 @@ export class QuizCollectionsComponent implements OnInit {
 
   setAttemptBtnWithSelectedSeason(season: number): void {
     this.selectedSeason = season;
+  }
+
+  navigateToQuizAttempt(data: ShowWithId): void {
+    const route = [Paths.HOME, data.id, this.selectedSeason];
+    this.route.navigate(route, {
+      queryParams: { title: data.title }
+    });
   }
 
   private getSelectedShowFromStorage(): void {
