@@ -21,6 +21,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
   quizCompleted: boolean = false;
+  numberOfQuestions: number = 0;
   userQuizResult: number = 0;
   questionIndex: number = 0;
   quizTimer$: Observable<Timer>;
@@ -150,7 +151,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
-  numberOfQuestions: number = 0;
+
   private configureQuizData(showCollection: ShowCollection[]) {
     const [selectedSeason] = showCollection.map((collection: ShowCollection) => {
       return collection.seasons.find(
