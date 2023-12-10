@@ -12,13 +12,13 @@
     >
       Season {{ season }}
     </bs-button>
-    <ng-container *ngTemplateOutlet="quizStart"></ng-container>
+    <ng-container *ngTemplateOutlet="quizStart; context: { show }"></ng-container>
   </ng-container>
 </ng-template>
 
-<ng-template #quizStart>
+<ng-template #quizStart let-show="show">
   <ng-container *ngIf="selectedSeason">
-    <bs-button [routerLink]="[selectedSeason]" class="quiz-button btn-success"
+    <bs-button (click)="navigateToQuizAttempt(show)" class="quiz-button btn-success"
       >Attempt season {{ selectedSeason }} quiz</bs-button
     >
   </ng-container>

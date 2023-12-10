@@ -25,6 +25,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   questionIndex: number = 0;
   quizTimer$: Observable<Timer>;
   seasonQuizData$: Observable<Questions[]>;
+  title: string;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -41,10 +42,12 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.title = this.activeRoute.snapshot.queryParamMap.get('title');
     this.seasonParam = this.activeRoute.snapshot.paramMap.get('season');
     this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
+    this.saveQuizResultToProfile();
   }
 
   ngOnDestroy(): void {
@@ -126,7 +129,8 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
       if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
     }
-    this.userQuizResult = totalScore;
+    this.userQuizResult = totalScore / this.seasonQuizAnswers.length;
+    this.saveQuizResultToProfile();
   }
 
   private getShowCollectionAndSetInStorage(): void {
@@ -146,7 +150,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
-
+  numberOfQuestions: number = 0;
   private configureQuizData(showCollection: ShowCollection[]) {
     const [selectedSeason] = showCollection.map((collection: ShowCollection) => {
       return collection.seasons.find(
@@ -163,6 +167,13 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
           options: [...data.alts, data.answer].sort(() => Math.random() - 0.5) // Randomise order of options
         };
       })
-    ).pipe(tap((questions: Questions[]) => this.setQuestionRange(questions)));
+    ).pipe(
+      tap((questions: Questions[]) => {
+        this.numberOfQuestions = selectedSeason.quiz.length,
+        this.setQuestionRange(questions);
+      })
+    );
   }
+
+  saveQuizResultToProfile(): void {}
 }

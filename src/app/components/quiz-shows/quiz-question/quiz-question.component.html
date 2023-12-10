@@ -14,7 +14,7 @@
   >
     <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
       <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
-
+      <p>{{questionIndex + 1}} of {{numberOfQuestions}}</p>
       <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
       <bs-button
         *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
@@ -30,6 +30,7 @@
 </ng-template>
 
 <ng-template #quizInit>
+  <h1>{{ title | presentAsTitle }}</h1>
   <h2>The timer will begin as soon as you start the quiz etc etc</h2>
   <h2>Press the button below when you are ready to begin.</h2>
   <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
@@ -45,7 +46,7 @@
 
 <ng-template #result>
   <ng-container *ngIf="quizCompleted">
-    <p>Your score: {{ userQuizResult }}</p>
+    <p>Your score: {{ userQuizResult | percent }}</p>
     <p>If you have a Profile you can view your results here</p>
   </ng-container>
 </ng-template>
