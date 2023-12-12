@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IndividualSeason,
   Questions,
@@ -18,6 +18,11 @@ import { Observable, of, take, tap } from 'rxjs';
   styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit, OnDestroy {
+
+  @Input('id') showIdParam: GetParam;
+  @Input('title') title: GetParam;
+  @Input('season') seasonParam: GetParam;
+
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
   quizCompleted: boolean = false;
@@ -26,26 +31,19 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   questionIndex: number = 0;
   quizTimer$: Observable<Timer>;
   seasonQuizData$: Observable<Questions[]>;
-  title: string;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
   private questionLimit: number = 0;
   private selectedOption: string = '';
-  private seasonParam: GetParam = null;
-  private showIdParam: GetParam = null;
 
   constructor(
     private quizSVC: QuizService,
-    private activeRoute: ActivatedRoute,
     private storageSVC: StorageService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.title = this.activeRoute.snapshot.queryParamMap.get('title');
-    this.seasonParam = this.activeRoute.snapshot.paramMap.get('season');
-    this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
     this.saveQuizResultToProfile();
