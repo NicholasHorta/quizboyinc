@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShowWithId } from '@app/models/quiz.models';
 import { GetParam, Paths } from '@app/models/shared/global.models';
 import { StorageService } from '@app/shared/services/storage.service';
@@ -14,17 +14,15 @@ import { Observable, of } from 'rxjs';
 export class QuizCollectionsComponent implements OnInit {
   constructor(
     private storageSVC: StorageService,
-    private activeRoute: ActivatedRoute,
     private route: Router
   ) {}
 
   selectedShow$: Observable<ShowWithId>;
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
-  private showIdParam: GetParam = null;
+  @Input('id') showIdParam: GetParam = null;
 
   ngOnInit(): void {
-    this.showIdParam = this.activeRoute.snapshot.paramMap.get('id');
     this.getSelectedShowFromStorage();
   }
 
