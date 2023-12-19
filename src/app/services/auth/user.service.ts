@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { RandomUsernameCreation } from '@app/shared/utilities/utils';
 import { Observable, Subject, switchMap, take } from 'rxjs';
-import { UserData } from '@app/models/auth.models';
+import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey } from '@app/models/shared/global.models';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
   constructor(
@@ -34,14 +34,16 @@ export class UserService {
     return this.user$.pipe(
       take(1),
       switchMap(user => {
-        return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).valueChanges();
+        return this.firebaseSVC.db
+          .collection<UserData>(DbRootKey.USERS)
+          .doc(user.uid)
+          .valueChanges();
       })
     );
   }
 
   async register(email: string, password: string, username: string): Promise<void> {
-
-    if(!username) username = RandomUsernameCreation();
+    if (!username) username = RandomUsernameCreation();
     const avatar = this.assignAvatar(username);
 
     await this.firebaseSVC.auth
@@ -61,7 +63,9 @@ export class UserService {
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
-        this.error.next(`${this.errorMsgPreface} register the account. Most likely the email already exists, try logging in.`)
+        this.error.next(
+          `${this.errorMsgPreface} register the account. Most likely the email already exists, try logging in.`
+        );
       });
   }
 
@@ -74,7 +78,7 @@ export class UserService {
       })
       .catch(error => {
         this.logSVC.emit('error', `Sign in error: ${error}`);
-        this.error.next(`${this.errorMsgPreface} login. Possibly an incorrect email or password?`)
+        this.error.next(`${this.errorMsgPreface} login. Possibly an incorrect email or password?`);
       });
   }
 
@@ -94,19 +98,41 @@ export class UserService {
     this.firebaseSVC.auth.user.subscribe(user => console.log('user', user));
   }
 
-  private assignAvatar(username: string): string {
-    return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`
+  saveUsersQuizResults(quizResult: Achievement) {
+    this.user$
+      .pipe(
+        take(1),
+        switchMap(user => {
+          return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
+        }),
+        switchMap(userData => {
+          const achievements = userData
+            .data()
+            .achievements.filter(
+              (achievement: Achievement) =>
+                achievement.show !== quizResult.show || achievement.season !== quizResult.season
+            );
+          return this.firebaseSVC.db
+            .collection(DbRootKey.USERS)
+            .doc(userData.id)
+            .update({ achievements: [...achievements, quizResult] });
+        })
+      )
+      .subscribe();
   }
 
+  private assignAvatar(username: string): string {
+    return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`;
+  }
 }
 
-  // resetPassword(email: string) {
-  //   this.fireAuth
-  //     .sendPasswordResetEmail(email)
-  //     .then(_ => this.router.navigate(['/login']))
-  //     .catch((err) => {
-  //       alert(
-  //         'An error occured attempting to reset your password. Please try again.'
-  //       );
-  //     });
-  // };
+// resetPassword(email: string) {
+//   this.fireAuth
+//     .sendPasswordResetEmail(email)
+//     .then(_ => this.router.navigate(['/login']))
+//     .catch((err) => {
+//       alert(
+//         'An error occured attempting to reset your password. Please try again.'
+//       );
+//     });
+// };

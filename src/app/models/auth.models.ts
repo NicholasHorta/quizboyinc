@@ -5,12 +5,12 @@ export interface UserData {
   uid: string;
   role: string;
   created: Date;
-  achievements: Achievements[];
+  achievements: Achievement[];
 }
 
-export interface Achievements {
+export interface Achievement {
   show: string;
-  score: string;
-  image: string;
+  score: number;
+  season: string;
   date: Date;
 }

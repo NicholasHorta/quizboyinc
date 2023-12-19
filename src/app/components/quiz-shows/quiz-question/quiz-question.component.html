@@ -4,16 +4,16 @@
 
 <ng-template #quiz>
   <ng-container *ngIf="isQuizInProgress; else quizInit">
-    <ng-container *ngTemplateOutlet="displayQuizQuestions"></ng-container>
+    <ng-container *ngTemplateOutlet="quizQuestionFlow"></ng-container>
   </ng-container>
 </ng-template>
 
-<ng-template #displayQuizQuestions>
+<ng-template #quizQuestionFlow>
   <ng-container
     *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
   >
     <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
-      <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
+      <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
       <p>{{questionIndex + 1}} of {{numberOfQuestions}}</p>
       <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
       <bs-button
@@ -46,7 +46,7 @@
 
 <ng-template #result>
   <ng-container *ngIf="quizCompleted">
-    <p>Your score: {{ userQuizResult | percent }}</p>
+    <p>Your score: {{ userQuizResult }}</p>
     <p>If you have a Profile you can view your results here</p>
   </ng-container>
 </ng-template>

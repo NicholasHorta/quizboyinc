@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Achievement } from '@app/models/auth.models';
 import {
   IndividualSeason,
   Questions,
@@ -8,6 +9,7 @@ import {
   Timer
 } from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
+import { UserService } from '@app/services/auth/user.service';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { Observable, of, take, tap } from 'rxjs';
@@ -18,7 +20,6 @@ import { Observable, of, take, tap } from 'rxjs';
   styleUrls: ['./quiz-question.component.scss']
 })
 export class QuizQuestionComponent implements OnInit, OnDestroy {
-
   @Input('id') showIdParam: GetParam;
   @Input('title') title: GetParam;
   @Input('season') seasonParam: GetParam;
@@ -40,13 +41,13 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   constructor(
     private quizSVC: QuizService,
     private storageSVC: StorageService,
-    private router: Router
+    private router: Router,
+    private userSVC: UserService
   ) {}
 
   ngOnInit(): void {
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
-    this.saveQuizResultToProfile();
   }
 
   ngOnDestroy(): void {
@@ -76,11 +77,21 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
 
   toggleQuizComplete(): void {
     if (this.quizCompleted) {
-      this.closeQuizAndReturnHome();
+      return this.closeQuizAndReturnHome();
     }
+    this.setQuizAsCompleted();
     this.updateActionButtonState('Return home');
-    this.quizCompleted = true;
     this.totalQuizScore();
+    this.saveQuizResultToProfile({
+      show: this.title,
+      season: this.seasonParam,
+      date: new Date(),
+      score: this.userQuizResult
+    });
+  }
+
+  private setQuizAsCompleted(): void {
+    this.quizCompleted = true;
   }
 
   private runQuestionTimer(): void {
@@ -127,9 +138,8 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     let totalScore = 0;
     for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
       if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
-    }
-    this.userQuizResult = totalScore / this.seasonQuizAnswers.length;
-    this.saveQuizResultToProfile();
+    };
+    this.userQuizResult = +(totalScore / this.seasonQuizAnswers.length * 100).toPrecision(2);
   }
 
   private getShowCollectionAndSetInStorage(): void {
@@ -168,11 +178,13 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
       })
     ).pipe(
       tap((questions: Questions[]) => {
-        this.numberOfQuestions = selectedSeason.quiz.length,
-        this.setQuestionRange(questions);
+        (this.numberOfQuestions = selectedSeason.quiz.length), this.setQuestionRange(questions);
       })
     );
   }
 
-  saveQuizResultToProfile(): void {}
+  private saveQuizResultToProfile(achievement: Achievement): void {
+    console.log(`%c ACH `, `background: cyan; color: black;`, achievement);
+    this.userSVC.saveUsersQuizResults(achievement);
+  }
 }
