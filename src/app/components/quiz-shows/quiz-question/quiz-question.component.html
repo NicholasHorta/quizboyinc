@@ -1,11 +1,14 @@
-<ng-container *ngIf="seasonQuizData$ | async; else error">
-  <ng-container *ngTemplateOutlet="quiz"></ng-container>
-</ng-container>
-
-<ng-template #quiz>
+<ng-container *ngIf="seasonQuizData$ | async; else dataError">
   <ng-container *ngIf="isQuizInProgress; else quizInit">
     <ng-container *ngTemplateOutlet="quizQuestionFlow"></ng-container>
   </ng-container>
+</ng-container>
+
+<ng-template #quizInit>
+  <h1>{{ title | presentAsTitle }}</h1>
+  <h2>The timer will begin as soon as you start the quiz etc etc</h2>
+  <h2>Begin whenever you are ready to begin...</h2>
+  <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
 </ng-template>
 
 <ng-template #quizQuestionFlow>
@@ -14,7 +17,7 @@
   >
     <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
       <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
-      <p>{{questionIndex + 1}} of {{numberOfQuestions}}</p>
+      <p>{{ questionIndex + 1 }} of {{ numberOfQuestions }}</p>
       <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
       <bs-button
         *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
@@ -24,33 +27,32 @@
         >{{ option }}</bs-button
       >
     </ng-container>
-    <ng-container *ngTemplateOutlet="result"></ng-container>
-    <ng-container *ngTemplateOutlet="nextQuestionBtn"></ng-container>
+    <ng-container *ngTemplateOutlet="quizResult"></ng-container>
+    <ng-container *ngTemplateOutlet="nextQuestionButton"></ng-container>
   </ng-container>
 </ng-template>
 
-<ng-template #quizInit>
-  <h1>{{ title | presentAsTitle }}</h1>
-  <h2>The timer will begin as soon as you start the quiz etc etc</h2>
-  <h2>Press the button below when you are ready to begin.</h2>
-  <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
-</ng-template>
-
-<ng-template #nextQuestionBtn>
+<ng-template #nextQuestionButton>
   <bs-button
     class="quiz-button btn-success"
     (click)="quizBtnState === 'Next' ? toggleNextQuestion() : toggleQuizComplete()"
-    >{{ quizBtnState }}</bs-button
   >
+    {{ quizBtnState }}
+  </bs-button>
 </ng-template>
 
-<ng-template #result>
+<ng-template #quizResult>
   <ng-container *ngIf="quizCompleted">
     <p>Your score: {{ userQuizResult }}</p>
-    <p>If you have a Profile you can view your results here</p>
+    <ng-container *ngIf="authError$ | async as authError; else userMessage">
+      <span>{{ authError }}</span>
+    </ng-container>
+    <ng-template #userMessage>
+      <p>View your results here</p>
+    </ng-template>
   </ng-container>
 </ng-template>
 
-<ng-template #error>
+<ng-template #dataError>
   <h1>No data available</h1>
 </ng-template>

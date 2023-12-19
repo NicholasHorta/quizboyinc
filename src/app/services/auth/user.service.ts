@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-import { RandomUsernameCreation } from '@app/shared/utilities/utils';
-import { Observable, Subject, switchMap, take } from 'rxjs';
+import { LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
+import { Observable, Subject, catchError, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
@@ -116,6 +116,10 @@ export class UserService {
             .collection(DbRootKey.USERS)
             .doc(userData.id)
             .update({ achievements: [...achievements, quizResult] });
+        }),
+        catchError(() => {
+          this.error.next(`${this.errorMsgPreface} store the quiz result. If you would like to save your quiz results, please sign in or register.`)
+          return LogErrorMessage$('Error saving quiz result to user profile.');
         })
       )
       .subscribe();

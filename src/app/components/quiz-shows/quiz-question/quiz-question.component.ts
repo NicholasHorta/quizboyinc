@@ -32,6 +32,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   questionIndex: number = 0;
   quizTimer$: Observable<Timer>;
   seasonQuizData$: Observable<Questions[]>;
+  authError$: Observable<string>;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];
@@ -48,6 +49,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
+    this.authError$ = this.userSVC.authError$;
   }
 
   ngOnDestroy(): void {
@@ -184,7 +186,6 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   }
 
   private saveQuizResultToProfile(achievement: Achievement): void {
-    console.log(`%c ACH `, `background: cyan; color: black;`, achievement);
     this.userSVC.saveUsersQuizResults(achievement);
   }
 }
