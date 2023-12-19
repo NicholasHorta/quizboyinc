@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Achievement } from '@app/models/auth.models';
 
 @Component({
@@ -6,6 +6,10 @@ import { Achievement } from '@app/models/auth.models';
   templateUrl: './achievements.component.html',
   styleUrls: ['./achievements.component.scss']
 })
-export class AchievementsComponent {
+export class AchievementsComponent implements OnInit {
   @Input() achievements: Achievement[];
+
+  ngOnInit(): void {
+    console.log(this.achievements);
+  }
 }

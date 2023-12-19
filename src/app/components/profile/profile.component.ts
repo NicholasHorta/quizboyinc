@@ -12,10 +12,15 @@ export class ProfileComponent implements OnInit {
 
   constructor(private profileSVC: ProfileService) { }
 
-  currentUser$: Observable<UserData>;
+  userData$: Observable<UserData>;
+  isAchievementsOpen = false;
 
   ngOnInit(): void {
-    this.currentUser$ = this.profileSVC.currentUser$;
+    this.userData$ = this.profileSVC.userData$;
+  }
+
+  toggleAchievements(): void {
+    this.isAchievementsOpen = !this.isAchievementsOpen;
   }
 
 }

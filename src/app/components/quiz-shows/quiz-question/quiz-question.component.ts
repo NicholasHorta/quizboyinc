@@ -87,7 +87,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     this.saveQuizResultToProfile({
       show: this.title,
       season: this.seasonParam,
-      date: new Date(),
+      date: new Date().toJSON(),
       score: this.userQuizResult
     });
   }

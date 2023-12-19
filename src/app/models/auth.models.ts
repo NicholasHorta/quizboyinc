@@ -12,5 +12,5 @@ export interface Achievement {
   show: string;
   score: number;
   season: string;
-  date: Date;
+  date: string;
 }

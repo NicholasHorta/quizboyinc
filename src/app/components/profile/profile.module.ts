@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { AchievementsComponent } from './achievements/achievements.component';
+import { PresentAsTitlePipe } from '@app/shared/pipes/present-as-title.pipe';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { AchievementsComponent } from './achievements/achievements.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    PresentAsTitlePipe,
   ]
 })
 
