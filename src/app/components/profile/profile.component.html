@@ -1,8 +1,19 @@
 <h1>Profile View</h1>
-<ng-container *ngIf="currentUser$ | async as currentUser">
-  <div data-testid="profile-wrapper">
-    <h1>{{currentUser.username}}</h1>
-    <img [src]="currentUser.avatar" alt="">
-    <a [routerLink]="['achievements']">Go to Achievements</a>
-  </div>
+<ng-container *ngIf="userData$ | async as data">
+  <ng-container *ngTemplateOutlet="profile; context: {data}"></ng-container>
+  <ng-container *ngTemplateOutlet="achievements; context: {data}"></ng-container>
 </ng-container>
+
+<ng-template #profile let-data="data">
+  <div data-testid="profile-wrapper">
+    <h1>{{data.username}}</h1>
+    <img width="200px" height="200px" [src]="data.avatar" alt="">
+    <span (click)="toggleAchievements()">{{isAchievementsOpen ? 'Hide' : 'View'}} Achievements</span>
+  </div>
+</ng-template>
+
+<ng-template #achievements let-data="data">
+  <ng-container *ngIf="isAchievementsOpen">
+    <bs-achievements [achievements]="data.achievements"></bs-achievements>
+  </ng-container>
+</ng-template>

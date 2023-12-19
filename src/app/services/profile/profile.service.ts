@@ -10,7 +10,7 @@ export class ProfileService {
 
   constructor(private userSVC: UserService) { }
 
-  get currentUser$(): Observable<UserData>{
+  get userData$(): Observable<UserData>{
     return this.userSVC.userData$;
   }
 }

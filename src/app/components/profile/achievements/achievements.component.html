@@ -1,1 +1,12 @@
-<p>achievements works!</p>
+<ng-container *ngIf="achievements.length; else empty">
+  <div *ngFor="let achievement of achievements" style="margin-top: 1rem">
+    <p>Show: {{ achievement.show | presentAsTitle }}</p>
+    <p>Season: {{ achievement.season }}</p>
+    <p>Score: {{ achievement.score }}</p>
+    <p>Date: {{ achievement.date | date }}</p>
+  </div>
+</ng-container>
+
+<ng-template #empty>
+  <span>No achievements to show</span>
+</ng-template>

@@ -22,6 +22,7 @@ import { SharedGlobalModule } from './shared/shared-global.module';
 import { StaticModule } from './static/static.module';
 import { ProfileModule } from './components/profile/profile.module';
 import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
     AngularFirestoreModule,
     AngularFireFunctionsModule,
     SharedGlobalModule,
+    HttpClientModule,
     CoreModule,
     StaticModule,
     ProfileModule,
