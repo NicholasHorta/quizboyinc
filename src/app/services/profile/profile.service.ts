@@ -13,4 +13,8 @@ export class ProfileService {
   get userData$(): Observable<UserData>{
     return this.userSVC.userData$;
   }
+
+  updateUsername(username: string) {
+    this.userSVC.updateUsername(username);
+  }
 }

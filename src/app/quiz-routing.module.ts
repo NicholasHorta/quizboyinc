@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { userGuard } from './shared/guards/user.guard';
 import { Paths } from './models/shared/global.models';
-import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: Paths.EMPTY, redirectTo: Paths.HOME, pathMatch: 'full' },
@@ -14,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: Paths.PROFILE,
-    component: ProfileComponent,
+    loadChildren: () => import('./components/profile/profile.module').then(m => m.ProfileModule),
     canActivate: [userGuard()]
   },
   {
@@ -26,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {bindToComponentInputs: true})],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule],
   providers: []
 })

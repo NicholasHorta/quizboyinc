@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/controllers/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AComponent } from './components/a/a.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { DarkModeDirective } from './directives/dark-mode.directive';
 import { PageLocatorComponent } from './components/page-key/page-key.component';
@@ -12,7 +11,6 @@ import { PageLocatorComponent } from './components/page-key/page-key.component';
 const components = [
   ButtonComponent,
   InputComponent,
-  AComponent
 ]
 
 @NgModule({
