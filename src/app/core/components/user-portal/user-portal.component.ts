@@ -31,7 +31,6 @@ export class UserPortalComponent implements OnInit {
   ngOnInit(): void {
     this.path;
     this.authError$ = this.userSVC.authError$;
-    this.userSVC.checkIn();
   }
 
   get path() {
@@ -47,13 +46,6 @@ export class UserPortalComponent implements OnInit {
   }
 
   registerUser() {
-    console.log(
-      `%c INFO `,
-      `background: purple; color: white;`,
-      this.form.value.email,
-      this.form.value.password,
-      'registerUser'
-    );
     this.userSVC.register(
       this.form.value.email,
       this.form.value.password,
@@ -62,13 +54,6 @@ export class UserPortalComponent implements OnInit {
   }
 
   signInUser() {
-    console.log(
-      `%c INFO `,
-      `background: purple; color: white;`,
-      this.form.value.email,
-      this.form.value.password,
-      'signInUser'
-    );
     this.userSVC.signIn(this.form.value.email, this.form.value.password);
   }
 }

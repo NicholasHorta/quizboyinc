@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="username" type="text" placeholder="Edit username" />
+  <bs-button [disabled]="!form.valid" type="submit" class="quiz-button btn-success"
+    >Submit</bs-button
+  >
+</form>

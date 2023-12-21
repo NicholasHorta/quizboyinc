@@ -25,18 +25,6 @@ export class AccessComponent {
     this.router.navigate(['auth', route]);
   }
 
-  clearLS(){
-    localStorage.clear();
-  }
-
-  seeLS(){
-    console.log(`%c localStorage `, `background: yellow; color: black;`, localStorage);
-  }
-
-  checkUser(){
-    this.userSVC.checkIn();
-  }
-
   logout(): void {
     this.userSVC.logout();
   }

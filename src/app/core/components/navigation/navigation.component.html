@@ -1,3 +1,4 @@
 <nav class="flex gap-8">
-  <bs-a *ngFor="let link of links" [link]="[link.path]"  [text]="link.label"></bs-a>
+  <!-- <bs-a *ngFor="let link of links" [link]="[link.path]"  [text]="link.label"></bs-a> -->
+  <a *ngFor="let link of links" [routerLink]="[link.path]">{{link.label}}</a>
 </nav>

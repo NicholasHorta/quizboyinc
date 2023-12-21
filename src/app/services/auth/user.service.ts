@@ -15,7 +15,7 @@ export class UserService {
     private firebaseSVC: FirebaseService,
     private storageSVC: StorageService,
     private router: Router,
-    private logSVC: LogService,
+    private logSVC: LogService
   ) {}
 
   error: Subject<string> = new Subject();
@@ -94,10 +94,6 @@ export class UserService {
       });
   }
 
-  checkIn() {
-    this.firebaseSVC.auth.user.subscribe(user => console.log('user', user));
-  }
-
   saveUsersQuizResults(quizResult: Achievement) {
     this.user$
       .pipe(
@@ -118,8 +114,31 @@ export class UserService {
             .update({ achievements: [...achievements, quizResult] });
         }),
         catchError(() => {
-          this.error.next(`${this.errorMsgPreface} store the quiz result. If you would like to save your quiz results, please sign in or register.`)
+          this.error.next(
+            `${this.errorMsgPreface} store the quiz result. If you would like to save your quiz results, please sign in or register.`
+          );
           return LogErrorMessage$('Error saving quiz result to user profile.');
+        })
+      )
+      .subscribe();
+  }
+
+  updateUsername(username: string): void {
+    this.user$
+      .pipe(
+        take(1),
+        switchMap(user => {
+          return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
+        }),
+        switchMap(userData => {
+          return this.firebaseSVC.db
+            .collection(DbRootKey.USERS)
+            .doc(userData.id)
+            .update({ username });
+        }),
+        catchError(() => {
+          this.error.next(`${this.errorMsgPreface} update your username. Perhaps try again?`);
+          return LogErrorMessage$('Error updating username.');
         })
       )
       .subscribe();

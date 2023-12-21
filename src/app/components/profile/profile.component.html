@@ -9,6 +9,7 @@
     <h1>{{data.username}}</h1>
     <img width="200px" height="200px" [src]="data.avatar" alt="">
     <span (click)="toggleAchievements()">{{isAchievementsOpen ? 'Hide' : 'View'}} Achievements</span>
+    <a [routerLink]="['edit']" [queryParams]="{username: data.username}">Edit profile</a>
   </div>
 </ng-template>
 
