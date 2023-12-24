@@ -8,27 +8,11 @@ import { DarkModeDirective } from './directives/dark-mode.directive';
 import { PageLocatorComponent } from './components/page-key/page-key.component';
 import { ToastDirective } from './directives/toast/toast.directive';
 
-
-const components = [
-  ButtonComponent,
-  InputComponent,
-]
+const components = [ButtonComponent, InputComponent];
 
 @NgModule({
-  declarations: [
-    ToastComponent,
-    DarkModeDirective,
-    PageLocatorComponent,
-    ToastDirective
-  ],
-  imports: [
-    ...components,
-    CommonModule,
-    ReactiveFormsModule,
-  ],
-  exports: [
-    ...components,
-    ReactiveFormsModule
-  ]
+  declarations: [DarkModeDirective, PageLocatorComponent],
+  imports: [...components, CommonModule, ReactiveFormsModule, ToastDirective, ToastComponent],
+  exports: [...components, ReactiveFormsModule]
 })
-export class SharedGlobalModule { }
+export class SharedGlobalModule {}

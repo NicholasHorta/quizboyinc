@@ -23,6 +23,7 @@ import { StaticModule } from './static/static.module';
 import { ProfileModule } from './components/profile/profile.module';
 import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     StaticModule,
     ProfileModule,
-    QuizShowsModule
+    QuizShowsModule,
+    ToastComponent
   ],
   providers: [
     {
