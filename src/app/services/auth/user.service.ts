@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey } from '@app/models/shared/global.models';
+import { ToastService } from '@app/shared/services/toast.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,8 @@ export class UserService {
     private firebaseSVC: FirebaseService,
     private storageSVC: StorageService,
     private router: Router,
-    private logSVC: LogService
+    private logSVC: LogService,
+    private toastSvc: ToastService
   ) {}
 
   error: Subject<string> = new Subject();
@@ -88,6 +90,7 @@ export class UserService {
       .then(() => {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
+        this.toastSvc.emitToastNotification(3000, 'You have been logged out.');
       })
       .catch(error => {
         this.logSVC.emit('error', `Logout error: ${error}`);
