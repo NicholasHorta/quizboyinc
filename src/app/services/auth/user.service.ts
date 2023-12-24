@@ -90,6 +90,7 @@ export class UserService {
       .then(() => {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
+        this.router.navigate(['/']);
         this.toastSvc.emitToastNotification(3000, 'You have been logged out.');
       })
       .catch(error => {
@@ -137,7 +138,7 @@ export class UserService {
           return this.firebaseSVC.db
             .collection(DbRootKey.USERS)
             .doc(userData.id)
-            .update({ username });
+            .update({ username }).then(() => this.toastSvc.emitToastNotification(3000, 'Username updated successfully.'));
         }),
         catchError(() => {
           this.error.next(`${this.errorMsgPreface} update your username. Perhaps try again?`);
