@@ -17,7 +17,7 @@ export class ModalDirective implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.modalSVC.isModalClosed) {
+    if (!this.modalSVC.isModalOpen) {
       this.viewContainerRef.clear();
     }
   }

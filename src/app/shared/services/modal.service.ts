@@ -6,16 +6,20 @@ import { Router } from '@angular/router';
 })
 export class ModalService {
 
-  public isModalClosed = false;
 
-  constructor(private router: Router) {}
+  //* CHANGE
+  public isModalOpen = false
+
+  constructor(private router: Router) {
+    console.log(`%c STATE `, `background: navy; color: yellow;`, this.isModalOpen)
+  }
 
   modal = {
     close: () => {
-      this.isModalClosed = true;
+      this.isModalOpen = false;
     },
     navigateTo: (param: string) => {
-      this.isModalClosed = true;
+      this.isModalOpen = false;
       this.router.navigate([`/${param}`]);
     }
   };

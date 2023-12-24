@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Paths } from '@app/models/shared/global.models';
 import { ModalDirective } from '@app/shared/directives/modal/modal.directive';
+import { ModalService } from '@app/shared/services/modal.service';
 
 @Component({
   selector: 'bs-modal',
@@ -10,7 +11,12 @@ import { ModalDirective } from '@app/shared/directives/modal/modal.directive';
   styleUrls: ['./modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalComponent {
-  shouldDisplayIf = true
+export class ModalComponent implements OnInit {
+  constructor(private modalSVC: ModalService) {}
+  isModalOpen = true;
   path = Paths.PROFILE;
+
+  ngOnInit(): void {
+    this.isModalOpen = this.modalSVC.isModalOpen;
+  }
 }

@@ -32,11 +32,14 @@ export interface Timer {
   isTimeUp: boolean;
 }
 
+export interface AchievementCheck {
+  season: string;
+  show: string;
+}
+
 export type ShowWithId = Show & FirestoreId
 export type ShowCollectionWithId = ShowCollection & FirestoreId
 
 interface FirestoreId {
   id: string;
 }
-
-

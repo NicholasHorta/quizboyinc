@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
-import { Observable, Subject, catchError, switchMap, take } from 'rxjs';
+import { Observable, Subject, catchError, map, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
+import { AchievementCheck } from '@app/models/quiz.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -99,12 +100,8 @@ export class UserService {
   }
 
   saveUsersQuizResults(quizResult: Achievement) {
-    this.user$
+    this.userDocument$
       .pipe(
-        take(1),
-        switchMap(user => {
-          return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
-        }),
         switchMap(userData => {
           const achievements = userData
             .data()
@@ -128,17 +125,16 @@ export class UserService {
   }
 
   updateUsername(username: string): void {
-    this.user$
+    this.userDocument$
       .pipe(
-        take(1),
-        switchMap(user => {
-          return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
-        }),
         switchMap(userData => {
           return this.firebaseSVC.db
             .collection(DbRootKey.USERS)
             .doc(userData.id)
-            .update({ username }).then(() => this.toastSvc.emitToastNotification(3000, 'Username updated successfully.'));
+            .update({ username })
+            .then(() =>
+              this.toastSvc.emitToastNotification(3000, 'Username updated successfully.')
+            );
         }),
         catchError(() => {
           this.error.next(`${this.errorMsgPreface} update your username. Perhaps try again?`);
@@ -148,8 +144,33 @@ export class UserService {
       .subscribe();
   }
 
+  warnIfUserHasAchievements(quiz: AchievementCheck): Observable<any> {
+    return this.userDocument$
+      .pipe(
+        switchMap(userData => {
+          const achievement = userData
+            .data()
+            .achievements.filter(
+              (achievement: Achievement) =>
+                achievement.show === quiz.show && achievement.season === quiz.season
+            );
+          return achievement;
+        }),
+        map(achievement => !!Object.keys(achievement))
+      )
+  }
+
   private assignAvatar(username: string): string {
     return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`;
+  }
+
+  private get userDocument$(): Observable<any> {
+    return this.user$.pipe(
+      take(1),
+      switchMap(user => {
+        return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
+      })
+    );
   }
 }
 
