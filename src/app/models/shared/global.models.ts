@@ -30,3 +30,8 @@ export enum DbRootKey {
   SEASONS = 'seasons',
   LOGS = 'logs',
 }
+
+export interface Toast {
+  isVisible: boolean;
+  message: string;
+}

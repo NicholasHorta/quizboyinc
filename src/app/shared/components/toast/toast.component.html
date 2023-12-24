@@ -1,1 +1,7 @@
-<p>toast works!</p>
+<ng-container *ngIf="toast$ | async as toast">
+  <ng-container *ngIf="toast.isVisible">
+    <div *bsToast="toast.isVisible" class="toast-component">
+      <p>{{ toast.message }}</p>
+    </div>
+  </ng-container>
+</ng-container>
