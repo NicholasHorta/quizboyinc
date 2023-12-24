@@ -1,10 +1,10 @@
-<div *bsModal="shouldDisplayIf; let methods = methods" class="modal-container">
+<div *bsModal="shouldDisplayIf; let modal = modal" class="modal-container">
   <div class="modal-container__modal">
-    <div class="flex justify-end"><span (click)="methods.close()">X</span></div>
+    <div class="flex justify-end"><span (click)="modal.close()">X</span></div>
     <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quos.</div>
     <div>
-      <button (click)="methods.navigateTo(path)" class="quiz-button btn-warning">Yes</button>
-      <button (click)="methods.close()" class="quiz-button btn-warning">No</button>
+      <button (click)="modal.navigateTo(path)" class="quiz-button btn-warning">Yes</button>
+      <button (click)="modal.close()" class="quiz-button btn-warning">No</button>
     </div>
   </div>
 </div>
