@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from './components/toast/toast.component';
 import { DarkModeDirective } from './directives/dark-mode.directive';
 import { PageLocatorComponent } from './components/page-key/page-key.component';
+import { ToastDirective } from './directives/toast/toast.directive';
 
 
 const components = [
@@ -17,7 +18,8 @@ const components = [
   declarations: [
     ToastComponent,
     DarkModeDirective,
-    PageLocatorComponent
+    PageLocatorComponent,
+    ToastDirective
   ],
   imports: [
     ...components,
