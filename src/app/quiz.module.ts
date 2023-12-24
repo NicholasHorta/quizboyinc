@@ -24,8 +24,12 @@ import { ProfileModule } from './components/profile/profile.module';
 import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
-
+const modals = [
+  ToastComponent,
+  ModalComponent,
+]
 @NgModule({
   declarations: [QuizComponent],
   imports: [
@@ -41,7 +45,8 @@ import { ToastComponent } from './shared/components/toast/toast.component';
     StaticModule,
     ProfileModule,
     QuizShowsModule,
-    ToastComponent
+    ...modals
+
   ],
   providers: [
     {
