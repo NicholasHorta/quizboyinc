@@ -6,13 +6,9 @@ import { Router } from '@angular/router';
 })
 export class ModalService {
 
-
-  //* CHANGE
   public isModalOpen = false
 
-  constructor(private router: Router) {
-    console.log(`%c STATE `, `background: navy; color: yellow;`, this.isModalOpen)
-  }
+  constructor(private router: Router) {}
 
   modal = {
     close: () => {

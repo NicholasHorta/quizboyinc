@@ -9,6 +9,7 @@ import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
 import { AchievementCheck } from '@app/models/quiz.models';
+import { ModalService } from '@app/shared/services/modal.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +19,11 @@ export class UserService {
     private storageSVC: StorageService,
     private router: Router,
     private logSVC: LogService,
-    private toastSvc: ToastService
-  ) {}
+    private toastSvc: ToastService,
+    private modalSvc: ModalService,
+  ) {
+    console.log(`%c USER `, `background: #a1f2aa; color: #333;`);
+  }
 
   error: Subject<string> = new Subject();
   error$ = this.error.asObservable();
@@ -145,19 +149,21 @@ export class UserService {
   }
 
   warnIfUserHasAchievements(quiz: AchievementCheck): Observable<any> {
-    return this.userDocument$
-      .pipe(
-        switchMap(userData => {
-          const achievement = userData
-            .data()
-            .achievements.filter(
-              (achievement: Achievement) =>
-                achievement.show === quiz.show && achievement.season === quiz.season
-            );
-          return achievement;
-        }),
-        map(achievement => !!Object.keys(achievement))
-      )
+    return this.userDocument$.pipe(
+      switchMap(userData => {
+        const achievement = userData
+          .data()
+          .achievements.filter(
+            (achievement: Achievement) =>
+              achievement.show === quiz.show && achievement.season === quiz.season
+          );
+        return achievement;
+      }),
+      map(achievement => {
+        console.log(`%c IN USER SVC `, `background: red; color: white;`, !!Object.keys(achievement))
+        this.modalSvc.isModalOpen =!!Object.keys(achievement);
+      })
+    );
   }
 
   private assignAvatar(username: string): string {

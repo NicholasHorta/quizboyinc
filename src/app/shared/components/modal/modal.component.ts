@@ -13,7 +13,7 @@ import { ModalService } from '@app/shared/services/modal.service';
 })
 export class ModalComponent implements OnInit {
   constructor(private modalSVC: ModalService) {}
-  isModalOpen = true;
+  isModalOpen = false;
   path = Paths.PROFILE;
 
   ngOnInit(): void {

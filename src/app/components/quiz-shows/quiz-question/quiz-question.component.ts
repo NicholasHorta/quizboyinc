@@ -11,9 +11,8 @@ import {
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
 import { UserService } from '@app/services/auth/user.service';
 import { QuizService } from '@app/services/quiz/quiz.service';
-import { ModalService } from '@app/shared/services/modal.service';
 import { StorageService } from '@app/shared/services/storage.service';
-import { Observable, Subscription, of, take, tap } from 'rxjs';
+import { Observable, of, take, tap } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-question',
@@ -45,18 +44,12 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     private storageSVC: StorageService,
     private router: Router,
     private userSVC: UserService,
-    private modalSVC: ModalService
   ) {}
-  sig: Subscription;
+
   ngOnInit(): void {
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
     this.authError$ = this.userSVC.authError$;
-    //@ Subscription
-    this.userSVC.warnIfUserHasAchievements({ show: this.title, season: this.seasonParam }).subscribe((res) => {
-      console.log(`%c res `, `background: white; color: red;`, res)
-      this.modalSVC.isModalOpen =  res
-    });
   }
 
   ngOnDestroy(): void {
