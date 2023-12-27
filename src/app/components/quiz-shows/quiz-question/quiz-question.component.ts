@@ -43,7 +43,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     private quizSVC: QuizService,
     private storageSVC: StorageService,
     private router: Router,
-    private userSVC: UserService,
+    private userSVC: UserService
   ) {}
 
   ngOnInit(): void {

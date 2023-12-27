@@ -14,7 +14,7 @@ import { Observable, of } from 'rxjs';
 export class QuizCollectionsComponent implements OnInit {
   constructor(
     private storageSVC: StorageService,
-    private route: Router,
+    private route: Router
   ) {}
 
   selectedShow$: Observable<ShowWithId>;
@@ -35,7 +35,6 @@ export class QuizCollectionsComponent implements OnInit {
     this.route.navigate(route, {
       queryParams: { title: data.title }
     });
-    // this.userSVC.warnIfUserHasAchievements({show: data.title, season: String(this.selectedSeason)}).subscribe()
   }
 
   private getSelectedShowFromStorage(): void {
