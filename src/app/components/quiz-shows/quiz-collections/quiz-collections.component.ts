@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShowWithId } from '@app/models/quiz.models';
 import { GetParam, Paths } from '@app/models/shared/global.models';
-import { UserService } from '@app/services/auth/user.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { GenerateArrayFromNumber, LogErrorMessage } from '@app/shared/utilities/utils';
 import { Observable, of } from 'rxjs';
@@ -16,7 +15,6 @@ export class QuizCollectionsComponent implements OnInit {
   constructor(
     private storageSVC: StorageService,
     private route: Router,
-    private userSVC: UserService
   ) {}
 
   selectedShow$: Observable<ShowWithId>;
@@ -37,7 +35,7 @@ export class QuizCollectionsComponent implements OnInit {
     this.route.navigate(route, {
       queryParams: { title: data.title }
     });
-    this.userSVC.warnIfUserHasAchievements({show: data.title, season: String(this.selectedSeason)}).subscribe()
+    // this.userSVC.warnIfUserHasAchievements({show: data.title, season: String(this.selectedSeason)}).subscribe()
   }
 
   private getSelectedShowFromStorage(): void {

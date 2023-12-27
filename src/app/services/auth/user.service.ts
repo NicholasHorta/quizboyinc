@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
-import { Observable, Subject, catchError, map, switchMap, take } from 'rxjs';
+import { Observable, Subject, catchError, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
-import { AchievementCheck } from '@app/models/quiz.models';
-import { ModalService } from '@app/shared/services/modal.service';
+// import { AchievementCheck } from '@app/models/quiz.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +19,6 @@ export class UserService {
     private router: Router,
     private logSVC: LogService,
     private toastSvc: ToastService,
-    private modalSvc: ModalService,
   ) {
     console.log(`%c USER `, `background: #a1f2aa; color: #333;`);
   }
@@ -148,23 +146,23 @@ export class UserService {
       .subscribe();
   }
 
-  warnIfUserHasAchievements(quiz: AchievementCheck): Observable<any> {
-    return this.userDocument$.pipe(
-      switchMap(userData => {
-        const achievement = userData
-          .data()
-          .achievements.filter(
-            (achievement: Achievement) =>
-              achievement.show === quiz.show && achievement.season === quiz.season
-          );
-        return achievement;
-      }),
-      map(achievement => {
-        console.log(`%c IN USER SVC `, `background: red; color: white;`, !!Object.keys(achievement))
-        this.modalSvc.isModalOpen =!!Object.keys(achievement);
-      })
-    );
-  }
+  // warnIfUserHasAchievements(quiz: AchievementCheck): Observable<any> {
+  //   return this.userDocument$.pipe(
+  //     switchMap(userData => {
+  //       const achievement = userData
+  //         .data()
+  //         .achievements.filter(
+  //           (achievement: Achievement) =>
+  //             achievement.show === quiz.show && achievement.season === quiz.season
+  //         );
+  //       return achievement;
+  //     }),
+  //     map(achievement => {
+  //       console.log(`%c IN USER SVC `, `background: red; color: white;`, !!Object.keys(achievement))
+  //       this.modalSvc.isModalOpen =!!Object.keys(achievement);
+  //     })
+  //   );
+  // }
 
   private assignAvatar(username: string): string {
     return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`;

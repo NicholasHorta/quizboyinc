@@ -1,6 +1,21 @@
 import { Directive, DoCheck, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ModalService } from '@app/shared/services/modal.service';
+import { Router } from '@angular/router';
 
+
+
+class ModalExtension {
+  constructor(private router: any) { }
+  public isModalOpen = true
+  modal = {
+    close: () => {
+      this.isModalOpen = true;
+    },
+    navigateTo: (prop: any) => {
+      this.isModalOpen = true;
+      this.router.navigate([`/${prop}`]);
+    }
+  }
+}
 @Directive({
   selector: '[bsModal]',
   standalone: true,
@@ -8,16 +23,18 @@ import { ModalService } from '@app/shared/services/modal.service';
 export class ModalDirective implements OnInit, DoCheck {
   @Input() bsModal: boolean;
 
+  modalExtension = new ModalExtension(this.router);
+
   ngOnInit(): void {
     if (this.bsModal) {
-      this.viewContainerRef.createEmbeddedView(this.templateRef, this.modalSVC);
+      this.viewContainerRef.createEmbeddedView(this.templateRef, this.modalExtension);
     } else {
       this.viewContainerRef.clear();
     }
   }
 
   ngDoCheck(): void {
-    if (!this.modalSVC.isModalOpen) {
+    if (!this.modalExtension.isModalOpen) {
       this.viewContainerRef.clear();
     }
   }
@@ -25,6 +42,6 @@ export class ModalDirective implements OnInit, DoCheck {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainerRef: ViewContainerRef,
-    private modalSVC: ModalService
+    private router: Router,
   ) {}
 }
