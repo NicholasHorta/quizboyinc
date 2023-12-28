@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-import { LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
+import { LogErrorMessage, LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
 import { EMPTY, Observable, Subject, catchError, of, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
-import { DbRootKey } from '@app/models/shared/global.models';
+import { DbRootKey, Paths } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
 import { AchievementCheck } from '@app/models/quiz.models';
 @Injectable({
@@ -63,7 +63,7 @@ export class UserService {
           achievements: []
         });
         this.logSVC.emit('log', 'User registered successfully.');
-        this.router.navigate(['/profile']);
+        this.router.navigate([Paths.PROFILE]);
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
@@ -78,7 +78,7 @@ export class UserService {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.logSVC.emit('log', 'User signed in successfully.');
-        this.router.navigate(['/profile']);
+        this.router.navigate([Paths.PROFILE]);
       })
       .catch(error => {
         this.logSVC.emit('error', `Sign in error: ${error}`);
@@ -92,7 +92,7 @@ export class UserService {
       .then(() => {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
-        this.router.navigate(['/']);
+        this.router.navigate([Paths.EMPTY]);
         this.toastSvc.emitToastNotification(3000, 'You have been logged out.');
       })
       .catch(error => {
@@ -128,8 +128,8 @@ export class UserService {
   updateUsername(username: string): void {
     this.userDocument$
       .pipe(
-        switchMap(userData => {
-          return this.firebaseSVC.db
+        switchMap(async userData => {
+          return await this.firebaseSVC.db
             .collection(DbRootKey.USERS)
             .doc(userData.id)
             .update({ username })
@@ -144,6 +144,16 @@ export class UserService {
       )
       .subscribe();
   }
+
+  resetPassword(email: string) {
+    this.firebaseSVC.auth
+      .sendPasswordResetEmail(email)
+      .then(_ => this.router.navigate([`/${Paths.AUTH}/${Paths.SIGN_IN}`]))
+      .catch((err) => {
+        this.error.next(`${this.errorMsgPreface} reset your password. You could already have an account or you can try again.`);
+        return LogErrorMessage('Error attempting to reset password.');
+      });
+  };
 
   warnIfUserHasAchievements(quiz: AchievementCheck): Observable<boolean> {
     return this.userDocument$.pipe(
@@ -173,14 +183,3 @@ export class UserService {
     );
   }
 }
-
-// resetPassword(email: string) {
-//   this.fireAuth
-//     .sendPasswordResetEmail(email)
-//     .then(_ => this.router.navigate(['/login']))
-//     .catch((err) => {
-//       alert(
-//         'An error occured attempting to reset your password. Please try again.'
-//       );
-//     });
-// };

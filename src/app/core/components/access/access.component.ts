@@ -4,6 +4,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/auth/user.service';
 import { Observable } from 'rxjs';
+import { Paths } from '@app/models/shared/global.models';
 
 @Component({
   selector: 'bs-access',
@@ -22,7 +23,7 @@ export class AccessComponent {
   }
 
   accessEvent(route: string): void {
-    this.router.navigate(['auth', route]);
+    this.router.navigate([Paths.AUTH, route]);
   }
 
   logout(): void {

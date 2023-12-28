@@ -13,6 +13,7 @@ export enum Paths {
   ACHIEVEMENTS = 'achievements',
   ABOUT = 'about',
   CONTACT = 'contact',
+  RESET_PW = 'reset-password',
 }
 
 export type ConsoleMsgType = 'info' | 'warn' | 'error' | 'log';

@@ -7,7 +7,7 @@
 <ng-template #profile let-data="data">
   <div data-testid="profile-wrapper">
     <h1>{{data.username}}</h1>
-    <img width="200px" height="200px" [src]="data.avatar" alt="">
+    <img width="200px" height="200px" [src]="data.avatar" alt="User avatar">
     <span (click)="toggleAchievements()">{{isAchievementsOpen ? 'Hide' : 'View'}} Achievements</span>
     <a [routerLink]="['edit']" [queryParams]="{username: data.username}">Edit profile</a>
   </div>
