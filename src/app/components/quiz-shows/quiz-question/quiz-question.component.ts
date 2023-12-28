@@ -140,8 +140,8 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
     let totalScore = 0;
     for (let i = 0; i < this.seasonQuizAnswers.length; i++) {
       if (this.seasonQuizAnswers[i] === this.userAnswerStore[i]) ++totalScore;
-    };
-    this.userQuizResult = +(totalScore / this.seasonQuizAnswers.length * 100).toPrecision(2);
+    }
+    this.userQuizResult = +((totalScore / this.seasonQuizAnswers.length) * 100).toPrecision(2);
   }
 
   private getShowCollectionAndSetInStorage(): void {

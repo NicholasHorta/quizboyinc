@@ -16,6 +16,5 @@ export class ToastDirective implements OnInit {
     }
   }
 
-
   constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<Component>) { }
 }

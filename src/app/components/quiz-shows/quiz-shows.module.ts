@@ -7,6 +7,7 @@ import { PresentAsTitlePipe } from '@app/shared/pipes/present-as-title.pipe';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizTimerComponent } from './components/quiz-timer/quiz-timer.component';
+import { ModalComponent } from '@app/shared/components/modal/modal.component';
 
 
 
@@ -21,7 +22,8 @@ import { QuizTimerComponent } from './components/quiz-timer/quiz-timer.component
     QuizShowsRoutingModule,
     PresentAsTitlePipe,
     ButtonComponent,
-    QuizTimerComponent
+    QuizTimerComponent,
+    ModalComponent
   ]
 })
 export class QuizShowsModule { }

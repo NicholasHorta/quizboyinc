@@ -1,0 +1,16 @@
+<ng-container *ngIf="isModalOpen$ | async as isModalOpen">
+  <div *bsModal="isModalOpen; let modal = modal" class="modal-container">
+    <div class="modal-container__modal">
+      <div class="flex justify-end"><span (click)="modal.close()">X</span></div>
+      <div>
+        The selected season has already been completed, and any new attempt will be recorded as your
+        latest score. If you would like to make another attempt, select 'Continue.' Alternatively,
+        if you prefer to review the results of your previous attempt, select 'Profile'.
+      </div>
+      <div>
+        <button (click)="modal.close()" class="quiz-button btn-warning">Continue</button>
+        <button (click)="modal.navigateTo(path)" class="quiz-button btn-warning">Profile</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
