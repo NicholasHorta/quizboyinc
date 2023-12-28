@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 
 
 class ModalExtension {
-  constructor(private router: any) { }
+  constructor(private router: Router) { }
   public isModalOpen = true
   modal = {
     close: () => {
-      this.isModalOpen = true;
+      this.isModalOpen = false;
     },
     navigateTo: (prop: any) => {
-      this.isModalOpen = true;
       this.router.navigate([`/${prop}`]);
     }
   }
@@ -28,8 +27,6 @@ export class ModalDirective implements OnInit, DoCheck {
   ngOnInit(): void {
     if (this.bsModal) {
       this.viewContainerRef.createEmbeddedView(this.templateRef, this.modalExtension);
-    } else {
-      this.viewContainerRef.clear();
     }
   }
 
