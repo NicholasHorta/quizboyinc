@@ -14,6 +14,7 @@
       <input formControlName="email" type="text" />
       <label for="">Password:</label>
       <input formControlName="password" type="password" />
+      <a *ngIf="path === Paths.SIGN_IN" [routerLink]="['/' + Paths.AUTH + '/' + Paths.RESET_PW]">Reset password</a>
     </div>
     <bs-button type="submit" [disabled]="!form.valid" class="quiz-button btn-success">
       {{ currentForm }}
