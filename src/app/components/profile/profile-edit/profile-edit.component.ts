@@ -30,6 +30,10 @@ export class ProfileEditComponent implements OnInit {
   }
 
   warnUserOfDeleteConsequences(): void {
+
     this.isModalOpen$ = of(true);
+    this.isModalOpen$.subscribe((isOpen) => {
+      console.log(`%c RES `, `background: cyan; color: black;`, isOpen)
+    })
   }
 }
