@@ -12,6 +12,9 @@ class ModalExtension {
     },
     navigateTo: (prop: any) => {
       this.router.navigate([`/${prop}`]);
+    },
+    deleteProfile: () => {
+
     }
   }
 }
