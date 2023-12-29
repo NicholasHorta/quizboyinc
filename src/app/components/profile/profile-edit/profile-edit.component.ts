@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetParam } from '@app/models/shared/global.models';
 import { ProfileService } from '@app/services/profile/profile.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'bs-profile-edit',
@@ -10,6 +11,7 @@ import { ProfileService } from '@app/services/profile/profile.service';
 })
 export class ProfileEditComponent implements OnInit {
   @Input() username: GetParam;
+  isModalOpen$: Observable<boolean>
 
   form: FormGroup = new FormGroup({
     username: new FormControl<string>('', [Validators.required, Validators.minLength(3)])
@@ -25,5 +27,9 @@ export class ProfileEditComponent implements OnInit {
 
   onSubmit() {
     this.profileSVC.updateUsername(this.form.value.username);
+  }
+
+  warnUserOfDeleteConsequences(): void {
+    this.isModalOpen$ = of(true);
   }
 }

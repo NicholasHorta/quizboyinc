@@ -1,11 +1,12 @@
 import { Directive, DoCheck, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-
-
+import { Paths } from '@app/models/shared/global.models';
+import { UserService } from '@app/services/auth/user.service';
+import { take } from 'rxjs';
 
 class ModalExtension {
-  constructor(private router: Router) { }
-  public isModalOpen = true
+  constructor(private router: Router, private userSVC: UserService) {}
+  public isModalOpen = true;
   modal = {
     close: () => {
       this.isModalOpen = false;
@@ -13,19 +14,21 @@ class ModalExtension {
     navigateTo: (prop: any) => {
       this.router.navigate([`/${prop}`]);
     },
-    deleteProfile: () => {
-
+    confirmDeleteUser: () => {
+      this.userSVC.deleteUserProfile$().pipe(take(1)).subscribe(() => {
+        this.modal.navigateTo(Paths.EMPTY);
+      });
     }
-  }
+  };
 }
 @Directive({
   selector: '[bsModal]',
-  standalone: true,
+  standalone: true
 })
 export class ModalDirective implements OnInit, DoCheck {
   @Input() bsModal: boolean;
 
-  modalExtension = new ModalExtension(this.router);
+  modalExtension = new ModalExtension(this.router, this.userSVC);
 
   ngOnInit(): void {
     if (this.bsModal) {
@@ -43,5 +46,6 @@ export class ModalDirective implements OnInit, DoCheck {
     private templateRef: TemplateRef<any>,
     private viewContainerRef: ViewContainerRef,
     private router: Router,
+    private userSVC: UserService
   ) {}
 }

@@ -144,7 +144,7 @@ export class UserService {
       .subscribe();
   }
 
-  resetPassword(email: string) {
+  resetPassword(email: string): void {
     this.firebaseSVC.auth
       .sendPasswordResetEmail(email)
       .then(_ => this.router.navigate([`/${Paths.AUTH}/${Paths.SIGN_IN}`]))

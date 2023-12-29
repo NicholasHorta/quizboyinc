@@ -1,7 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Paths } from '@app/models/shared/global.models';
-import { UserService } from '@app/services/auth/user.service';
 import { ModalDirective } from '@app/shared/directives/modal/modal.directive';
 import { Observable, of } from 'rxjs';
 
@@ -15,13 +14,10 @@ import { Observable, of } from 'rxjs';
 })
 
 export class DeleteNotificationComponent {
-  isModalOpen$: Observable<boolean>
+  @Input() isModalOpen$: Observable<boolean>
   path = Paths.PROFILE;
 
-  constructor(private userSVC: UserService) {}
-
-  ngOnInit(): void {
+  warnUserOfDeleteConsequences(): void {
     this.isModalOpen$ = of(true);
-    this.userSVC.deleteUserProfile$()
   }
 }
