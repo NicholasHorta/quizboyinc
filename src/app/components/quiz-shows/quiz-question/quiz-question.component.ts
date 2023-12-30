@@ -33,6 +33,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   quizTimer$: Observable<Timer>;
   seasonQuizData$: Observable<Questions[]>;
   authError$: Observable<string>;
+  Paths = Paths;
 
   private seasonQuizAnswers: string[] = [];
   private userAnswerStore: string[] = [];

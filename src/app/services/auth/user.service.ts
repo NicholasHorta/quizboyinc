@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LogErrorMessage, LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
-import { EMPTY, Observable, Subject, catchError, of, switchMap, take } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, of, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
@@ -19,8 +19,7 @@ export class UserService {
     private router: Router,
     private logSVC: LogService,
     private toastSvc: ToastService
-  ) {
-  }
+  ) {}
 
   error: Subject<string> = new Subject();
   error$ = this.error.asObservable();
@@ -145,7 +144,7 @@ export class UserService {
       .subscribe();
   }
 
-  resetPassword(email: string) {
+  resetPassword(email: string): void {
     this.firebaseSVC.auth
       .sendPasswordResetEmail(email)
       .then(_ => this.router.navigate([`/${Paths.AUTH}/${Paths.SIGN_IN}`]))
@@ -154,6 +153,19 @@ export class UserService {
         return LogErrorMessage('Error attempting to reset password.');
       });
   };
+
+  deleteUserProfile$(): Observable<any> {
+    return this.user$.pipe(
+      take(1),
+      map(user => user.delete()),
+      catchError(() => {
+        this.error.next(
+          `${this.errorMsgPreface} delete your profile. Perhaps try again?`
+        );
+        return LogErrorMessage$('Error deleting profile.');
+      })
+    )
+  }
 
   warnIfUserHasAchievements(quiz: AchievementCheck): Observable<boolean> {
     return this.userDocument$.pipe(

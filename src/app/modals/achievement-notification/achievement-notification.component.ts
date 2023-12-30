@@ -7,14 +7,14 @@ import { ModalDirective } from '@app/shared/directives/modal/modal.directive';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'bs-modal',
+  selector: 'bs-achievement-notification',
   standalone: true,
   imports: [ModalDirective, AsyncPipe, NgIf],
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  templateUrl: './achievement-notification.component.html',
+  styleUrls: ['./achievement-notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalComponent implements OnInit {
+export class AchievementNotificationComponent implements OnInit {
   title: GetParam;
   seasonParam: GetParam;
   isModalOpen$: Observable<boolean>
@@ -26,6 +26,7 @@ export class ModalComponent implements OnInit {
     this.seasonParam = this.activatedRoute.snapshot.paramMap.get('season');
     this.title = this.activatedRoute.snapshot.queryParamMap.get('title');
     this.isModalOpen$ = this.userSVC
-    .warnIfUserHasAchievements({ season: this.seasonParam, show: this.title })
+    .warnIfUserHasAchievements({ season: this.seasonParam, show: this.title });
   }
 }
+

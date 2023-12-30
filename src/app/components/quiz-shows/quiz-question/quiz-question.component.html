@@ -48,7 +48,7 @@
       <span>{{ authError }}</span>
     </ng-container>
     <ng-template #userMessage>
-      <p>View your results on <a [routerLink]="['/profile']">your profile page</a></p>
+      <p>View your results on <a [routerLink]="['/' + Paths.PROFILE]">your profile page</a></p>
     </ng-template>
   </ng-container>
 </ng-template>
@@ -57,4 +57,4 @@
   <h1>No data available</h1>
 </ng-template>
 
-<bs-modal></bs-modal>
+<bs-achievement-notification></bs-achievement-notification>

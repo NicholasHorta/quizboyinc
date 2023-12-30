@@ -7,6 +7,7 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { DeleteNotificationComponent } from '../../modals/delete-notification/delete-notification.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
     PresentAsTitlePipe,
     ProfileRoutingModule,
     ReactiveFormsModule,
-    ButtonComponent
+    ButtonComponent,
+    DeleteNotificationComponent
   ]
 })
 

@@ -4,4 +4,5 @@
     >Submit</bs-button
   >
 </form>
-<button>Delete profile</button>
+<bs-button class="quiz-button btn-success" (click)="warnUserBeforeProfileDelete()" >Delete profile</bs-button>
+<bs-delete-notification [isModalOpen$]="isModalOpen$"></bs-delete-notification>
