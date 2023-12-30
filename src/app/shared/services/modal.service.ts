@@ -28,7 +28,7 @@ export class ModalService {
     },
 
     confirmDeleteUser: () => {
-      this.userSVC.deleteUserProfile$().pipe(first()).subscribe();
+      this.userSVC.deleteUser$().pipe(first()).subscribe();
       this.router.navigate([Paths.EMPTY]);
     }
   };

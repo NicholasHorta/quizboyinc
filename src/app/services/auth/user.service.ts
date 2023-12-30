@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
-import { LogErrorMessage, LogErrorMessage$, RandomUsernameCreation } from '@app/shared/utilities/utils';
+import {
+  LogErrorMessage,
+  LogErrorMessage$,
+  RandomUsernameCreation
+} from '@app/shared/utilities/utils';
 import { EMPTY, Observable, Subject, catchError, map, of, switchMap, take } from 'rxjs';
 import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
@@ -148,23 +152,26 @@ export class UserService {
     this.firebaseSVC.auth
       .sendPasswordResetEmail(email)
       .then(_ => this.router.navigate([`/${Paths.AUTH}/${Paths.SIGN_IN}`]))
-      .catch((err) => {
-        this.error.next(`${this.errorMsgPreface} reset your password. You could already have an account or you can try again.`);
+      .catch(err => {
+        this.error.next(
+          `${this.errorMsgPreface} reset your password. You could already have an account or you can try again.`
+        );
         return LogErrorMessage('Error attempting to reset password.');
       });
-  };
+  }
 
-  deleteUserProfile$(): Observable<any> {
+  deleteUser$(): Observable<any> {
     return this.user$.pipe(
       take(1),
-      map(user => user.delete()),
+      map(async user => {
+        await this.firebaseSVC.db.collection(DbRootKey.USERS).doc(user.uid).delete();
+        await user.delete();
+      }),
       catchError(() => {
-        this.error.next(
-          `${this.errorMsgPreface} delete your profile. Perhaps try again?`
-        );
+        this.error.next(`${this.errorMsgPreface} delete your profile. Perhaps try again?`);
         return LogErrorMessage$('Error deleting profile.');
       })
-    )
+    );
   }
 
   warnIfUserHasAchievements(quiz: AchievementCheck): Observable<boolean> {
@@ -189,7 +196,7 @@ export class UserService {
     return this.user$.pipe(
       take(1),
       switchMap(user => {
-        if(!user?.uid) return EMPTY;
+        if (!user?.uid) return EMPTY;
         return this.firebaseSVC.db.collection<UserData>(DbRootKey.USERS).doc(user.uid).get();
       })
     );
