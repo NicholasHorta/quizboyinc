@@ -1,5 +1,6 @@
 import { Directive, DoCheck, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ModalService } from '@app/shared/services/modal.service';
+import { first } from 'rxjs';
 
 @Directive({
   selector: '[bsModal]',
@@ -9,19 +10,17 @@ export class ModalDirective implements OnInit, DoCheck {
   @Input() bsModal: boolean;
 
   ngOnInit(): void {
-    this.modalSVC.isModalOpen.next(this.bsModal);
+    this.modalSVC.setModalState(this.bsModal);
     this.viewContainerRef.createEmbeddedView(this.templateRef, this.modalSVC);
   }
 
   ngDoCheck(): void {
-    this.modalSVC.isModalOpen$
-      .subscribe(modalState => {
-        this.bsModal = modalState;
-        if (!this.bsModal) {
-          this.viewContainerRef.clear();
-        }
-      })
-      .unsubscribe();
+    this.modalSVC.isModalOpen$.pipe(first()).subscribe(modalState => {
+      this.bsModal = modalState;
+      if (!this.bsModal) {
+        this.viewContainerRef.clear();
+      }
+    });
   }
 
   constructor(

@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetParam } from '@app/models/shared/global.models';
 import { ProfileService } from '@app/services/profile/profile.service';
-import { Observable, of } from 'rxjs';
+import { ModalService } from '@app/shared/services/modal.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bs-profile-edit',
@@ -18,7 +19,8 @@ export class ProfileEditComponent implements OnInit {
   });
 
   constructor(
-    private profileSVC: ProfileService
+    private profileSVC: ProfileService,
+    private modalSVC: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -29,11 +31,8 @@ export class ProfileEditComponent implements OnInit {
     this.profileSVC.updateUsername(this.form.value.username);
   }
 
-  warnUserOfDeleteConsequences(): void {
-
-    this.isModalOpen$ = of(true);
-    this.isModalOpen$.subscribe((isOpen) => {
-      console.log(`%c RES `, `background: cyan; color: black;`, isOpen)
-    })
+  warnUserBeforeProfileDelete(): void {
+    this.modalSVC.setModalState(true);
+    this.isModalOpen$ = this.modalSVC.isModalOpen$;
   }
 }

@@ -2,7 +2,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Paths } from '@app/models/shared/global.models';
 import { ModalDirective } from '@app/shared/directives/modal/modal.directive';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bs-delete-notification',
@@ -16,8 +16,4 @@ import { Observable, of } from 'rxjs';
 export class DeleteNotificationComponent {
   @Input() isModalOpen$: Observable<boolean>
   path = Paths.PROFILE;
-
-  warnUserOfDeleteConsequences(): void {
-    this.isModalOpen$ = of(true);
-  }
 }

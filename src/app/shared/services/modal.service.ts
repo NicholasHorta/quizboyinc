@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Paths } from '@app/models/shared/global.models';
+import { UserService } from '@app/services/auth/user.service';
+import { BehaviorSubject, first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  isModalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isModalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isModalOpen$ = this.isModalOpen.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userSVC: UserService) {}
+
+  setModalState(state: boolean): void {
+    this.isModalOpen.next(state);
+  }
+
 
   modal = {
     close: () => {
@@ -18,6 +25,11 @@ export class ModalService {
 
     navigateTo: (prop: string) => {
       this.router.navigate([`/${prop}`]);
+    },
+
+    confirmDeleteUser: () => {
+      this.userSVC.deleteUserProfile$().pipe(first()).subscribe();
+      this.router.navigate([Paths.EMPTY]);
     }
   };
 }
