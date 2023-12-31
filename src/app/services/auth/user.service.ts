@@ -13,6 +13,7 @@ import { StorageService } from '@app/shared/services/storage.service';
 import { DbRootKey, Paths } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
 import { AchievementCheck } from '@app/models/quiz.models';
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +23,8 @@ export class UserService {
     private storageSVC: StorageService,
     private router: Router,
     private logSVC: LogService,
-    private toastSvc: ToastService
+    private toastSvc: ToastService,
+    private location: Location
   ) {}
 
   error: Subject<string> = new Subject();
@@ -52,7 +54,6 @@ export class UserService {
   async register(email: string, password: string, username: string): Promise<void> {
     if (!username) username = RandomUsernameCreation();
     const avatar = this.assignAvatar(username);
-
     await this.firebaseSVC.auth
       .createUserWithEmailAndPassword(email, password)
       .then(data => {
@@ -186,6 +187,16 @@ export class UserService {
         return achievement.length ? of(true) : of(false);
       })
     );
+  }
+
+  refreshAppData$(): Observable<boolean> {
+    const timestamps = this.storageSVC.getTimestamps();
+    const currentTime = Date.now();
+    if (currentTime - timestamps.future > 0) {
+      this.storageSVC.wipeStorage();
+      this.location.go(this.location.path());
+    };
+    return of(true);
   }
 
   private assignAvatar(username: string): string {

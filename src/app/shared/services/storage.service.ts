@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TimestampSet } from '@app/models/core.model';
 import { ShowCollection, ShowWithId } from '@app/models/quiz.models';
 import { StorageKeys } from '@app/models/storage.models';
 
@@ -45,6 +46,21 @@ export class StorageService {
 
   wipeStorage(): void {
     localStorage.clear();
+  }
+
+  getTimestamps(): TimestampSet {
+    const session = JSON.parse(localStorage.getItem(StorageKeys.TIMESTAMP)!)
+    if (!session) {
+      this.setTimestamps();
+    }
+    const future = JSON.parse(localStorage.getItem(StorageKeys.REFRESH_TIMESTAMP)!)
+    return {session, future};
+  }
+
+  private setTimestamps(): void {
+    const futureTimestamp = Date.now() + (12 * 60 * 60 * 1000);
+    localStorage.setItem(StorageKeys.TIMESTAMP, this.toJSON(Date.now()));
+    localStorage.setItem(StorageKeys.REFRESH_TIMESTAMP, this.toJSON(futureTimestamp));
   }
 
   private toJSON(value: any): string {
