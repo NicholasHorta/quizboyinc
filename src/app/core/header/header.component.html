@@ -1,9 +1,11 @@
-<div class="mb-6">
-  <div class="flex justify-between items-center py-6">
-    <bs-logo></bs-logo>
-    <bs-access></bs-access>
+<ng-container *ngIf="refreshAppData$ | async">
+  <div class="mb-6">
+    <div class="flex justify-between items-center py-6">
+      <bs-logo></bs-logo>
+      <bs-access></bs-access>
+    </div>
+    <bs-navigation></bs-navigation>
+    <router-outlet></router-outlet>
+    <bs-auth></bs-auth>
   </div>
-  <bs-navigation></bs-navigation>
-  <router-outlet></router-outlet>
-  <bs-auth></bs-auth>
-</div>
+</ng-container>

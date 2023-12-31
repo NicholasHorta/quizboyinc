@@ -3,4 +3,9 @@ export interface NavigationLinks {
   path: string;
 }
 
+export interface TimestampSet {
+  session: number;
+  future: number;
+}
+
 export type PortalType = 'Sign in' | 'Register';
