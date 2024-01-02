@@ -1,12 +1,27 @@
-<ng-container *ngIf="achievements.length; else empty">
-  <div *ngFor="let achievement of achievements" style="margin-top: 1rem">
-    <p>Show: {{ achievement.show | presentAsTitle }}</p>
-    <p>Season: {{ achievement.season }}</p>
-    <p>Score: {{ achievement.score }}</p>
-    <p>Date: {{ achievement.date | date }}</p>
-  </div>
-</ng-container>
-
 <ng-template #empty>
-  <span>No achievements to show</span>
+  <p class="pt-6 script-text">No achievements currently exist... for now 😏</p>
 </ng-template>
+
+<ng-container *ngIf="achievements.length; else empty">
+  <table class="w-full border rounded-lg mt-6">
+    <thead>
+      <tr class="border-b bg-blue-gray-100 text-gray-700">
+        <th class="py-3 px-4 text-left">Date</th>
+        <th class="py-3 px-4 text-left">Show title</th>
+        <th class="py-3 px-4 text-left">Season</th>
+        <th class="py-3 px-4 text-left">Score</th>
+      </tr>
+    </thead>
+    <tbody class="text-blue-gray-900">
+      <tr class="border-b border-blue-gray-200" *ngFor="let achievement of achievements">
+        <td class="py-3 px-4 w-1/4">{{ achievement.date | date }}</td>
+        <td class="py-3 px-4 w-1/4">{{ achievement.show | presentAsTitle }}</td>
+        <td class="py-3 px-4 w-1/4">{{ achievement.season }}</td>
+        <td class="py-3 px-4 w-1/4">{{ achievement.score }}</td>
+        <td class="py-3 px-4 flex justify-center">
+          <bs-button class="quiz-btn-alt btn-default">Redo</bs-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

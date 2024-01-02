@@ -4,19 +4,19 @@
 
 <ng-template #portal>
   <form [formGroup]="form" (ngSubmit)="path === Paths.SIGN_IN ? signInUser() : registerUser()">
-    <h2 class="heading-secondary">{{ currentForm }}</h2>
+    <h2 class="heading-component">{{ currentForm }}</h2>
     <div class="grid grid-cols-12 gap-2">
       <ng-container *ngIf="path === Paths.REGISTER">
-        <div class="quiz-input-field">
+        <div class="quiz-input-field script-text">
           <label for="">Username</label>
           <input formControlName="username" placeholder="Optional" type="text" class="quiz-input" />
         </div>
       </ng-container>
-      <div class="quiz-input-field">
+      <div class="quiz-input-field script-text">
         <label for="">Email</label>
         <input formControlName="email" type="text" class="quiz-input" />
       </div>
-      <div class="quiz-input-field">
+      <div class="quiz-input-field script-text">
         <label for="">Password</label>
         <input formControlName="password" type="password" class="quiz-input" />
       </div>
@@ -37,7 +37,10 @@
       >
     </div>
     <ng-container *ngIf="authError$ | async as authError">
-      <p>{{ authError }}</p>
+      <p class="error-text pt-3 flex items-center gap-1">
+        <mat-icon>error_outline</mat-icon>
+        {{ authError }}
+      </p>
     </ng-container>
   </form>
 </ng-template>

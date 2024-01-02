@@ -200,7 +200,7 @@ export class UserService {
   }
 
   private assignAvatar(username: string): string {
-    return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}`;
+    return `https://api.dicebear.com/7.x/notionists-neutral/svg?seed=${username}`;
   }
 
   private get userDocument$(): Observable<any> {

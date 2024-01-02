@@ -7,11 +7,12 @@ import { PortalType } from '@app/models/core.model';
 import { UserService } from '@app/services/auth/user.service';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { Observable } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-portal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, RouterModule, MatIconModule],
   templateUrl: './user-portal.component.html',
   styleUrls: ['./user-portal.component.scss']
 })

@@ -8,6 +8,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { DeleteNotificationComponent } from '../../modals/delete-notification/delete-notification.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DeleteNotificationComponent } from '../../modals/delete-notification/de
     ProfileRoutingModule,
     ReactiveFormsModule,
     ButtonComponent,
-    DeleteNotificationComponent
+    DeleteNotificationComponent,
+    MatIconModule
   ]
 })
 

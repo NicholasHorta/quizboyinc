@@ -37,11 +37,11 @@
 
 // Buttons
 .quiz-btn {
-  @apply px-4 py-2 rounded-md text-sm font-medium border focus:outline-none focus:ring transition;
+  @apply px-4 py-2 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition;
 }
 
 .quiz-btn-alt {
-  @apply px-3 py-1 rounded-md text-sm font-medium border focus:outline-none focus:ring transition;
+  @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal;
 }
 
 .disabled {
@@ -57,27 +57,34 @@
   @apply  text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
 }
 
-
 .btn-success {
-  @apply  text-green-400 border-green-400 hover:text-white hover:bg-green-400;
+  @apply  text-green-600 border-green-600 hover:text-white hover:bg-green-600;
 }
 
 .btn-danger {
-  @apply  text-red-400 border-red-400 hover:text-gray-600 hover:bg-red-400;
+  @apply  text-red-600 border-red-600 hover:text-white hover:bg-red-600;
 }
 
 .btn-info {
-  @apply  text-blue-400 border-blue-400 hover:text-gray-600 hover:bg-blue-400;
+  @apply  text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
 }
 
 
 // Text
-.heading-secondary {
+.heading-component {
   @apply text-2xl py-6 text-gray-600 quiz-font-script;
 }
 
-.navigation-text {
+.heading-secondary {
+  @apply text-xl text-gray-600 quiz-font-script;
+}
+
+.script-text {
   @apply text-gray-600 quiz-font-script;
+}
+
+.error-text {
+  @apply text-red-600 quiz-font-script;
 }
 
 .quiz-text-block {
@@ -90,10 +97,13 @@
 
 // Input
 .quiz-input {
-  @apply px-2 py-1 mb-4 border rounded-md font-medium focus:outline-none focus:border-pink-300;
+  @apply px-2 py-1 mb-4  border rounded-md font-medium focus:outline-none focus:border-pink-300;
 }
 
 // Form
 .quiz-input-field {
   @apply quiz-font-script gap-2 col-span-6 flex flex-col;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

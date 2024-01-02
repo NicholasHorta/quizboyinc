@@ -9,11 +9,12 @@ import { IconComponent } from '../shared/components/icon/icon.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { AuthModule } from '@app/auth/auth.module';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 const components = [LogoComponent, NavigationComponent, AccessComponent];
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, IconComponent],
-  imports: [CommonModule, ...components, CoreRoutingModule, AuthModule, RouterModule],
+  imports: [CommonModule, ...components, CoreRoutingModule, AuthModule, RouterModule, MatIconModule],
   exports: [
     HeaderComponent,
     FooterComponent

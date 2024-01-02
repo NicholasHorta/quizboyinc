@@ -24,6 +24,7 @@ import { ProfileModule } from './components/profile/profile.module';
 import { QuizShowsModule } from './components/quiz-shows/quiz-shows.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const modals = [
   ToastComponent,
@@ -43,8 +44,8 @@ const modals = [
     StaticModule,
     ProfileModule,
     QuizShowsModule,
-    ...modals
-
+    ...modals,
+    MatIconModule
   ],
   providers: [
     {
