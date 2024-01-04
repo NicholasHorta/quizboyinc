@@ -18,6 +18,10 @@
   src: url("./assets/fonts/Silkscreen/Silkscreen-Regular.ttf");
 }
 
+table {
+  border-radius: 20px;
+}
+
 .quiz-font-main {
   font-family: 'main';
 }
@@ -104,6 +108,3 @@
 .quiz-input-field {
   @apply quiz-font-script gap-2 col-span-6 flex flex-col;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

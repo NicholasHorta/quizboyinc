@@ -13,18 +13,10 @@ export class ProfileComponent implements OnInit {
   constructor(private profileSVC: ProfileService) {}
 
   userData$: Observable<UserData>;
-  isAchievementsOpen = false;
-  achievementIcon = 'expand_less';
   Paths = Paths;
 
   ngOnInit(): void {
     this.userData$ = this.profileSVC.userData$;
   }
 
-  toggleAchievements(): void {
-    this.isAchievementsOpen = !this.isAchievementsOpen;
-    this.isAchievementsOpen
-      ? (this.achievementIcon = 'expand_more')
-      : (this.achievementIcon = 'expand_less');
-  }
 }
