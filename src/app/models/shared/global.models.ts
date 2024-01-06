@@ -36,4 +36,7 @@ export enum DbRootKey {
 export interface Toast {
   isVisible: boolean;
   message: string;
+  displayStyle: ToastType;
 }
+
+export type ToastType = 'success' | 'error' | 'info' | 'warning';

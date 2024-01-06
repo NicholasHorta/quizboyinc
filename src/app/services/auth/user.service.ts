@@ -68,6 +68,7 @@ export class UserService {
         });
         this.logSVC.emit('log', 'User registered successfully.');
         this.router.navigate([Paths.PROFILE]);
+        this.toastSvc.emitToastNotification(3000, `Welcome to BrainSploog ${username}!`, 'success');
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
@@ -97,7 +98,7 @@ export class UserService {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
         this.router.navigate([Paths.EMPTY]);
-        this.toastSvc.emitToastNotification(3000, 'You have been logged out.');
+        this.toastSvc.emitToastNotification(3000, 'You have been logged out.', 'success');
       })
       .catch(error => {
         this.logSVC.emit('error', `Logout error: ${error}`);
@@ -138,7 +139,7 @@ export class UserService {
             .doc(userData.id)
             .update({ username })
             .then(() =>
-              this.toastSvc.emitToastNotification(3000, 'Username updated successfully.')
+              this.toastSvc.emitToastNotification(3000, 'Username updated successfully.', 'success')
             );
         }),
         catchError(() => {

@@ -1,18 +1,9 @@
 <ng-container *ngTemplateOutlet="titles"></ng-container>
 
-<!-- <ng-template #titles>
-  <h2 class="heading-component">Shows</h2>
-  <div *ngIf="shows$ | async as shows" class="flex flex-col">
-    <a [routerLink]="[show.id]" *ngFor="let show of shows">{{ show.title | presentAsTitle }}</a>
-  </div>
-</ng-template> -->
 <ng-template #titles>
   <h2 class="heading-component">Shows</h2>
-  <div *ngIf="shows$ | async as shows" class="flex flex-wrap gap-3">
-    <a [routerLink]="[show.id]" *ngFor="let show of shows" >
-        <div
-          class="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md"
-        >
+  <div *ngIf="shows$ | async as shows" class="flex flex-wrap gap-3 justify-between">
+    <a [routerLink]="[show.id]" *ngFor="let show of shows" style="max-width: 220px;" class="cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md ">
           <img
             class="w-full rounded-lg object-cover object-center max"
             [src]="show.image"
@@ -25,7 +16,6 @@
                 {{show.seasons}} seasons
               </p>
             </div>
-          </div>
         </div>
     </a>
   </div>

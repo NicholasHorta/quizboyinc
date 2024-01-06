@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   @apply box-border m-0 p-0;
 }
 
+:host {
+  --var-green: #24da82;
+}
 
 // Fonts
 @font-face {
-  font-family: "script";
-  src: url("./assets/fonts/Figtree/Figtree-VariableFont_wght.ttf");
+  font-family: 'script';
+  src: url('./assets/fonts/Figtree/Figtree-VariableFont_wght.ttf');
 }
 
 @font-face {
-  font-family: "main";
-  src: url("./assets/fonts/Silkscreen/Silkscreen-Regular.ttf");
+  font-family: 'main';
+  src: url('./assets/fonts/Silkscreen/Silkscreen-Regular.ttf');
 }
 
 table {
@@ -40,12 +45,9 @@ table {
 }
 
 // Buttons
-.quiz-btn {
-  @apply px-4 py-2 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition;
-}
 
-.quiz-btn-alt {
-  @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal;
+.quiz-btn {
+  @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal hover:shadow-md;
 }
 
 .disabled {
@@ -54,25 +56,24 @@ table {
 
 // Button Colors
 .btn-default {
-  @apply  text-pink-400 border-pink-400 hover:text-white hover:bg-pink-400;
+  @apply text-pink-400 border-pink-400 hover:text-white hover:bg-pink-400;
 }
 
 .btn-default-alt {
-  @apply  text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
+  @apply text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
 }
 
 .btn-success {
-  @apply  text-green-600 border-green-600 hover:text-white hover:bg-green-600;
+  @apply text-green-600 border-green-600 hover:text-white hover:bg-green-600;
 }
 
 .btn-danger {
-  @apply  text-red-600 border-red-600 hover:text-white hover:bg-red-600;
+  @apply text-red-600 border-red-600 hover:text-white hover:bg-red-600;
 }
 
 .btn-info {
-  @apply  text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
+  @apply text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
 }
-
 
 // Text
 .heading-component {
@@ -107,4 +108,23 @@ table {
 // Form
 .quiz-input-field {
   @apply quiz-font-script gap-2 col-span-6 flex flex-col;
+}
+
+// Toast
+
+.toast {
+  @apply absolute right-8 top-9 py-2.5 px-4 border rounded-lg flex gap-2 shadow-lg;
+}
+
+.toast-success {
+  @apply bg-green-200 text-green-700;
+}
+.toast-info {
+  @apply bg-blue-200 text-blue-700;
+}
+.toast-warning {
+  @apply bg-yellow-200 text-yellow-700;
+}
+.toast-error {
+  @apply bg-red-200 text-red-700;
 }
