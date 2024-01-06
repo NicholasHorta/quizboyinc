@@ -1,20 +1,39 @@
-<h1>Profile View</h1>
+<h2 class="heading-component">Profile</h2>
 <ng-container *ngIf="userData$ | async as data">
-  <ng-container *ngTemplateOutlet="profile; context: {data}"></ng-container>
-  <ng-container *ngTemplateOutlet="achievements; context: {data}"></ng-container>
+  <ng-container *ngTemplateOutlet="profile; context: { data }"></ng-container>
+  <ng-container *ngTemplateOutlet="achievements; context: { data }"></ng-container>
 </ng-container>
 
 <ng-template #profile let-data="data">
   <div data-testid="profile-wrapper">
-    <h1>{{data.username}}</h1>
-    <img width="200px" height="200px" [src]="data.avatar" alt="User avatar">
-    <span (click)="toggleAchievements()">{{isAchievementsOpen ? 'Hide' : 'View'}} Achievements</span>
-    <a [routerLink]="['edit']" [queryParams]="{username: data.username}">Edit profile</a>
+    <div class="flex justify-between items-center">
+      <p class="heading-secondary border-b border-gray-300 !text-pink-600 flex-grow pb-1">
+        Hello, {{ data.username }}
+      </p>
+      <img
+        width="100px"
+        class="rounded-lg border border-gray-300 p-1"
+        [src]="data.avatar"
+        alt="User avatar"
+      />
+    </div>
+    <div class="flex justify-between pt-6">
+      <div
+        class="flex items-center gap-1 script-text border-b"
+      >
+        <span>Achievements</span>
+        <mat-icon class="flex justify-start">expand_more</mat-icon>
+      </div>
+      <a
+        class="quiz-btn btn-info"
+        [routerLink]="[Paths.EDIT]"
+        [queryParams]="{ username: data.username }"
+        >Edit profile</a
+      >
+    </div>
   </div>
 </ng-template>
 
 <ng-template #achievements let-data="data">
-  <ng-container *ngIf="isAchievementsOpen">
     <bs-achievements [achievements]="data.achievements"></bs-achievements>
-  </ng-container>
 </ng-template>

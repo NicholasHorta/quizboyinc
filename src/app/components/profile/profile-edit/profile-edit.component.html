@@ -1,8 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input formControlName="username" type="text" placeholder="Edit username" />
-  <bs-button [disabled]="!form.valid" type="submit" class="quiz-button btn-success"
-    >Submit</bs-button
-  >
+  <h2 class="heading-component">Edit profile</h2>
+  <div class="grid grid-cols-12">
+    <div class="quiz-input-field">
+      <label>Current username</label>
+      <input
+        class="quiz-input"
+        formControlName="username"
+        type="text"
+        placeholder="Edit username"
+      />
+    </div>
+  </div>
+  <div class="flex gap-3">
+    <bs-button [disabled]="!form.valid" type="submit" class="quiz-btn btn-success"
+      >Update username</bs-button
+    >
+    <bs-button class="quiz-btn btn-danger" (click)="warnUserBeforeProfileDelete()"
+      >Delete profile</bs-button
+    >
+  </div>
 </form>
-<bs-button class="quiz-button btn-success" (click)="warnUserBeforeProfileDelete()" >Delete profile</bs-button>
 <bs-delete-notification [isModalOpen$]="isModalOpen$"></bs-delete-notification>

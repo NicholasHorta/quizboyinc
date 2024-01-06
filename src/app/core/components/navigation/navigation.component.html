@@ -1,4 +1,3 @@
-<nav class="flex gap-8">
-  <!-- <bs-a *ngFor="let link of links" [link]="[link.path]"  [text]="link.label"></bs-a> -->
-  <a *ngFor="let link of links" [routerLink]="[link.path]">{{link.label}}</a>
+<nav class="flex gap-8 pb-1 border-b">
+  <a class="script-text hover:text-pink-600" *ngFor="let link of links" [routerLink]="[link.path]" routerLinkActive="!text-pink-600">{{link.label}}</a>
 </nav>

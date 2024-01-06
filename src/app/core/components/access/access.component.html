@@ -1,14 +1,16 @@
 <div>
   <ng-container *ngIf="user$ | async as user; else accessOptions">
-    <bs-button class="quiz-button btn-success" (click)="logout()">Logout</bs-button>
+    <bs-button class="quiz-btn btn-danger" (click)="logout()">Logout</bs-button>
   </ng-container>
 </div>
 
 <ng-template #accessOptions>
-  <bs-button class="quiz-button btn-success" value="sign-in" (routeChange)="accessEvent($event)">
-    Sign In
-  </bs-button>
-  <bs-button class="quiz-button btn-success" value="register" (routeChange)="accessEvent($event)">
-    Register
-  </bs-button>
+  <div class="flex gap-3">
+    <bs-button class="quiz-btn btn-default-alt font-main" value="sign-in" (routeChange)="accessEvent($event)">
+      Sign in
+    </bs-button>
+    <bs-button class="quiz-btn btn-default" value="register" (routeChange)="accessEvent($event)">
+      Register
+    </bs-button>
+  </div>
 </ng-template>

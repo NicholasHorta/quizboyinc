@@ -2,7 +2,6 @@
 
 <ng-template #seasons>
   <ng-container *ngIf="selectedShow$ | async as show; else error">
-    <pre>{{ show | json }}</pre>
     <h1>{{ show.title | presentAsTitle }}</h1>
     <p>{{ show.info }}</p>
     <bs-button

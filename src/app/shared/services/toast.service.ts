@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Toast } from '@app/models/shared/global.models';
+import { Toast, ToastType } from '@app/models/shared/global.models';
 import { Subject, delay, take, timer } from 'rxjs';
 
 @Injectable({
@@ -10,9 +10,9 @@ export class ToastService {
   private toast: Subject<Toast> = new Subject();
   toast$ = this.toast.asObservable()
 
-  emitToastNotification(delayTime: number, message: string): void {
-    this.toast.next({isVisible: true, message});
-    timer(delayTime).pipe(take(1), delay(delayTime)).subscribe(() => this.toast.next({isVisible: false, message: ''}));
+  emitToastNotification(delayTime: number, message: string, displayStyle: ToastType): void {
+    this.toast.next({isVisible: true, message, displayStyle});
+    timer(delayTime).pipe(take(1), delay(delayTime)).subscribe(() => this.toast.next({isVisible: false, message: '', displayStyle: 'info'}));
   }
 }
 

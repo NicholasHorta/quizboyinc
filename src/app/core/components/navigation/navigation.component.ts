@@ -12,10 +12,11 @@ import { RouterModule } from '@angular/router';
 })
 export class NavigationComponent {
 
-  links: NavigationLinks[]  = [
-    {label: 'Shows', path: `${Paths.HOME}`},
-    {label: 'Profile', path: `${Paths.PROFILE}`},
-    {label: 'About', path: `${Paths.STATIC}/about`},
-    {label: 'Contact', path: `${Paths.STATIC}/contact`}
+  links: NavigationLinks[] = [
+    { label: 'Shows', path: `${Paths.HOME}` },
+    { label: 'Profile', path: `${Paths.PROFILE}` },
+    { label: 'About', path: `${Paths.STATIC}/about` },
+    { label: 'Contact', path: `${Paths.STATIC}/contact` }
   ];
+
 }

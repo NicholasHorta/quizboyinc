@@ -2,17 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #666;
+*,
+*::before,
+*::after {
+  @apply box-border m-0 p-0;
 }
 
-.quiz-container {
-  @apply mx-auto max-w-7xl px-2 sm:px-6 lg:px-8;
+:host {
+  --var-green: #24da82;
 }
 
-.quiz-button {
-  @apply px-4 py-2 rounded-md text-sm font-medium border focus:outline-none focus:ring transition
+// Fonts
+@font-face {
+  font-family: 'script';
+  src: url('./assets/fonts/Figtree/Figtree-VariableFont_wght.ttf');
 }
+
+@font-face {
+  font-family: 'main';
+  src: url('./assets/fonts/Silkscreen/Silkscreen-Regular.ttf');
+}
+
+table {
+  border-radius: 20px;
+}
+
+.quiz-font-main {
+  font-family: 'main';
+}
+
+.quiz-font-script {
+  font-family: 'script';
+}
+
+.line-height-text-body {
+  line-height: 1.75rem;
+}
+
+// Containers
+.quiz-main-container {
+  @apply mx-auto max-w-5xl px-2 sm:px-6 lg:px-8;
+}
+
+// Buttons
+
+.quiz-btn {
+  @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal hover:shadow-md;
+}
+
+.disabled {
+  @apply cursor-not-allowed text-gray-300 border-gray-300;
+}
+
+// Button Colors
+.btn-default {
+  @apply text-pink-400 border-pink-400 hover:text-white hover:bg-pink-400;
+}
+
+.btn-default-alt {
+  @apply text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
+}
+
 .btn-success {
-  @apply  text-white border-white hover:text-gray-600 hover:bg-white active:bg-gray-700 focus:ring-gray-300
+  @apply text-green-600 border-green-600 hover:text-white hover:bg-green-600;
+}
+
+.btn-danger {
+  @apply text-red-600 border-red-600 hover:text-white hover:bg-red-600;
+}
+
+.btn-info {
+  @apply text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
+}
+
+// Text
+.heading-component {
+  @apply text-2xl py-6 text-gray-600 quiz-font-script;
+}
+
+.heading-secondary {
+  @apply text-xl text-gray-600 quiz-font-script;
+}
+
+.script-text {
+  @apply text-gray-600 quiz-font-script;
+}
+
+.error-text {
+  @apply text-red-600 quiz-font-script;
+}
+
+.quiz-text-block {
+  @apply text-gray-600 quiz-font-script py-2 line-height-text-body;
+}
+
+.link-text {
+  @apply text-blue-600 quiz-font-script underline;
+}
+
+// Input
+.quiz-input {
+  @apply px-2 py-1 mb-4  border rounded-md font-medium focus:outline-none focus:border-pink-300;
+}
+
+// Form
+.quiz-input-field {
+  @apply quiz-font-script gap-2 col-span-6 flex flex-col;
+}
+
+// Toast
+
+.toast {
+  @apply absolute right-8 top-9 py-2.5 px-4 border rounded-lg flex gap-2 shadow-lg;
+}
+
+.toast-success {
+  @apply bg-green-200 text-green-700;
+}
+.toast-info {
+  @apply bg-blue-200 text-blue-700;
+}
+.toast-warning {
+  @apply bg-yellow-200 text-yellow-700;
+}
+.toast-error {
+  @apply bg-red-200 text-red-700;
 }

@@ -1,6 +1,12 @@
 <ng-container *ngIf="toast$ | async as toast">
   <ng-container *ngIf="toast.isVisible">
-    <div *bsToast="toast.isVisible" class="toast-component">
+    <div
+      *bsToast="toast.isVisible"
+      [class]="'toast-component'"
+      class="toast"
+      [ngClass]="'toast-' + toast.displayStyle"
+    >
+      <mat-icon>info</mat-icon>
       <p>{{ toast.message }}</p>
     </div>
   </ng-container>
