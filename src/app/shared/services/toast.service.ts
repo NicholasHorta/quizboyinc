@@ -6,13 +6,18 @@ import { Subject, delay, take, timer } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
-
   private toast: Subject<Toast> = new Subject();
-  toast$ = this.toast.asObservable()
+  toast$ = this.toast.asObservable();
 
   emitToastNotification(delayTime: number, message: string, displayStyle: ToastType): void {
-    this.toast.next({isVisible: true, message, displayStyle});
-    timer(delayTime).pipe(take(1), delay(delayTime)).subscribe(() => this.toast.next({isVisible: false, message: '', displayStyle: 'info'}));
+    this.toast.next({ isVisible: true, message, displayStyle });
+    timer(delayTime)
+      .pipe(take(1), delay(delayTime))
+      .subscribe(() => this.toast.next({ isVisible: false, message: '', displayStyle: ToastType.INFO }));
+  }
+
+  acknowledgeToast(): void {
+    this.toast.next({ isVisible: false, message: '', displayStyle: ToastType.INFO });
   }
 }
 

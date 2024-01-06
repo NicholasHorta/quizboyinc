@@ -10,7 +10,7 @@ import { Achievement, UserData } from '@app/models/auth.models';
 import { Router } from '@angular/router';
 import { LogService } from '@app/shared/services/log.service';
 import { StorageService } from '@app/shared/services/storage.service';
-import { DbRootKey, Paths } from '@app/models/shared/global.models';
+import { DbRootKey, Paths, ToastType } from '@app/models/shared/global.models';
 import { ToastService } from '@app/shared/services/toast.service';
 import { AchievementCheck } from '@app/models/quiz.models';
 import { Location } from '@angular/common';
@@ -68,7 +68,7 @@ export class UserService {
         });
         this.logSVC.emit('log', 'User registered successfully.');
         this.router.navigate([Paths.PROFILE]);
-        this.toastSvc.emitToastNotification(3000, `Welcome to BrainSploog ${username}!`, 'success');
+        this.toastSvc.emitToastNotification(3000, `Welcome to BrainSploog ${username}!`, ToastType.SUCCESS);
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
@@ -98,7 +98,7 @@ export class UserService {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
         this.router.navigate([Paths.EMPTY]);
-        this.toastSvc.emitToastNotification(3000, 'You have been logged out.', 'success');
+        this.toastSvc.emitToastNotification(3000, 'You have been logged out.', ToastType.INFO);
       })
       .catch(error => {
         this.logSVC.emit('error', `Logout error: ${error}`);
@@ -139,7 +139,7 @@ export class UserService {
             .doc(userData.id)
             .update({ username })
             .then(() =>
-              this.toastSvc.emitToastNotification(3000, 'Username updated successfully.', 'success')
+              this.toastSvc.emitToastNotification(3000, 'Username updated successfully.', ToastType.SUCCESS)
             );
         }),
         catchError(() => {

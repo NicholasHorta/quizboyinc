@@ -6,8 +6,16 @@
       class="toast"
       [ngClass]="'toast-' + toast.displayStyle"
     >
-      <mat-icon>info</mat-icon>
-      <p>{{ toast.message }}</p>
+      <div class="flex gap-2">
+        <ng-container [ngSwitch]="toast.displayStyle">
+          <mat-icon *ngSwitchCase="toastType.INFO">info</mat-icon>
+          <mat-icon *ngSwitchCase="toastType.WARNING">warning</mat-icon>
+          <mat-icon *ngSwitchCase="toastType.ERROR">error</mat-icon>
+          <mat-icon *ngSwitchCase="toastType.SUCCESS">check</mat-icon>
+        </ng-container>
+        <p>{{ toast.message }}</p>
+      </div>
+      <mat-icon (click)="acknowledgeToast()" class="ml-6 mr-3 cursor-pointer hover:text-white">highlight_off</mat-icon>
     </div>
   </ng-container>
 </ng-container>

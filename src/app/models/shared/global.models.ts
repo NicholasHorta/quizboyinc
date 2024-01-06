@@ -1,4 +1,4 @@
-export type GetParam = string | null
+export type GetParam = string | null;
 
 export type QuizButton = 'Next' | 'Complete quiz' | 'Begin' | 'Return home';
 
@@ -14,7 +14,7 @@ export enum Paths {
   ACHIEVEMENTS = 'achievements',
   ABOUT = 'about',
   CONTACT = 'contact',
-  RESET_PW = 'reset-password',
+  RESET_PW = 'reset-password'
 }
 
 export type ConsoleMsgType = 'info' | 'warn' | 'error' | 'log';
@@ -30,7 +30,7 @@ export enum DbRootKey {
   USERS = 'users',
   SHOWS = 'shows',
   SEASONS = 'seasons',
-  LOGS = 'logs',
+  LOGS = 'logs'
 }
 
 export interface Toast {
@@ -39,4 +39,9 @@ export interface Toast {
   displayStyle: ToastType;
 }
 
-export type ToastType = 'success' | 'error' | 'info' | 'warning';
+export enum ToastType {
+  SUCCESS = 'success',
+  ERROR = 'error',
+  INFO = 'info',
+  WARNING = 'warning'
+}
