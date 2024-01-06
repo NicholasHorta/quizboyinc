@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router';
-import { Paths } from '@app/models/shared/global.models';
+import { Paths, ToastType } from '@app/models/shared/global.models';
 import { UserService } from '@app/services/auth/user.service';
 import { Observable, map, tap } from 'rxjs';
 import { ToastService } from '../services/toast.service';
@@ -24,7 +24,7 @@ export function userGuard(): CanActivateFn {
       tap(isUser => {
         if (!isUser) {
           router.navigate([Paths.EMPTY]);
-          toast.emitToastNotification(3000, 'Please sign in to view this page', 'info');
+          toast.emitToastNotification(3000, 'Please sign in to view this page.', ToastType.INFO);
         }
       })
     );
