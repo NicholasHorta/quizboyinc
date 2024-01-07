@@ -3,10 +3,10 @@ export interface Show {
   info: string;
   image: string;
   seasons: number;
+  preface: string;
 }
 
 export interface ShowCollection {
-  preface: string;
   showId: string;
   seasons: IndividualSeason[];
 }

@@ -2,7 +2,10 @@
 
 <ng-template #seasons>
   <ng-container *ngIf="selectedShow$ | async as show; else error">
-    <h2 class="heading-secondary py-6">{{ show.title | presentAsTitle }}</h2>
+    <div class="py-6">
+      <h2 class="heading-secondary pb-2">{{ show.title | presentAsTitle }}</h2>
+      <p class="preface">{{ show.preface }}</p>
+    </div>
     <p class="quiz-text-block">{{ show.info }}</p>
     <div class="flex gap-3 pt-2">
       <bs-button
