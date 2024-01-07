@@ -75,6 +75,14 @@ table {
   @apply text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
 }
 
+.btn-quiz-season {
+  @apply text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600 focus:bg-blue-600 focus-within:bg-blue-600 focus-within:text-white;
+}
+
+.btn-quiz-attempt {
+  @apply text-white bg-pink-400 border-pink-400 hover:text-white hover:bg-pink-700 hover:border-pink-700;
+}
+
 // Text
 .heading-component {
   @apply text-2xl py-6 text-gray-600 quiz-font-script;

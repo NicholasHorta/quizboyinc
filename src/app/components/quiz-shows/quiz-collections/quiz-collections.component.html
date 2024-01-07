@@ -2,27 +2,31 @@
 
 <ng-template #seasons>
   <ng-container *ngIf="selectedShow$ | async as show; else error">
-    <h1>{{ show.title | presentAsTitle }}</h1>
-    <p>{{ show.info }}</p>
-    <bs-button
-      *ngFor="let season of numberOfSeasons"
-      class="quiz-button btn-success"
-      (click)="setAttemptBtnWithSelectedSeason(season)"
-    >
-      Season {{ season }}
-    </bs-button>
+    <h2 class="heading-secondary py-6">{{ show.title | presentAsTitle }}</h2>
+    <p class="quiz-text-block">{{ show.info }}</p>
+    <div class="flex gap-3 pt-2">
+      <bs-button
+        *ngFor="let season of numberOfSeasons"
+        class="quiz-btn btn-quiz-season"
+        (click)="setAttemptBtnWithSelectedSeason(season)"
+      >
+        Season {{ season }}
+      </bs-button>
+    </div>
     <ng-container *ngTemplateOutlet="quizStart; context: { show }"></ng-container>
   </ng-container>
 </ng-template>
 
 <ng-template #quizStart let-show="show">
   <ng-container *ngIf="selectedSeason">
-    <bs-button (click)="navigateToQuizAttempt(show)" class="quiz-button btn-success"
+    <bs-button
+      (click)="navigateToQuizAttempt(show)"
+      class="quiz-btn btn-quiz-attempt inline-flex my-4"
       >Attempt season {{ selectedSeason }} quiz</bs-button
     >
   </ng-container>
 </ng-template>
 
 <ng-template #error>
-  <div>No Document Found</div>
+  <bs-data-error></bs-data-error>
 </ng-template>

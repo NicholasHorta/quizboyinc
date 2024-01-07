@@ -8,6 +8,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizTimerComponent } from './components/quiz-timer/quiz-timer.component';
 import { AchievementNotificationComponent } from '../../modals/achievement-notification/achievement-notification.component';
+import { DataErrorComponent } from '@app/shared/components/data-error/data-error.component';
 
 
 
@@ -23,7 +24,8 @@ import { AchievementNotificationComponent } from '../../modals/achievement-notif
     PresentAsTitlePipe,
     ButtonComponent,
     QuizTimerComponent,
-    AchievementNotificationComponent
+    AchievementNotificationComponent,
+    DataErrorComponent
   ]
 })
 export class QuizShowsModule { }

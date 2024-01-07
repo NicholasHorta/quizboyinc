@@ -21,6 +21,7 @@ export class QuizCollectionsComponent implements OnInit {
   numberOfSeasons: number[] = [];
   selectedSeason: number = 0;
   @Input('id') showIdParam: GetParam = null;
+  Paths = Paths;
 
   ngOnInit(): void {
     this.getSelectedShowFromStorage();
