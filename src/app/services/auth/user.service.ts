@@ -98,7 +98,7 @@ export class UserService {
         this.storageSVC.wipeStorage();
         this.logSVC.emit('log', 'User logged out successfully.');
         this.router.navigate([Paths.EMPTY]);
-        this.toastSvc.emitToastNotification(3000, 'You have been logged out.', ToastType.INFO);
+        this.toastSvc.emitToastNotification(3000, 'You have been logged out.', ToastType.SUCCESS);
       })
       .catch(error => {
         this.logSVC.emit('error', `Logout error: ${error}`);

@@ -5,10 +5,13 @@
 </ng-container>
 
 <ng-template #quizInit>
-  <h1>{{ title | presentAsTitle }}</h1>
-  <h2>The timer will begin as soon as you start the quiz etc etc</h2>
-  <h2>Begin whenever you are ready to begin...</h2>
-  <bs-button class="quiz-button btn-success" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
+  <h2 class="heading-secondary py-6">Ready.. Set..</h2>
+  <p class="quiz-text-block">
+    When the quiz starts you'll have 30 seconds to answer each
+    question. Keep an eye on the timer and make sure to submit your answers before time runs out or it will disable the submission button.
+  </p>
+  <p class="quiz-text-block">Begin whenever you're ready... Good luck!</p>
+  <bs-button class="quiz-btn btn-quiz-attempt inline-flex mt-2" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
 </ng-template>
 
 <ng-template #quizQuestionFlow>
@@ -21,7 +24,7 @@
       <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
       <bs-button
         *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
-        class="quiz-button btn-success"
+        class="quiz-btn btn-success"
         (click)="setSelectedAnswer(option)"
         [hidden]="vm?.quizTimer?.isTimeUp"
         >{{ option }}</bs-button
@@ -34,7 +37,7 @@
 
 <ng-template #nextQuestionButton>
   <bs-button
-    class="quiz-button btn-success"
+    class="quiz-btn btn-success"
     (click)="quizBtnState === 'Next' ? toggleNextQuestion() : toggleQuizComplete()"
   >
     {{ quizBtnState }}
@@ -54,7 +57,7 @@
 </ng-template>
 
 <ng-template #dataError>
-  <h1>No data available</h1>
+  <bs-data-error></bs-data-error>
 </ng-template>
 
-<bs-achievement-notification></bs-achievement-notification>
+<!-- <bs-achievement-notification></bs-achievement-notification> -->

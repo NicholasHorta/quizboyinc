@@ -1,3 +1,5 @@
+@import './styles/_colors.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,9 +10,7 @@
   @apply box-border m-0 p-0;
 }
 
-:host {
-  --var-green: #24da82;
-}
+
 
 // Fonts
 @font-face {
@@ -45,7 +45,6 @@ table {
 }
 
 // Buttons
-
 .quiz-btn {
   @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal hover:shadow-md;
 }
@@ -56,7 +55,7 @@ table {
 
 // Button Colors
 .btn-default {
-  @apply text-pink-400 border-pink-400 hover:text-white hover:bg-pink-400;
+  @apply text-qz-pink-alt border-qz-pink-alt hover:text-white hover:bg-qz-pink-alt;
 }
 
 .btn-default-alt {
@@ -64,15 +63,23 @@ table {
 }
 
 .btn-success {
-  @apply text-green-600 border-green-600 hover:text-white hover:bg-green-600;
+  @apply text-qz-green-alt border-qz-green-alt hover:text-white hover:bg-qz-green-alt;
 }
 
 .btn-danger {
-  @apply text-red-600 border-red-600 hover:text-white hover:bg-red-600;
+  @apply text-white bg-qz-red-alt border-qz-red-alt hover:text-white hover:bg-red-700 hover:border-red-700;
 }
 
 .btn-info {
-  @apply text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600;
+  @apply text-qz-blue-alt border-qz-blue-alt hover:text-white hover:bg-qz-blue-alt;
+}
+
+.btn-quiz-season {
+  @apply text-qz-blue border-qz-blue hover:text-white hover:bg-qz-blue focus:bg-qz-blue focus-within:bg-qz-blue focus-within:text-white;
+}
+
+.btn-quiz-attempt {
+  @apply text-white bg-qz-pink border-qz-pink hover:text-white hover:bg-qz-pink-alt hover:border-qz-pink-alt;
 }
 
 // Text
@@ -89,20 +96,25 @@ table {
 }
 
 .error-text {
-  @apply text-red-600 quiz-font-script;
+  @apply text-qz-red quiz-font-script;
 }
 
 .quiz-text-block {
-  @apply text-gray-600 quiz-font-script py-2 line-height-text-body;
+  @apply text-gray-600 quiz-font-script line-height-text-body;
 }
 
 .link-text {
-  @apply text-blue-600 quiz-font-script underline;
+  @apply text-qz-blue quiz-font-script underline;
 }
+
+.preface {
+  @apply text-lg text-gray-500 quiz-font-script italic;
+}
+
 
 // Input
 .quiz-input {
-  @apply px-2 py-1 mb-4  border rounded-md font-medium focus:outline-none focus:border-pink-300;
+  @apply px-2 py-1 mb-4  border rounded-md font-medium focus:outline-none focus:border-qz-blue;
 }
 
 // Form
@@ -117,14 +129,14 @@ table {
 }
 
 .toast-success {
-  @apply bg-green-200 text-green-700;
+  @apply bg-qz-green-op text-qz-green-alt;
 }
 .toast-info {
-  @apply bg-blue-200 text-blue-700;
+  @apply bg-qz-blue-op text-qz-blue-alt;
 }
 .toast-warning {
-  @apply bg-yellow-200 text-yellow-700;
+  @apply bg-qz-yellow-op text-qz-yellow-alt;
 }
 .toast-error {
-  @apply bg-red-200 text-red-700;
+  @apply bg-qz-red-op text-qz-red-alt;
 }
