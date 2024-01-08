@@ -12,6 +12,7 @@
         <th class="py-3 px-4 text-left border-b">Show</th>
         <th class="py-3 px-4 text-left border-b">Season</th>
         <th class="py-3 px-4 text-left border-b">Score</th>
+        <th class="py-3 px-4 text-left border-b">Redo</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +21,7 @@
         <td class="py-3 px-4 w-1/4">{{ achievement.show | presentAsTitle }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.season }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.score }}%</td>
-        <td class="py-3 px-4">
+        <td class="py-3 px-4 relative">
           <bs-button class="quiz-btn btn-info flex items-center">
             <mat-icon class="mt-1.5">loop</mat-icon>
           </bs-button>
