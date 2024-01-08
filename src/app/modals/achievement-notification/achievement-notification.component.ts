@@ -1,5 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { GetParam, Paths } from '@app/models/shared/global.models';
 import { UserService } from '@app/services/auth/user.service';
@@ -9,9 +10,9 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'bs-achievement-notification',
   standalone: true,
-  imports: [ModalDirective, AsyncPipe, NgIf],
+  imports: [ModalDirective, AsyncPipe, NgIf, MatIconModule],
   templateUrl: './achievement-notification.component.html',
-  styleUrls: ['./achievement-notification.component.scss'],
+  styleUrls: ['../../shared/directives/modal/modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AchievementNotificationComponent implements OnInit {
