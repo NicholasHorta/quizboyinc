@@ -1,3 +1,5 @@
+@import './styles/_colors.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,25 +10,6 @@
   @apply box-border m-0 p-0;
 }
 
-// :host {
-//   --var-green: #24da82;
-// }
-
-$qz-yellow: theme('colors.qz-yellow');
-$qz-green: theme('colors.qz-green');
-$qz-blue: theme('colors.qz-blue');
-$qz-pink: theme('colors.qz-pink');
-$qz-red: theme('colors.qz-red');
-$qz-red-op: theme('colors.qz-red-op');
-$qz-blue-op: theme('colors.qz-blue-op');
-$qz-pink-op: theme('colors.qz-pink-op');
-$qz-green-op: theme('colors.qz-green-op');
-$qz-yellow-op: theme('colors.qz-yellow-op');
-$qz-yellow-alt: theme('colors.qz-yellow-alt');
-$qz-pink-alt: theme('colors.qz-pink-alt');
-$qz-red-alt: theme('colors.qz-red-alt');
-$qz-blue-alt: theme('colors.qz-blue-alt');
-$qz-green-alt: theme('colors.qz-green-alt');
 
 
 // Fonts
@@ -62,7 +45,6 @@ table {
 }
 
 // Buttons
-
 .quiz-btn {
   @apply px-3 py-1 rounded-md text-sm font-medium border cursor-pointer focus:outline-none focus:ring transition font-normal hover:shadow-md;
 }
@@ -85,7 +67,7 @@ table {
 }
 
 .btn-danger {
-  @apply text-qz-red-alt border-qz-red-alt hover:text-white hover:bg-qz-red-alt;
+  @apply text-white bg-qz-red-alt border-qz-red-alt hover:text-white hover:bg-red-700 hover:border-red-700;
 }
 
 .btn-info {
@@ -125,6 +107,11 @@ table {
   @apply text-qz-blue quiz-font-script underline;
 }
 
+.preface {
+  @apply text-lg text-gray-500 quiz-font-script italic;
+}
+
+
 // Input
 .quiz-input {
   @apply px-2 py-1 mb-4  border rounded-md font-medium focus:outline-none focus:border-qz-blue;
@@ -152,8 +139,4 @@ table {
 }
 .toast-error {
   @apply bg-qz-red-op text-qz-red-alt;
-}
-
-.preface {
-  @apply text-lg text-gray-500 quiz-font-script italic;
 }
