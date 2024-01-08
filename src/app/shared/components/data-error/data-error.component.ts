@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Paths } from '@app/models/shared/global.models';
 
 @Component({
   selector: 'bs-data-error',
@@ -11,5 +10,5 @@ import { Paths } from '@app/models/shared/global.models';
   styleUrls: ['./data-error.component.scss']
 })
 export class DataErrorComponent {
-  paths = Paths;
+  @Input() route: string;
 }

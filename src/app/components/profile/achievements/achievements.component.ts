@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Achievement } from '@app/models/auth.models';
 import { Paths } from '@app/models/shared/global.models';
 
@@ -10,4 +11,10 @@ import { Paths } from '@app/models/shared/global.models';
 export class AchievementsComponent {
   @Input() achievements: Achievement[];
   Paths = Paths;
+
+  constructor(private router: Router) {}
+
+  attemptRedoOfSelectedAchievement(id: string, season: string, title: string): void {
+    this.router.navigate([Paths.HOME, id, season], { queryParams: { title } });
+  }
 }
