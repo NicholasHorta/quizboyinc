@@ -140,3 +140,8 @@ table {
 .toast-error {
   @apply bg-qz-red-op text-qz-red-alt;
 }
+
+// Tooltip
+.quiz-tooltip {
+  @apply absolute -top-8 right-0 left-0 z-10 p-2 w-full  text-white bg-gray-300 opacity-80 rounded-md shadow-lg text-gray-800;
+}
