@@ -89,7 +89,8 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
       show: this.title,
       season: this.seasonParam,
       date: new Date().toJSON(),
-      score: this.userQuizResult
+      score: this.userQuizResult,
+      showId: this.showIdParam
     });
   }
 

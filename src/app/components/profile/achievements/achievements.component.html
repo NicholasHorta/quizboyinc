@@ -1,6 +1,7 @@
 <ng-template #empty>
   <p class="pt-6 script-text">
-    No achievements currently exist, so <a class="cursor-pointer link-text" [routerLink]="[Paths.EMPTY]">get quizzin'!</a>
+    No achievements currently exist, so
+    <a class="cursor-pointer link-text" [routerLink]="[Paths.EMPTY]">get quizzin'!</a>
   </p>
 </ng-template>
 
@@ -16,13 +17,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="border-t border-blue-gray-200 hover:bg-qz-blue-op" *ngFor="let achievement of achievements">
+      <tr
+        class="border-t border-blue-gray-200 hover:bg-qz-blue-op"
+        *ngFor="let achievement of achievements"
+      >
         <td class="py-3 px-4 w-1/4 text-gray-400">{{ achievement.date | date }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.show | presentAsTitle }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.season }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.score }}%</td>
         <td class="py-3 px-4">
-          <bs-button class="quiz-btn btn-info flex items-center">
+          <bs-button
+            class="quiz-btn btn-info flex items-center"
+            (click)="
+              attemptRedoOfSelectedAchievement(
+                achievement.showId,
+                achievement.season,
+                achievement.show
+              )
+            "
+          >
             <mat-icon class="mt-1.5">loop</mat-icon>
           </bs-button>
         </td>

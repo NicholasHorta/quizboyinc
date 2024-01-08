@@ -5,13 +5,34 @@
 </ng-container>
 
 <ng-template #quizInit>
-  <h2 class="heading-secondary py-6">Ready.. Set..</h2>
-  <p class="quiz-text-block">
-    When the quiz starts you'll have 30 seconds to answer each
-    question. Keep an eye on the timer and make sure to submit your answers before time runs out or it will disable the submission button.
-  </p>
-  <p class="quiz-text-block">Begin whenever you're ready... Good luck!</p>
-  <bs-button class="quiz-btn btn-quiz-attempt inline-flex mt-2" (click)="initiateQuiz()">{{ quizBtnState }}</bs-button>
+  <div class="py-6">
+    <h2 class="heading-secondary pb-2">{{ title | presentAsTitle }}</h2>
+    <p class="preface">Season {{ seasonParam }}</p>
+  </div>
+  <div>
+    <p class="quiz-text-block pb-1">Quiz guidelines:</p>
+    <ul class="script-text">
+      <li class="list-item list-disc list-inside">
+        You'll have 30 seconds to answer each question.
+      </li>
+      <li class="list-item list-disc list-inside">
+        Ensure you select or submit an answer before the timer ends.
+      </li>
+      <li class="list-item list-disc list-inside">You can view all results in your profile.</li>
+    </ul>
+  </div>
+  <p class="quiz-text-block my-3">Whenever you're ready... Good luck!</p>
+  <div class="inline-flex">
+    <bs-button class="quiz-btn btn-default-solid" (click)="initiateQuiz()">
+      {{ quizBtnState }}
+    </bs-button>
+    <bs-button
+      class="quiz-btn btn-default-alt ml-3"
+      [routerLink]="'/' + Paths.HOME + '/' + showIdParam"
+    >
+      Go back
+    </bs-button>
+  </div>
 </ng-template>
 
 <ng-template #quizQuestionFlow>
@@ -19,7 +40,7 @@
     *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
   >
     <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
-      <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
+      <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
       <p>{{ questionIndex + 1 }} of {{ numberOfQuestions }}</p>
       <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
       <bs-button
@@ -57,7 +78,7 @@
 </ng-template>
 
 <ng-template #dataError>
-  <bs-data-error></bs-data-error>
+  <bs-data-error [route]="'/shows/' + showIdParam"></bs-data-error>
 </ng-template>
 
 <bs-achievement-notification></bs-achievement-notification>
