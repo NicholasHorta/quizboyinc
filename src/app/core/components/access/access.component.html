@@ -1,6 +1,6 @@
 <div>
   <ng-container *ngIf="user$ | async as user; else accessOptions">
-    <bs-button class="quiz-btn btn-danger" (click)="logout()">Logout</bs-button>
+    <bs-button class="quiz-btn btn-default-alt-solid hover:bg-qz-pink-alt hover:border-qz-pink-alt" (click)="logout()">Logout</bs-button>
   </ng-container>
 </div>
 
@@ -9,7 +9,7 @@
     <bs-button class="quiz-btn btn-default-alt font-main" value="sign-in" (routeChange)="accessEvent($event)">
       Sign in
     </bs-button>
-    <bs-button class="quiz-btn btn-default" value="register" (routeChange)="accessEvent($event)">
+    <bs-button class="quiz-btn btn-default-solid" value="register" (routeChange)="accessEvent($event)">
       Register
     </bs-button>
   </div>

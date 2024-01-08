@@ -58,8 +58,16 @@ table {
   @apply text-qz-pink-alt border-qz-pink-alt hover:text-white hover:bg-qz-pink-alt;
 }
 
+.btn-default-solid {
+  @apply text-white border-qz-pink-alt bg-qz-pink-alt hover:bg-qz-pink hover:border-qz-pink;
+}
+
 .btn-default-alt {
   @apply text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
+}
+
+.btn-default-alt-solid {
+  @apply text-white border-gray-900 bg-gray-900 hover:bg-gray-700;
 }
 
 .btn-success {
@@ -67,6 +75,10 @@ table {
 }
 
 .btn-danger {
+  @apply text-qz-red-alt border-qz-red-alt hover:text-white hover:bg-qz-red-alt;
+}
+
+.btn-danger-solid {
   @apply text-white bg-qz-red-alt border-qz-red-alt hover:text-white hover:bg-red-700 hover:border-red-700;
 }
 
@@ -75,7 +87,7 @@ table {
 }
 
 .btn-quiz-season {
-  @apply text-qz-blue border-qz-blue hover:text-white hover:bg-qz-blue focus:bg-qz-blue focus-within:bg-qz-blue focus-within:text-white;
+  @apply text-qz-blue-alt border-qz-blue-alt hover:text-white hover:bg-qz-blue-alt focus:bg-qz-blue-alt focus-within:bg-qz-blue-alt focus-within:text-white;
 }
 
 .btn-quiz-attempt {
@@ -104,7 +116,7 @@ table {
 }
 
 .link-text {
-  @apply text-qz-blue quiz-font-script underline;
+  @apply text-qz-blue-alt quiz-font-script underline;
 }
 
 .preface {
