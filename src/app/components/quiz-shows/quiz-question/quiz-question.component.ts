@@ -62,7 +62,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   }
 
   initiateQuiz(): void {
-    this.updateActionButtonState('Next');
+    this.updateActionButtonState('Next question');
     this.storageSVC.setQuizInProgress();
     this.runQuestionTimer();
   }

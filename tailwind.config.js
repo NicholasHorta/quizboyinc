@@ -18,9 +18,16 @@ module.exports = {
         'qz-blue-op': '#cce5ff',
         'qz-yellow-alt': '#ffcc00',
         'qz-yellow': '#ffdb4d',
-        'qz-yellow-op': '#ffe0b3'
+        'qz-yellow-op': '#ffe0b3',
+        'qz-pink-op-l': '#ffe5f9',
+        'qz-red-op-l': '#ffd9d9',
+        'qz-green-op-l': '#e5ffe5',
+        'qz-blue-op-l': '#e5f0ff',
+        'qz-yellow-op-l': '#fff5e0',
+
       }
     }
   },
   plugins: []
 };
+

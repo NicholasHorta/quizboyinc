@@ -40,16 +40,30 @@
     *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
   >
     <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
-      <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
-      <p>{{ questionIndex + 1 }} of {{ numberOfQuestions }}</p>
-      <h1>{{ vm?.seasonData?.[questionIndex]?.question }}</h1>
-      <bs-button
-        *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
-        class="quiz-btn btn-success"
-        (click)="setSelectedAnswer(option)"
-        [hidden]="vm?.quizTimer?.isTimeUp"
-        >{{ option }}</bs-button
-      >
+      <section class="flex flex-col script-text">
+        <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
+        <div class="flex justify-between items-center pt-6">
+          <div>
+            <h2 class="heading-component !pb-2">{{ title | presentAsTitle }}</h2>
+            <p class="text-gray-400 italic">Season {{ seasonParam }}</p>
+          </div>
+          <p class="border border-gray-500 bg-gray-100 rounded-lg px-2 py-1 text-gray-500">{{ questionIndex + 1 }} / {{ numberOfQuestions }}</p>
+        </div>
+        <div class="flex flex-col pt-10 gap-3">
+          <p class="self-center text-lg pb-6 text-center max-w-lg">
+            {{ vm?.seasonData?.[questionIndex]?.question }}
+          </p>
+          <bs-button
+            *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
+            class="quiz-btn w-max self-center"
+            [ngClass]="vm?.quizTimer?.isTimeUp ? 'disabled' : 'btn-question-selection'"
+            (click)="setSelectedAnswer(option)"
+            [disabled]="vm?.quizTimer?.isTimeUp"
+          >
+            {{ option }}
+          </bs-button>
+        </div>
+      </section>
     </ng-container>
     <ng-container *ngTemplateOutlet="quizResult"></ng-container>
     <ng-container *ngTemplateOutlet="nextQuestionButton"></ng-container>
@@ -57,12 +71,14 @@
 </ng-template>
 
 <ng-template #nextQuestionButton>
-  <bs-button
-    class="quiz-btn btn-success"
-    (click)="quizBtnState === 'Next' ? toggleNextQuestion() : toggleQuizComplete()"
-  >
-    {{ quizBtnState }}
-  </bs-button>
+  <div class="flex justify-center w-full pt-6">
+    <bs-button
+      class="quiz-btn btn-quiz-question-next w-1/6 text-center !py-2"
+      (click)="quizBtnState === 'Next question' ? toggleNextQuestion() : toggleQuizComplete()"
+    >
+      {{ quizBtnState }}
+    </bs-button>
+  </div>
 </ng-template>
 
 <ng-template #quizResult>
