@@ -66,6 +66,10 @@ table {
   @apply text-gray-900 border-gray-900 hover:text-white hover:bg-gray-900;
 }
 
+.btn-question-selection {
+  @apply text-gray-900 border-gray-900 hover:text-white hover:bg-qz-pink-alt hover:border-qz-pink-alt focus:bg-qz-pink-alt focus-within:bg-qz-pink-alt focus-within:border-qz-pink-alt focus-within:text-white;
+}
+
 .btn-default-alt-solid {
   @apply text-white border-gray-900 bg-gray-900 hover:bg-gray-700;
 }
@@ -92,6 +96,10 @@ table {
 
 .btn-quiz-attempt {
   @apply text-white bg-qz-pink border-qz-pink hover:text-white hover:bg-qz-pink-alt hover:border-qz-pink-alt;
+}
+
+.btn-quiz-question-next {
+  @apply text-qz-green-alt bg-qz-green-op-l border-qz-green-alt hover:text-white hover:bg-qz-green-alt;
 }
 
 // Text
@@ -141,16 +149,16 @@ table {
 }
 
 .toast-success {
-  @apply bg-qz-green-op text-qz-green-alt;
+  @apply bg-qz-green-op-l text-qz-green-alt;
 }
 .toast-info {
-  @apply bg-qz-blue-op text-qz-blue-alt;
+  @apply bg-qz-blue-op-l text-qz-blue-alt;
 }
 .toast-warning {
-  @apply bg-qz-yellow-op text-qz-yellow-alt;
+  @apply bg-qz-yellow-op-l text-qz-yellow-alt;
 }
 .toast-error {
-  @apply bg-qz-red-op text-qz-red-alt;
+  @apply bg-qz-red-op-l text-qz-red-alt;
 }
 
 // Tooltip
