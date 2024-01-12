@@ -18,7 +18,12 @@
       <li class="list-item list-disc list-inside">
         Ensure you select or submit an answer before the timer ends.
       </li>
-      <li class="list-item list-disc list-inside">You can view all results in your profile.</li>
+      <li class="list-item list-disc list-inside">
+        If you refresh or navigate away, all progress will be lost and attempt discarded.
+      </li>
+      <li class="list-item list-disc list-inside">
+        If you have an account, you can view all results in your profile.
+      </li>
     </ul>
   </div>
   <p class="quiz-text-block my-3">Whenever you're ready... Good luck!</p>
@@ -47,21 +52,25 @@
             <h2 class="heading-component !pb-2">{{ title | presentAsTitle }}</h2>
             <p class="text-gray-400 italic">Season {{ seasonParam }}</p>
           </div>
-          <p class="border border-gray-500 bg-gray-100 rounded-lg px-2 py-1 text-gray-500">{{ questionIndex + 1 }} / {{ numberOfQuestions }}</p>
+          <p class="border border-gray-500 bg-gray-100 rounded-lg px-2 py-1 text-gray-500">
+            {{ questionIndex + 1 }} / {{ numberOfQuestions }}
+          </p>
         </div>
         <div class="flex flex-col pt-10 gap-3">
           <p class="self-center text-lg pb-6 text-center max-w-lg">
             {{ vm?.seasonData?.[questionIndex]?.question }}
           </p>
-          <bs-button
-            *ngFor="let option of vm?.seasonData?.[questionIndex]?.options"
-            class="quiz-btn w-max self-center"
-            [ngClass]="vm?.quizTimer?.isTimeUp ? 'disabled' : 'btn-question-selection'"
-            (click)="setSelectedAnswer(option)"
-            [disabled]="vm?.quizTimer?.isTimeUp"
-          >
-            {{ option }}
-          </bs-button>
+          <ng-container *ngFor="let option of vm?.seasonData?.[questionIndex]?.options">
+            <button
+              #selectedAnswer
+              class="quiz-btn w-max self-center"
+              [ngClass]="vm?.quizTimer?.isTimeUp ? 'disabled' : 'btn-question-selection'"
+              (click)="setSelectedAnswer(option)"
+              [disabled]="vm?.quizTimer?.isTimeUp"
+            >
+              {{ option }}
+            </button>
+          </ng-container>
         </div>
       </section>
     </ng-container>

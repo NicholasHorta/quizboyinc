@@ -1,4 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Achievement } from '@app/models/auth.models';
 import {
@@ -23,6 +31,8 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   @Input('id') showIdParam: GetParam;
   @Input('title') title: GetParam;
   @Input('season') seasonParam: GetParam;
+  @Input() inputValue: any;
+  @ViewChildren('selectedAnswer') selectedAnswer: QueryList<ElementRef<HTMLButtonElement>>;
 
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
@@ -75,6 +85,7 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   }
 
   setSelectedAnswer(answer: string): void {
+    this.markAnswerAsCurrentlySelected(answer);
     this.selectedOption = answer;
   }
 
@@ -190,4 +201,13 @@ export class QuizQuestionComponent implements OnInit, OnDestroy {
   private saveQuizResultToProfile(achievement: Achievement): void {
     this.userSVC.saveUsersQuizResults(achievement);
   }
+
+  private markAnswerAsCurrentlySelected(curentAnswer: string){
+    this.selectedAnswer.forEach((btn: ElementRef<HTMLButtonElement>) => {
+      btn.nativeElement.classList.remove('btn-quiz-attempt');
+      if (btn.nativeElement.textContent.trim() === curentAnswer) {
+        btn.nativeElement.classList.add('btn-quiz-attempt');
+      }
+    });
+  };
 }
