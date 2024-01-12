@@ -15,6 +15,7 @@ export class AchievementsComponent {
   constructor(private router: Router) {}
 
   attemptRedoOfSelectedAchievement(id: string, season: string, title: string): void {
+    console.log(`%c CLICK  `, `background: yellow; color: black;`, id, season, title)
     this.router.navigate([Paths.HOME, id, season], { queryParams: { title } });
   }
 }

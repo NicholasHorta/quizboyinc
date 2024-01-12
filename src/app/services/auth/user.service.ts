@@ -68,7 +68,7 @@ export class UserService {
         });
         this.logSVC.emit('log', 'User registered successfully.');
         this.router.navigate([Paths.PROFILE]);
-        this.toastSvc.emitToastNotification(3000, `Welcome to BrainSploog ${username}!`, ToastType.SUCCESS);
+        this.toastSvc.emitToastNotification(3000, `Welcome to BrainSploog, ${username}!`, ToastType.SUCCESS);
       })
       .catch(error => {
         this.logSVC.emit('error', `Register error: ${error}`);
