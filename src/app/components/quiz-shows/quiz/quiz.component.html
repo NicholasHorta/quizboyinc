@@ -8,7 +8,7 @@
   <ng-container
     *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
   >
-    <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
+    <ng-container *ngIf="quizBtnState !== 'View my result' && !quizCompleted; else quizComplete">
       <section class="flex flex-col script-text">
         <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
         <bs-quiz-question-header
@@ -21,6 +21,7 @@
           <bs-quiz-question
             [data]="vm?.seasonData"
             [timer]="vm?.quizTimer"
+            [quizBtnState]="quizBtnState"
             [questionIndex]="questionIndex"
             (emitSetSelectedAnswer)="setSelectedAnswer($event)"
           ></bs-quiz-question>
@@ -58,8 +59,19 @@
   ></bs-quiz-result>
 </ng-template>
 
+<ng-template #quizComplete>
+  <bs-quiz-complete
+    [title]="title"
+    [seasonParam]="seasonParam"
+    [quizCompleted]="quizCompleted"
+  ></bs-quiz-complete>
+</ng-template>
+
 <ng-template #dataError>
-  <bs-data-error message="No data found for this collection." [route]="'/shows/' + showIdParam"></bs-data-error>
+  <bs-data-error
+    message="No data found for this collection."
+    [route]="'/shows/' + showIdParam"
+  ></bs-data-error>
 </ng-template>
 
 <bs-achievement-notification></bs-achievement-notification>

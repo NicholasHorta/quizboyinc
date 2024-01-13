@@ -1,0 +1,8 @@
+<ng-container *ngIf="!quizCompleted">
+  <div class="flex flex-col items-center heading-component !pb-0">
+    <p class="pt-6">
+      Congratulation on completing {{ title | presentAsTitle }}'s season {{ seasonParam }} quiz!
+    </p>
+    <p class="quiz-text-block pt-2 !text-gray-500">To view your results, click the button below.</p>
+  </div>
+</ng-container>

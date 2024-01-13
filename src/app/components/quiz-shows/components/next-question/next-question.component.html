@@ -1,6 +1,7 @@
 <div class="flex justify-center w-full pt-6">
   <bs-button
-    class="quiz-btn btn-quiz-question-next w-1/6 text-center !py-2"
+    class="quiz-btn w-1/6 text-center !py-2"
+    [ngClass]="quizBtnState === 'Next question' ? 'btn-quiz-question-next' : 'btn-quiz-view-result'"
     (click)="quizBtnState === 'Next question' ? onEmitToggleNext() : onEmitToggleQuizComplete()"
   >
     {{ quizBtnState }}

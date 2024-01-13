@@ -14,6 +14,7 @@ import { QuizResultComponent } from './components/quiz-result/quiz-result.compon
 import { NextQuestionComponent } from './components/next-question/next-question.component';
 import { QuizQuestionHeaderComponent } from './components/quiz-question-header/quiz-question-header.component';
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
+import { QuizCompleteComponent } from './components/quiz-complete/quiz-complete.component';
 
 
 
@@ -27,6 +28,7 @@ import { QuizQuestionComponent } from './components/quiz-question/quiz-question.
     NextQuestionComponent,
     QuizQuestionHeaderComponent,
     QuizQuestionComponent,
+    QuizCompleteComponent,
   ],
   imports: [
     CommonModule,

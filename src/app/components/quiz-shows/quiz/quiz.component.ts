@@ -144,7 +144,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   private confirmQuizCompleted(): void {
     this.storeSelectedAnswer();
-    this.updateActionButtonState('Complete quiz');
+    this.updateActionButtonState('View my result');
     this.quizTimer$ = of({ time: 0, isTimeUp: true });
   }
 

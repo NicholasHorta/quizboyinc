@@ -1,7 +1,7 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { QuizModule } from './app/quiz.module';
+import { QuizRootModule } from './app/quiz-root.module';
 
 
-platformBrowserDynamic().bootstrapModule(QuizModule)
+platformBrowserDynamic().bootstrapModule(QuizRootModule)
   .catch(err => console.error(err));

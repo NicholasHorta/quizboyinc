@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'quiz-root',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  templateUrl: './quiz-root.component.html',
+  styleUrls: ['./quiz-root.component.scss'],
 })
 export class QuizComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
