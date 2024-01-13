@@ -10,7 +10,9 @@
   @apply box-border m-0 p-0;
 }
 
-
+html, body {
+  height: 100%;
+}
 
 // Fonts
 @font-face {

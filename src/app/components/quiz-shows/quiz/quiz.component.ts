@@ -23,15 +23,14 @@ import { StorageService } from '@app/shared/services/storage.service';
 import { Observable, of, take, tap } from 'rxjs';
 
 @Component({
-  selector: 'bs-quiz-question',
-  templateUrl: './quiz-question.component.html',
-  styleUrls: ['./quiz-question.component.scss']
+  selector: 'bs-quiz',
+  templateUrl: './quiz.component.html',
+  styleUrls: ['./quiz.component.scss']
 })
-export class QuizQuestionComponent implements OnInit, OnDestroy {
+export class QuizComponent implements OnInit, OnDestroy {
   @Input('id') showIdParam: GetParam;
   @Input('title') title: GetParam;
   @Input('season') seasonParam: GetParam;
-  @Input() inputValue: any;
   @ViewChildren('selectedAnswer') selectedAnswer: QueryList<ElementRef<HTMLButtonElement>>;
 
   quizBtnState: QuizButton = 'Begin';

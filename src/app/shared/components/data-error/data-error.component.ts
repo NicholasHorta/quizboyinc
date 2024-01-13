@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ToastType } from '@app/models/shared/global.models';
+import { ToastService } from '@app/shared/services/toast.service';
 
 @Component({
   selector: 'bs-data-error',
@@ -9,6 +11,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './data-error.component.html',
   styleUrls: ['./data-error.component.scss']
 })
-export class DataErrorComponent {
+export class DataErrorComponent implements OnInit {
   @Input() route: string;
+  @Input() message: string;
+
+  ngOnInit(): void {
+      this.toastSVC.emitToastNotification(3000, this.message, ToastType.ERROR)
+  }
+
+  constructor(private toastSVC: ToastService) {}
 }
