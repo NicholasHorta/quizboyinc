@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuizShowsComponent } from './quiz-shows.component';
+import { QuizShowsComponent } from './quiz-shows/quiz-shows.component';
 import { QuizCollectionsComponent } from './quiz-collections/quiz-collections.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { Paths } from '@app/models/shared/global.models';
