@@ -1,0 +1,10 @@
+<ng-container *ngIf="quizCompleted">
+  <p>Your score: {{ userQuizResult }}</p>
+  <ng-container *ngIf="authError$ | async as authError; else userMessage">
+    <span>{{ authError }}</span>
+  </ng-container>
+</ng-container>
+
+<ng-template #userMessage>
+  <p>View your results on <a [routerLink]="['/' + Paths.PROFILE]">your profile page</a></p>
+</ng-template>

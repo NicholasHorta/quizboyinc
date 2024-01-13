@@ -1,0 +1,65 @@
+<ng-container *ngIf="seasonQuizData$ | async; else dataError">
+  <ng-container *ngIf="isQuizInProgress; else quizInit">
+    <ng-container *ngTemplateOutlet="quizQuestionFlow"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #quizQuestionFlow>
+  <ng-container
+    *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
+  >
+    <ng-container *ngIf="quizBtnState !== 'Complete quiz' && !quizCompleted">
+      <section class="flex flex-col script-text">
+        <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
+        <bs-quiz-question-header
+          [title]="title"
+          [seasonParam]="seasonParam"
+          [questionIndex]="questionIndex"
+          [numberOfQuestions]="numberOfQuestions"
+        ></bs-quiz-question-header>
+        <ng-container *ngIf="vm">
+          <bs-quiz-question
+            [data]="vm?.seasonData"
+            [timer]="vm?.quizTimer"
+            [questionIndex]="questionIndex"
+            (emitSetSelectedAnswer)="setSelectedAnswer($event)"
+          ></bs-quiz-question>
+        </ng-container>
+      </section>
+    </ng-container>
+    <ng-container *ngTemplateOutlet="quizResult"></ng-container>
+    <ng-container *ngTemplateOutlet="nextQuestionButton"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #quizInit>
+  <bs-quiz-intro
+    [title]="title"
+    [seasonParam]="seasonParam"
+    [quizBtnState]="quizBtnState"
+    [showIdParam]="showIdParam"
+    (onInitiateQuizClick)="initiateQuiz()"
+  ></bs-quiz-intro>
+</ng-template>
+
+<ng-template #nextQuestionButton>
+  <bs-next-question
+    [quizBtnState]="quizBtnState"
+    (emitToggleNext)="toggleNextQuestion()"
+    (emitToggleQuizComplete)="toggleQuizComplete()"
+  ></bs-next-question>
+</ng-template>
+
+<ng-template #quizResult>
+  <bs-quiz-result
+    [quizCompleted]="quizCompleted"
+    [userQuizResult]="userQuizResult"
+    [authError$]="authError$"
+  ></bs-quiz-result>
+</ng-template>
+
+<ng-template #dataError>
+  <bs-data-error message="No data found for this collection." [route]="'/shows/' + showIdParam"></bs-data-error>
+</ng-template>
+
+<bs-achievement-notification></bs-achievement-notification>

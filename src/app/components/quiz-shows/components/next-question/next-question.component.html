@@ -1,0 +1,8 @@
+<div class="flex justify-center w-full pt-6">
+  <bs-button
+    class="quiz-btn btn-quiz-question-next w-1/6 text-center !py-2"
+    (click)="quizBtnState === 'Next question' ? onEmitToggleNext() : onEmitToggleQuizComplete()"
+  >
+    {{ quizBtnState }}
+  </bs-button>
+</div>
