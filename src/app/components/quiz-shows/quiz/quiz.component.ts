@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
+  ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Achievement, UserData } from '@app/models/auth.models';
@@ -32,6 +33,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   @Input('id') showIdParam: GetParam;
   @Input('title') title: GetParam;
   @Input('season') seasonParam: GetParam;
+  @ViewChildren('selectedAnswer') selectedAnswer: QueryList<ElementRef<HTMLButtonElement>>;
 
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
@@ -107,6 +109,10 @@ export class QuizComponent implements OnInit, OnDestroy {
       score: this.userQuizResult,
       showId: this.showIdParam
     });
+  }
+
+  resetAnswer(data: AnswerEmit): void {
+    this.markAnswerAsCurrentlySelected(data.answer, data.btnRef);
   }
 
   private setQuizAsCompleted(): void {

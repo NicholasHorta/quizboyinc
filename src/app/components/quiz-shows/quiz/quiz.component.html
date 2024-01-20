@@ -25,6 +25,7 @@
             [quizBtnState]="quizBtnState"
             [questionIndex]="questionIndex"
             (emitSetSelectedAnswer)="setSelectedAnswer($event)"
+            (emitResetAnswers)="resetAnswer($event)"
           ></bs-quiz-question>
         </ng-container>
       </section>
