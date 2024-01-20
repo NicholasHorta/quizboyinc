@@ -24,9 +24,6 @@ export class QuizQuestionComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes && changes['questionIndex']){
       this.emitResetAnswers.emit({ answer: '', btnRef: this.selectedAnswer });
-      // this.selectedAnswer.forEach((btn: ElementRef<HTMLButtonElement>) => {
-      //   btn.nativeElement.classList.remove('selected');
-      // });
     }
   }
 }
