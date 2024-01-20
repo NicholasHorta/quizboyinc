@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { UserData } from '@app/models/auth.models';
 import { Paths } from '@app/models/shared/global.models';
 import { Observable } from 'rxjs';
 
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 export class QuizResultComponent {
  @Input() quizCompleted: boolean;
  @Input() userQuizResult: number;
- @Input() authError$: Observable<string>;
+ @Input() userExists$: Observable<boolean>;
+ @Input() userData$: Observable<UserData>;
  Paths = Paths
 }

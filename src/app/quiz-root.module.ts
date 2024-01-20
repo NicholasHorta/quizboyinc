@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { QuizComponent } from './quiz.component';
-import { QuizRoutingModule } from './quiz-routing.module';
+import { QuizComponent } from './quiz-root.component';
+import { QuizRootRoutingModule } from './quiz-root-routing.module';
 import { devEnvironment } from '../environments/environment.dev';
 import { AngularFireModule } from '@angular/fire/compat';
 import {
@@ -33,7 +33,7 @@ const modals = [
   declarations: [QuizComponent],
   imports: [
     BrowserModule,
-    QuizRoutingModule,
+    QuizRootRoutingModule,
     AngularFireModule.initializeApp(devEnvironment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -69,4 +69,4 @@ const modals = [
   ],
   bootstrap: [QuizComponent],
 })
-export class QuizModule {}
+export class QuizRootModule {}

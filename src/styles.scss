@@ -103,6 +103,9 @@ table {
 .btn-quiz-question-next {
   @apply text-qz-green-alt bg-qz-green-op-l border-qz-green-alt hover:text-white hover:bg-qz-green-alt;
 }
+.btn-quiz-view-result {
+  @apply text-qz-blue-alt bg-qz-blue-op-l border-qz-blue-alt hover:text-white hover:bg-qz-blue-alt;
+}
 
 // Text
 .heading-component {
@@ -168,3 +171,9 @@ table {
 .quiz-tooltip {
   @apply absolute -top-8 right-0 left-0 z-10 p-2 w-full  text-white bg-gray-300 opacity-80 rounded-md shadow-lg text-gray-800;
 }
+
+// Results
+.quiz-result {
+  @apply py-3 px-10 text-4xl border rounded-full bg-qz-green-op-l text-qz-green-alt border-qz-green-op-l mt-3;
+}
+

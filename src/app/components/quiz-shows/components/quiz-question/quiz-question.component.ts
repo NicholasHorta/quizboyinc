@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Questions, Timer } from '@app/models/quiz.models';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { AnswerEmit, Questions, Timer } from '@app/models/quiz.models';
+import { QuizButton } from '@app/models/shared/global.models';
+
 
 @Component({
   selector: 'bs-quiz-question',
@@ -9,10 +11,12 @@ import { Questions, Timer } from '@app/models/quiz.models';
 export class QuizQuestionComponent {
   @Input() data: Questions[];
   @Input() timer: Timer;
+  @Input() quizBtnState: QuizButton;
   @Input() questionIndex: number;
-  @Output() emitSetSelectedAnswer: EventEmitter<string> = new EventEmitter<string>();
+  @Output() emitSetSelectedAnswer: EventEmitter<AnswerEmit> = new EventEmitter<AnswerEmit>();
+  @ViewChildren('selectedAnswer') selectedAnswer: QueryList<ElementRef<HTMLButtonElement>>;
 
-  onSetSelectedAnswer(option:string): void {
-    this.emitSetSelectedAnswer.emit(option);
+  onSetSelectedAnswer(answer: string): void {
+    this.emitSetSelectedAnswer.emit({ answer, btnRef: this.selectedAnswer });
   }
 }

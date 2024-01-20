@@ -1,3 +1,5 @@
+import { ElementRef, QueryList } from "@angular/core";
+
 export interface Show {
   title: string;
   info: string;
@@ -36,6 +38,12 @@ export interface AchievementCheck {
   season: string;
   show: string;
 }
+
+export interface AnswerEmit {
+  answer: string;
+  btnRef: QueryList<ElementRef<HTMLButtonElement>>;
+}
+
 
 export type ShowWithId = Show & FirestoreId
 export type ShowCollectionWithId = ShowCollection & FirestoreId

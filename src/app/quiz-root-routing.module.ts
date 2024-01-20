@@ -29,4 +29,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class QuizRoutingModule {}
+export class QuizRootRoutingModule {}

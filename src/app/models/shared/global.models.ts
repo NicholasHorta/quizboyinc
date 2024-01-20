@@ -1,6 +1,6 @@
 export type GetParam = string | null;
 
-export type QuizButton = 'Next question' | 'Complete quiz' | 'Begin' | 'Return home';
+export type QuizButton = 'Next question' | 'View my result' | 'Begin' | 'Return home';
 
 export enum Paths {
   EMPTY = '',
