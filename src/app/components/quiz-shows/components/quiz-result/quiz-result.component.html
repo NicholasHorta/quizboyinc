@@ -1,6 +1,18 @@
 <ng-container *ngIf="quizCompleted">
   <ng-container *ngIf="userData$ | async as userData; else noProfileMessage">
-    <ng-container *ngTemplateOutlet="hasUser; context: { userData }"></ng-container>
+    <div class="flex flex-col items-center heading-component !pb-0">
+      <p class="mt-6 text-4xl">Congratulations, {{ userData.username }}</p>
+      <ng-container *ngTemplateOutlet="score; context: { userData }"></ng-container>
+    </div>
+
+    <div class="flex justify-center w-full pt-12">
+      <bs-button
+        class="quiz-btn btn-quiz-attempt w-1/6 text-center !py-2"
+        [routerLink]="['/' + Paths.PROFILE]"
+      >
+        View achievements
+      </bs-button>
+    </div>
   </ng-container>
   <ng-template #noProfileMessage>
     <ng-container *ngTemplateOutlet="noUserData"></ng-container>
@@ -17,16 +29,6 @@
   </div>
 </ng-template>
 
-<ng-template #hasUser let-userData="userData">
-  <div class="flex flex-col items-center heading-component !pb-0">
-    <p username class="mt-6 text-4xl">Congratulations, {{ userData.username }}</p>
-    <ng-container *ngTemplateOutlet="score; context: { userData }"></ng-container>
-  </div>
-
-  <div class="flex justify-center w-full pt-12">
-    <bs-button class="quiz-btn btn-quiz-attempt w-1/6 text-center !py-2" [routerLink]="['/' + Paths.PROFILE]"> View achievements </bs-button>
-  </div>
-</ng-template>
 
 <ng-template #score let-userData="userData">
   <p class="text-4xl" [ngClass]="userData ? 'mt-3 text-3xl' : 'mt-6 text-4xl'">
