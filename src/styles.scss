@@ -173,7 +173,16 @@ table {
 }
 
 // Results
-.quiz-result {
+.quiz-result-high {
   @apply py-3 px-10 text-4xl border rounded-full bg-qz-green-op-l text-qz-green-alt border-qz-green-op-l mt-3;
+}
+.quiz-result-h-mid {
+  @apply py-3 px-10 text-4xl border rounded-full bg-qz-yellow-op-l text-qz-yellow-alt border-qz-yellow-op-l mt-3;
+}
+.quiz-result-l-mid {
+  @apply py-3 px-10 text-4xl border rounded-full bg-qz-orange-op-l text-qz-orange-alt border-qz-orange-op-l mt-3;
+}
+.quiz-result-low {
+  @apply py-3 px-10 text-4xl border rounded-full bg-qz-red-op-l text-qz-red-alt border-qz-red-op-l mt-3;
 }
 
