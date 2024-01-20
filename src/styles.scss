@@ -171,3 +171,9 @@ table {
 .quiz-tooltip {
   @apply absolute -top-8 right-0 left-0 z-10 p-2 w-full  text-white bg-gray-300 opacity-80 rounded-md shadow-lg text-gray-800;
 }
+
+// Results
+.quiz-result {
+  @apply py-3 px-10 text-4xl border rounded-full bg-qz-green-op-l text-qz-green-alt border-qz-green-op-l mt-3;
+}
+

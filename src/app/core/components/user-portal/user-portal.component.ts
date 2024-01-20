@@ -26,12 +26,14 @@ export class UserPortalComponent implements OnInit {
   });
 
   Paths = Paths;
-  user$ = this.userSVC.user$;
+  user$: Observable<any>;
   authError$: Observable<string>;
 
   ngOnInit(): void {
     this.path;
     this.authError$ = this.userSVC.authError$;
+    this.user$ = this.userSVC.user$;
+
   }
 
   get path() {

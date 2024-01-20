@@ -5,11 +5,11 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChildren
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Achievement } from '@app/models/auth.models';
+import { Achievement, UserData } from '@app/models/auth.models';
 import {
+  AnswerEmit,
   IndividualSeason,
   Questions,
   QuizItem,
@@ -18,9 +18,10 @@ import {
 } from '@app/models/quiz.models';
 import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
 import { UserService } from '@app/services/auth/user.service';
+import { ProfileService } from '@app/services/profile/profile.service';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
-import { Observable, of, take, tap } from 'rxjs';
+import { Observable, map, of, take, tap } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz',
@@ -31,7 +32,6 @@ export class QuizComponent implements OnInit, OnDestroy {
   @Input('id') showIdParam: GetParam;
   @Input('title') title: GetParam;
   @Input('season') seasonParam: GetParam;
-  @ViewChildren('selectedAnswer') selectedAnswer: QueryList<ElementRef<HTMLButtonElement>>;
 
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
@@ -42,6 +42,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   quizTimer$: Observable<Timer>;
   seasonQuizData$: Observable<Questions[]>;
   authError$: Observable<string>;
+  userExists$: Observable<boolean>;
+  userData$: Observable<UserData>;
   Paths = Paths;
 
   private seasonQuizAnswers: string[] = [];
@@ -53,13 +55,16 @@ export class QuizComponent implements OnInit, OnDestroy {
     private quizSVC: QuizService,
     private storageSVC: StorageService,
     private router: Router,
-    private userSVC: UserService
+    private userSVC: UserService,
+    private profileSVC: ProfileService
   ) {}
 
   ngOnInit(): void {
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
     this.authError$ = this.userSVC.authError$;
+    this.userExists$ = this.userSVC.user$.pipe(map((user) => !!user));
+    this.userData$ = this.profileSVC.userData$;
   }
 
   ngOnDestroy(): void {
@@ -83,9 +88,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.runQuestionTimer();
   }
 
-  setSelectedAnswer(answer: string): void {
-    this.markAnswerAsCurrentlySelected(answer);
-    this.selectedOption = answer;
+  setSelectedAnswer(data: AnswerEmit): void {
+    this.markAnswerAsCurrentlySelected(data.answer, data.btnRef);
+    this.selectedOption = data.answer;
   }
 
   toggleQuizComplete(): void {
@@ -201,10 +206,10 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.userSVC.saveUsersQuizResults(achievement);
   }
 
-  private markAnswerAsCurrentlySelected(curentAnswer: string){
-    this.selectedAnswer.forEach((btn: ElementRef<HTMLButtonElement>) => {
+  private markAnswerAsCurrentlySelected(currentAnswer: string, btnRef: QueryList<ElementRef<HTMLButtonElement>>){
+    btnRef.forEach((btn: ElementRef<HTMLButtonElement>) => {
       btn.nativeElement.classList.remove('btn-quiz-attempt');
-      if (btn.nativeElement.textContent.trim() === curentAnswer) {
+      if (btn.nativeElement.textContent.trim() === currentAnswer) {
         btn.nativeElement.classList.add('btn-quiz-attempt');
       }
     });

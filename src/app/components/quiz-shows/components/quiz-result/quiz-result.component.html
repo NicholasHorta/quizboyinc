@@ -1,10 +1,36 @@
 <ng-container *ngIf="quizCompleted">
-  <p>Your score: {{ userQuizResult }}</p>
-  <ng-container *ngIf="authError$ | async as authError; else userMessage">
-    <span>{{ authError }}</span>
+  <ng-container *ngIf="userData$ | async as userData; else noProfileMessage">
+    <ng-container *ngTemplateOutlet="hasUser; context: { userData }"></ng-container>
   </ng-container>
+  <ng-template #noProfileMessage>
+    <ng-container *ngTemplateOutlet="noUserData"></ng-container>
+  </ng-template>
 </ng-container>
 
-<ng-template #userMessage>
-  <p>View your results on <a [routerLink]="['/' + Paths.PROFILE]">your profile page</a></p>
+<ng-template #noUserData>
+  <div class="flex flex-col items-center heading-component !pb-0">
+    <ng-container *ngTemplateOutlet="score"></ng-container>
+    <p class="text-gray-400 pt-6 text-lg max-w-lg text-center">
+      If you would like to store and view the results of all of your quiz attempts, consider
+      registering for an account.
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #hasUser let-userData="userData">
+  <div class="flex flex-col items-center heading-component !pb-0">
+    <p username class="mt-6 text-4xl">Congratulations, {{ userData.username }}</p>
+    <ng-container *ngTemplateOutlet="score; context: { userData }"></ng-container>
+  </div>
+
+  <div class="flex justify-center w-full pt-12">
+    <bs-button class="quiz-btn btn-quiz-attempt w-1/6 text-center !py-2" [routerLink]="['/' + Paths.PROFILE]"> View achievements </bs-button>
+  </div>
+</ng-template>
+
+<ng-template #score let-userData="userData">
+  <p class="text-4xl" [ngClass]="userData ? 'mt-3 text-3xl' : 'mt-6 text-4xl'">
+    Your final score is
+  </p>
+  <div class="quiz-result">{{ userQuizResult }}%</div>
 </ng-template>

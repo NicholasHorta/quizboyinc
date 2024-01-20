@@ -19,6 +19,7 @@
         ></bs-quiz-question-header>
         <ng-container *ngIf="vm">
           <bs-quiz-question
+            #selectedAnswer
             [data]="vm?.seasonData"
             [timer]="vm?.quizTimer"
             [quizBtnState]="quizBtnState"
@@ -53,9 +54,10 @@
 
 <ng-template #quizResult>
   <bs-quiz-result
+    [userData$]="userData$"
+    [userExists$]="userExists$"
     [quizCompleted]="quizCompleted"
     [userQuizResult]="userQuizResult"
-    [authError$]="authError$"
   ></bs-quiz-result>
 </ng-template>
 
@@ -68,10 +70,7 @@
 </ng-template>
 
 <ng-template #dataError>
-  <bs-data-error
-    message="No data found for this collection."
-    [route]="'/shows/' + showIdParam"
-  ></bs-data-error>
+  <bs-data-error [route]="'/shows/' + showIdParam"></bs-data-error>
 </ng-template>
 
 <bs-achievement-notification></bs-achievement-notification>
