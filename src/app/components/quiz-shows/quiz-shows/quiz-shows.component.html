@@ -1,22 +1,25 @@
-<ng-container *ngTemplateOutlet="titles"></ng-container>
-
-<ng-template #titles>
+<div class="h-full">
   <h2 class="heading-component">Shows</h2>
   <div *ngIf="shows$ | async as shows" class="flex flex-wrap gap-3 justify-between">
-    <a [routerLink]="[show.id]" *ngFor="let show of shows" style="max-width: 220px;" class="cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md ">
-          <img
-            class="w-full rounded-lg object-cover object-center max"
-            [src]="show.image"
-            [attr.alt]="show.image + ' image'"
-          />
-          <div>
-            <div class="my-6 flex flex-col align-baseline px-4">
-              <p class="font-bold text-gray-500">{{show.title | presentAsTitle}}</p>
-              <p class="rounded-full bg-blue-500 px-2 py-0.5 text-xs font-semibold text-white">
-                {{show.seasons}} seasons
-              </p>
-            </div>
+    <a
+      [routerLink]="[show.id]"
+      *ngFor="let show of shows"
+      style="max-width: 220px"
+      class="cursor-pointer rounded-lg bg-qz-card p-2 shadow duration-150 hover:scale-105 hover:shadow-md w-2/4"
+    >
+      <img
+        class="w-full rounded-lg object-cover object-center max"
+        [src]="'../../../../assets/images/series/' + show.title + '.jpeg'"
+        [attr.alt]="show.image + ' image'"
+      />
+      <div>
+        <div class="flex flex-col my-3 gap-2">
+          <p class="font-bold text-gray-500">{{ show.title | presentAsTitle }}</p>
+          <p class="rounded-full toast-info px-2 py-1 text-xs font-semibold text-white self-start">
+            {{ show.seasons === 1 ? show.seasons + ' season' : show.seasons + ' seasons' }}
+          </p>
         </div>
+      </div>
     </a>
   </div>
-</ng-template>
+</div>
