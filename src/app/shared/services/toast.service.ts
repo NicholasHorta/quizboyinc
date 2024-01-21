@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Toast, ToastType } from '@app/models/shared/global.models';
-import { Subject, delay, take, timer } from 'rxjs';
+import { Subject, delay, first, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class ToastService {
   emitToastNotification(delayTime: number, message: string, displayStyle: ToastType): void {
     this.toast.next({ isVisible: true, message, displayStyle });
     timer(delayTime)
-      .pipe(take(1), delay(delayTime))
+      .pipe(first(), delay(delayTime))
       .subscribe(() => this.toast.next({ isVisible: false, message: '', displayStyle: ToastType.INFO }));
   }
 
