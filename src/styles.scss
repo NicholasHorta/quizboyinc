@@ -7,11 +7,11 @@
 *,
 *::before,
 *::after {
-  @apply box-border m-0 p-0;
+  @apply box-border m-0 p-0 tracking-wider;
 }
 
-html, body {
-  height: 100%;
+body {
+  min-height: 100vh;
 }
 
 // Fonts
@@ -43,7 +43,7 @@ table {
 
 // Containers
 .quiz-main-container {
-  @apply mx-auto max-w-5xl px-2 sm:px-6 lg:px-8;
+  @apply mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 h-full;
 }
 
 // Buttons
@@ -136,7 +136,10 @@ table {
   @apply text-lg text-gray-500 quiz-font-script italic;
 }
 
-
+// Nav
+.nav-link {
+  @apply text-qz-pink-alt bg-qz-pink-op-l  px-2 rounded-lg;
+}
 
 // Input
 .quiz-input {
