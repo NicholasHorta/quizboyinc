@@ -1,5 +1,5 @@
 <h2 class="heading-component">Profile</h2>
-<ng-container *ngIf="userData$ | async as data">
+<ng-container *ngIf="userData$ | async as data; else loading">
   <ng-container *ngTemplateOutlet="profile; context: { data }"></ng-container>
   <ng-container *ngTemplateOutlet="achievements; context: { data }"></ng-container>
 </ng-container>
@@ -18,9 +18,7 @@
       />
     </div>
     <div class="flex justify-between pt-6">
-      <div
-        class="flex items-center gap-1 script-text border-b"
-      >
+      <div class="flex items-center gap-1 script-text border-b">
         <span>Achievements</span>
         <mat-icon class="flex justify-start">expand_more</mat-icon>
       </div>
@@ -35,5 +33,9 @@
 </ng-template>
 
 <ng-template #achievements let-data="data">
-    <bs-achievements [achievements]="data.achievements"></bs-achievements>
+  <bs-achievements [achievements]="data.achievements"></bs-achievements>
+</ng-template>
+
+<ng-template #loading>
+  <bs-loader></bs-loader>
 </ng-template>

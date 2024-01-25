@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { DeleteNotificationComponent } from '../../modals/delete-notification/delete-notification.component';
 import { MatIconModule } from '@angular/material/icon';
+import { LoaderComponent } from '@app/shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     ButtonComponent,
     DeleteNotificationComponent,
-    MatIconModule
+    MatIconModule,
+    LoaderComponent
   ]
 })
 
