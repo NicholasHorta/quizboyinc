@@ -27,6 +27,10 @@ export class ProfileEditComponent implements OnInit {
     this.form.patchValue({ username: this.username });
   }
 
+  get hasUsernameChanged() {
+    return this.form.get('username').value !== this.username;
+  }
+
   onSubmit() {
     this.profileSVC.updateUsername(this.form.value.username);
   }

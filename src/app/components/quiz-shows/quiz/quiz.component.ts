@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Achievement, UserData } from '@app/models/auth.models';
@@ -65,7 +65,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.storageSVC.removeQuizInProgress();
     this.getShowCollectionAndSetInStorage();
     this.authError$ = this.userSVC.authError$;
-    this.userExists$ = this.userSVC.user$.pipe(map((user) => !!user));
+    this.userExists$ = this.userSVC.user$.pipe(map(user => !!user));
     this.userData$ = this.profileSVC.userData$;
   }
 
@@ -212,12 +212,17 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.userSVC.saveUsersQuizResults(achievement);
   }
 
-  private markAnswerAsCurrentlySelected(currentAnswer: string, btnRef: QueryList<ElementRef<HTMLButtonElement>>){
-    btnRef.forEach((btn: ElementRef<HTMLButtonElement>) => {
-      btn.nativeElement.classList.remove('btn-quiz-attempt');
-      if (btn.nativeElement.textContent.trim() === currentAnswer) {
-        btn.nativeElement.classList.add('btn-quiz-attempt');
-      }
-    });
-  };
+  private markAnswerAsCurrentlySelected(
+    currentAnswer: string,
+    btnRef: QueryList<ElementRef<HTMLButtonElement>>
+  ) {
+    if (btnRef) {
+      btnRef.forEach((btn: ElementRef<HTMLButtonElement>) => {
+        btn.nativeElement.classList.remove('btn-quiz-attempt');
+        if (btn.nativeElement.textContent.trim() === currentAnswer) {
+          btn.nativeElement.classList.add('btn-quiz-attempt');
+        }
+      });
+    }
+  }
 }
