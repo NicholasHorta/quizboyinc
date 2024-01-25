@@ -15,6 +15,7 @@ import { NextQuestionComponent } from './components/next-question/next-question.
 import { QuizQuestionHeaderComponent } from './components/quiz-question-header/quiz-question-header.component';
 import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
 import { QuizCompleteComponent } from './components/quiz-complete/quiz-complete.component';
+import { LoaderComponent } from '@app/shared/components/loader/loader.component';
 
 
 
@@ -37,7 +38,8 @@ import { QuizCompleteComponent } from './components/quiz-complete/quiz-complete.
     ButtonComponent,
     QuizTimerComponent,
     AchievementNotificationComponent,
-    DataErrorComponent
+    DataErrorComponent,
+    LoaderComponent
   ]
 })
 export class QuizShowsModule { }

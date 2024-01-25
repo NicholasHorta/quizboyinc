@@ -1,6 +1,6 @@
 <div class="h-full">
   <h2 class="heading-component">Shows</h2>
-  <div *ngIf="shows$ | async as shows" class="flex flex-wrap gap-3 justify-between">
+  <div *ngIf="shows$ | async as shows; else loading" class="flex flex-wrap gap-3 justify-between">
     <a
       [routerLink]="[show.id]"
       *ngFor="let show of shows"
@@ -23,3 +23,7 @@
     </a>
   </div>
 </div>
+
+<ng-template #loading>
+  <bs-loader></bs-loader>
+</ng-template>
