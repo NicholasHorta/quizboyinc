@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ShowWithId } from '@app/models/quiz.models';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
-import { Observable, of, take, tap } from 'rxjs';
+import { Observable, map, of, take } from 'rxjs';
 
 @Component({
   selector: 'bs-quiz-shows',
@@ -29,14 +29,13 @@ export class QuizShowsComponent implements OnInit {
       return;
     }
 
-    this.quizSVC.getShowsFromDB$()
+    this.shows$ = this.quizSVC.getShowsFromDB$()
       .pipe(
         take(1),
-        tap((shows: ShowWithId[]) => {
+        map((shows: ShowWithId[]) => {
           this.setShowDataInStorage(shows)
-          this.shows$ = of(shows)
+          return shows
         }),
       )
-      .subscribe();
   }
 }
