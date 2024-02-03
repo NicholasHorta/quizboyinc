@@ -1,0 +1,11 @@
+.card__bg-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  z-index: -100;
+  position: absolute;
+  filter: blur(2px);
+  background-position: bottom;
+  background-image: url('../../../../assets/images/card-bg.jpeg');
+  object-fit: contain;
+}
