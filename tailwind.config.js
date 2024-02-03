@@ -2,6 +2,12 @@
 module.exports = {
   content: ['./src/**/*.{html, ts}'],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '820px',
+      'lg': '1040px',
+      'xl': '1280px',
+    },
     extend: {
       colors: {
         'qz-pink-alt': '#e60073',
