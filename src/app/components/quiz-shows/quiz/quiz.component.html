@@ -10,7 +10,7 @@
   >
     <ng-container *ngIf="quizBtnState !== 'View my result' && !quizCompleted; else quizComplete">
       <section class="flex flex-col script-text">
-        <!-- <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer> -->
+        <bs-quiz-timer [quizTimer]="vm.quizTimer"></bs-quiz-timer>
         <bs-quiz-question-header
           [title]="title"
           [seasonParam]="seasonParam"
