@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-user-portal',
+  selector: 'bs-user-portal',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ButtonComponent, RouterModule, MatIconModule],
   templateUrl: './user-portal.component.html',

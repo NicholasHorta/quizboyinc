@@ -10,6 +10,7 @@ import { Paths } from '@app/models/shared/global.models';
 })
 export class AchievementsComponent {
   @Input() achievements: Achievement[];
+  @Input() isMobile = false;
   Paths = Paths;
 
   constructor(private router: Router) {}

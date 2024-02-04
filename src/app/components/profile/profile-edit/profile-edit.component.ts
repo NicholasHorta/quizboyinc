@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetParam } from '@app/models/shared/global.models';
+import { GetParam, ViewToggle } from '@app/models/shared/global.models';
 import { ProfileService } from '@app/services/profile/profile.service';
 import { ModalService } from '@app/shared/services/modal.service';
+import { ViewportService } from '@app/shared/services/viewport.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,18 +14,20 @@ import { Observable } from 'rxjs';
 export class ProfileEditComponent implements OnInit {
   @Input() username: GetParam;
   isModalOpen$: Observable<boolean>
-
+  isMobile: boolean = false;
   form: FormGroup = new FormGroup({
     username: new FormControl<string>('', [Validators.required, Validators.minLength(3)])
   });
 
   constructor(
     private profileSVC: ProfileService,
-    private modalSVC: ModalService
+    private modalSVC: ModalService,
+    private viewportSVC: ViewportService
   ) {}
 
   ngOnInit(): void {
     this.form.patchValue({ username: this.username });
+    this.isMobile = this.viewportSVC.getViewportSize() > ViewToggle.MD ? false : true;
   }
 
   get hasUsernameChanged() {

@@ -13,9 +13,9 @@
           If you would like to make another attempt, select 'Continue.' Alternatively, if you prefer to review the results of your previous attempt, select 'Profile'.
         </p>
       </div>
-      <div class="flex gap-3 pt-6">
-        <button (click)="modal.close()" class="quiz-btn btn-default-solid">Continue</button>
-        <button (click)="modal.navigateTo(path)" class="quiz-btn btn-info">Profile</button>
+      <div class="flex gap-3 pt-6 justify-between md:justify-normal">
+        <button (click)="modal.close()" class="quiz-btn btn-default-solid flex-1 text-center md:flex-grow-0">Continue</button>
+        <button (click)="modal.navigateTo(path)" class="quiz-btn btn-info flex-1 text-center md:flex-grow-0">Profile</button>
       </div>
     </div>
   </div>

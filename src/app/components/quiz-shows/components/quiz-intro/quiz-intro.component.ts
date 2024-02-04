@@ -11,6 +11,7 @@ export class QuizIntroComponent {
   @Input() seasonParam: string;
   @Input() quizBtnState: string;
   @Input() showIdParam: string;
+  @Input() isMobile: boolean;
   @Output() onInitiateQuizClick: EventEmitter<void> = new EventEmitter<void>();
 
   Paths = Paths;

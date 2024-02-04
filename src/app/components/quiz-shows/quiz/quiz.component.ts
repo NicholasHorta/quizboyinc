@@ -17,11 +17,12 @@ import {
   ShowCollection,
   Timer
 } from '@app/models/quiz.models';
-import { GetParam, Paths, QuizButton } from '@app/models/shared/global.models';
+import { GetParam, Paths, QuizButton, ViewToggle } from '@app/models/shared/global.models';
 import { UserService } from '@app/services/auth/user.service';
 import { ProfileService } from '@app/services/profile/profile.service';
 import { QuizService } from '@app/services/quiz/quiz.service';
 import { StorageService } from '@app/shared/services/storage.service';
+import { ViewportService } from '@app/shared/services/viewport.service';
 import { Observable, map, of, take, tap } from 'rxjs';
 
 @Component({
@@ -38,6 +39,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   quizBtnState: QuizButton = 'Begin';
   confirmQuizStart: boolean = false;
   quizCompleted: boolean = false;
+  isMobile: boolean = false;
   numberOfQuestions: number = 0;
   userQuizResult: number = 0;
   questionIndex: number = 0;
@@ -58,7 +60,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     private storageSVC: StorageService,
     private router: Router,
     private userSVC: UserService,
-    private profileSVC: ProfileService
+    private profileSVC: ProfileService,
+    private viewportSVC: ViewportService
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +70,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.authError$ = this.userSVC.authError$;
     this.userExists$ = this.userSVC.user$.pipe(map(user => !!user));
     this.userData$ = this.profileSVC.userData$;
+    this.isMobile = this.viewportSVC.getViewportSize() > ViewToggle.MD ? false : true;
   }
 
   ngOnDestroy(): void {
