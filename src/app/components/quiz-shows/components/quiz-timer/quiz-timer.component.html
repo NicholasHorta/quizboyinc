@@ -1,4 +1,1 @@
-<ng-container *ngIf="!quizTimer?.isTimeUp">
-  <p>{{quizTimer?.time}}</p>
-  <p>{{quizTimer?.isTimeUp}}</p>
-</ng-container>
+  <div #timer class="timer" [ngClass]="{'expired': quizTimer?.isTimeUp}"></div>

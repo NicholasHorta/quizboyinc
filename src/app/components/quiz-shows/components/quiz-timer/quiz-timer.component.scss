@@ -1,0 +1,14 @@
+.timer {
+  width: 0%;
+  height: 5px;
+  border-radius: 20px;
+  border: 2px solid #00cc00;
+  background-color: #00cc00;
+  transition: all 150ms ease-in-out;
+}
+
+.expired {
+  background-color: #ff0033;
+  border: 2px solid #ff0033;
+
+}
