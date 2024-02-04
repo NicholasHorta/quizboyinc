@@ -9,10 +9,19 @@
   top: 0;
   left: 0;
   .modal-container__modal {
+    margin: 0 2rem; // @start
     max-width: 700px;
     max-height: 700px;
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
+  }
+}
+
+@screen sm {
+  .modal-container {
+    .modal-container__modal {
+      margin: 0 3rem;
+    }
   }
 }

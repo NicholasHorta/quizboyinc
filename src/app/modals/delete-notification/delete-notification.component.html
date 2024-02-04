@@ -18,9 +18,9 @@
           account, click 'Cancel.
         </p>
       </div>
-      <div class="flex gap-3 pt-6">
-        <button (click)="modal.close()" class="quiz-btn btn-default-alt">Cancel</button>
-        <button (click)="modal.confirmDeleteUser()" class="quiz-btn btn-danger-solid">Delete</button>
+      <div class="flex gap-3 pt-6 justify-between md:justify-normal">
+        <button (click)="modal.close()" class="quiz-btn btn-default-alt flex-1 text-center md:flex-grow-0">Cancel</button>
+        <button (click)="modal.confirmDeleteUser()" class="quiz-btn btn-danger-solid flex-1 text-center md:flex-grow-0">Delete</button>
       </div>
     </div>
   </div>

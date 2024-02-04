@@ -45,3 +45,11 @@ export enum ToastType {
   INFO = 'info',
   WARNING = 'warning'
 }
+
+export enum ViewToggle {
+  XS = 500,
+  SM = 640,
+  MD = 820,
+  LG = 1040,
+  XL = 1280,
+}

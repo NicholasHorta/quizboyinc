@@ -9,25 +9,30 @@
   <table class="w-full border rounded-lg mt-6 script-text border-separate !border-gray-300">
     <thead>
       <tr class="text-lg">
-        <th class="py-3 px-4 text-left border-b">Date</th>
+        <th class="py-3 px-4 text-left border-b" *ngIf="!isMobile">Date</th>
         <th class="py-3 px-4 text-left border-b">Show</th>
         <th class="py-3 px-4 text-left border-b">Season</th>
         <th class="py-3 px-4 text-left border-b">Score</th>
-        <th class="py-3 px-4 text-left border-b">Redo</th>
+        <th class="py-3 px-4 text-left border-b" *ngIf="!isMobile">Redo</th>
       </tr>
     </thead>
     <tbody>
       <tr
         class="border-t border-blue-gray-200 hover:bg-qz-blue-op-l"
         *ngFor="let achievement of achievements"
+        (click)="
+          isMobile ?  attemptRedoOfSelectedAchievement(achievement.showId, achievement.season, achievement.show) : null
+        "
       >
-        <td class="py-3 px-4 w-1/4 text-gray-400">{{ achievement.date | date }}</td>
+        <td class="py-3 px-4 w-1/4 text-gray-400" *ngIf="!isMobile">
+          {{ achievement.date | date }}
+        </td>
         <td class="py-3 px-4 w-1/4">{{ achievement.show | presentAsTitle }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.season }}</td>
         <td class="py-3 px-4 w-1/4">{{ achievement.score }}%</td>
-        <td class="py-3 px-4">
+        <td class="py-3 px-4" *ngIf="!isMobile">
           <bs-button
-            class="quiz-btn btn-info flex items-center"
+            class="quiz-btn btn-quiz-attempt flex items-center"
             (click)="
               attemptRedoOfSelectedAchievement(
                 achievement.showId,

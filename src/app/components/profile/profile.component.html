@@ -17,7 +17,7 @@
         alt="User avatar"
       />
     </div>
-    <div class="flex justify-between pt-6">
+    <div class="flex justify-between pt-6 gap-3">
       <div class="flex items-center gap-1 script-text border-b">
         <span>Achievements</span>
         <mat-icon class="flex justify-start">expand_more</mat-icon>
@@ -25,6 +25,7 @@
       <a
         class="quiz-btn btn-info"
         [routerLink]="[Paths.EDIT]"
+        [ngClass]="{'flex-1 text-center': isMobile}"
         [queryParams]="{ username: data.username }"
         >Edit profile</a
       >
@@ -33,7 +34,7 @@
 </ng-template>
 
 <ng-template #achievements let-data="data">
-  <bs-achievements [achievements]="data.achievements"></bs-achievements>
+  <bs-achievements [isMobile]="isMobile" [achievements]="data.achievements"></bs-achievements>
 </ng-template>
 
 <ng-template #loading>

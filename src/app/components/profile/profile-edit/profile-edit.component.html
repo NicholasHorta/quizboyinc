@@ -12,11 +12,14 @@
       />
     </div>
   </div>
-  <div class="flex gap-3 pt-1">
+  <div class="flex gap-3 pt-1 justify-between md:justify-normal ">
     <bs-button [disabled]="!form.valid || !hasUsernameChanged" type="submit" class="quiz-btn btn-info"
+    [ngClass]="{'flex-1 text-center': isMobile}"
       >Update username</bs-button
     >
-    <bs-button class="quiz-btn btn-danger-solid" (click)="warnUserBeforeProfileDelete();"
+    <bs-button class="quiz-btn btn-danger-solid "
+    [ngClass]="{'flex-1 text-center': isMobile}"
+    (click)="warnUserBeforeProfileDelete();"
       >Delete profile</bs-button
     >
   </div>

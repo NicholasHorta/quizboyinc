@@ -14,6 +14,10 @@ body {
   min-height: 100vh;
 }
 
+h2, p.preface {
+  @apply text-center sm:text-left;
+}
+
 // Fonts
 @font-face {
   font-family: 'script';
@@ -43,7 +47,7 @@ table {
 
 // Containers
 .quiz-main-container {
-  @apply mx-auto max-w-5xl px-2 sm:px-6 lg:px-8 h-full;
+  @apply mx-auto max-w-5xl px-2 px-6 lg:px-8 h-full;
 }
 
 // Buttons
@@ -148,7 +152,7 @@ table {
 
 // Form
 .quiz-input-field {
-  @apply quiz-font-script gap-2 col-span-6 flex flex-col;
+  @apply quiz-font-script gap-2 col-span-12 md:col-span-6 flex flex-col;
 }
 
 // Toast
@@ -187,31 +191,4 @@ table {
 }
 .quiz-result-low {
   @apply py-3 px-10 text-4xl border rounded-full bg-qz-red-op-l text-qz-red-alt border-qz-red-op-l mt-3;
-}
-
-/* Styles for screens with a maximum width of 600px */
-// @media (max-width: 600px) {
-//   .show-card {
-//     width: 231px;
-//   }
-
-// }
-
-// /* Styles for screens with a minimum width of 601px and a maximum width of 1024px */
-// @media (min-width: 820px) and (max-width: 1040px) {
-//   .show-card {
-//     width: fit-content;
-//   }
-// }
-
-/* Styles for screens with a minimum width of 1025px */
-// @media (min-width: 1040px) {
-//   .show-card {
-//     width: 231px;
-//   }
-
-// }
-
-.show-card {
-  max-width: 231px;
 }
