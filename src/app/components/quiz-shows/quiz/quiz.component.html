@@ -1,9 +1,10 @@
+<div class="min-h-screen">
 <ng-container *ngIf="seasonQuizData$ | async; else dataError">
   <ng-container *ngIf="isQuizInProgress; else quizInit">
     <ng-container *ngTemplateOutlet="quizQuestionFlow"></ng-container>
   </ng-container>
 </ng-container>
-
+</div>
 <ng-template #quizQuestionFlow>
   <ng-container
     *ngIf="{ seasonData: seasonQuizData$ | async, quizTimer: quizTimer$ | async } as vm"
