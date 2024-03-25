@@ -1,4 +1,6 @@
-<ng-container *ngTemplateOutlet="seasons"></ng-container>
+<div class="min-h-screen">
+  <ng-container *ngTemplateOutlet="seasons"></ng-container>
+</div>
 
 <ng-template #seasons>
   <ng-container *ngIf="selectedShow$ | async as show; else error">
